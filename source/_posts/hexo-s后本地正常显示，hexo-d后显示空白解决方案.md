@@ -1,5 +1,5 @@
 ---
-title: hexo s后本地正常显示，hexo d后显示空白解决方案
+title: hexo s本地正常显示，但是hexo d显示空白的解决方案
 date: 2016-11-17 11:17:58
 tags: Hexo
 categories: Hexo
