@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://lzblog.cn/"/>
-  <updated>2016-11-21T15:39:51.928Z</updated>
+  <updated>2016-11-21T15:45:41.158Z</updated>
   <id>http://lzblog.cn/</id>
   
   <author>
@@ -20,7 +20,7 @@
     <link href="http://lzblog.cn/2016/11/21/Hexo%E5%8D%9A%E5%AE%A2%E5%A4%9A%E7%94%B5%E8%84%91%E5%90%8C%E6%AD%A5%E5%8F%8A%E6%9B%B4%E6%8D%A2%E7%94%B5%E8%84%91%E5%90%8E%E5%A4%84%E7%90%86%E6%96%B9%E5%BC%8F/"/>
     <id>http://lzblog.cn/2016/11/21/Hexo博客多电脑同步及更换电脑后处理方式/</id>
     <published>2016-11-21T15:29:05.000Z</published>
-    <updated>2016-11-21T15:39:51.928Z</updated>
+    <updated>2016-11-21T15:45:41.158Z</updated>
     
     <content type="html"><![CDATA[<p>&#x524D;&#x4E24;&#x5929;&#x6362;&#x4E86;&#x7535;&#x8111;&#xFF0C;&#x4E4B;&#x524D;&#x505A;hexo&#x535A;&#x5BA2;&#x7684;&#x65F6;&#x5019;&#x5C31;&#x60F3;&#x8FC7;&#x8FD9;&#x4E8B;&#xFF0C;&#x53EA;&#x662F;&#x5F53;&#x65F6;&#x6CA1;&#x592A;&#x5728;&#x610F;&#x3002;&#x8BD5;&#x4E86;&#x5F88;&#x591A;&#x65B9;&#x6CD5;&#xFF0C;&#x8FD8;&#x597D;&#x5F04;&#x597D;&#x4E86;&#xFF0C;&#x8BB0;&#x5F55;&#x4E0B;&#x6765;&#x514D;&#x5F97;&#x4EE5;&#x540E;&#x518D;&#x7528;&#x5230;&#x3002;</p>
 <p>&#x53C2;&#x8003;&#x4E86;&#x77E5;&#x4E4E;&#x4E0A;&#x5173;&#x4E8E;&#x4E0D;&#x540C;&#x7535;&#x8111;&#x5199;&#x540C;&#x4E00;&#x4E2A;&#x535A;&#x5BA2;&#x7684;&#x95EE;&#x9898;&#xFF0C;&#x8BD5;&#x9A8C;&#x4E86;&#x597D;&#x51E0;&#x6B21;&#xFF0C;&#x7EC8;&#x4E8E;&#x6210;&#x529F;&#x4E86;&#x3002;&#x4E00;&#x5B9A;&#x8981;&#x4FDD;&#x5B58;&#x597D;&#x6E90;&#x6587;&#x4EF6;&#x54E6;&#xFF0C;&#x5426;&#x5219;&#x54ED;&#x90FD;&#x627E;&#x4E0D;&#x5230;&#x5730;&#x65B9;&#x3002;</p>
@@ -48,7 +48,8 @@
 <p>&#x7136;&#x540E;&#x4F9D;&#x6B21;&#x6267;&#x884C;&#x4EE5;&#x4E0B;&#x547D;&#x4EE4;&#xFF1A;<br><code>npm install -g hexo-cli</code><br><code>npm install</code><br><code>npm install hexo -server --save</code><br><code>npm install hexo-deployer-git --save</code></p>
 <p>&#x8FD9;&#x6837;&#x4E00;&#x4E2A;&#x65B0;&#x7684;&#x672C;&#x5730;&#x535A;&#x5BA2;&#x5C31;&#x5B89;&#x88C5;&#x5B8C;&#x6210;&#x4E86;&#x54E6;&#x3002;</p>
 <p>&#x6309;&#x7167;&#x4F60;&#x65E5;&#x5E38;&#x66F4;&#x65B0;&#x535A;&#x5BA2;&#x7684;&#x65B9;&#x6CD5;&#x8BD5;&#x4E00;&#x4E0B;&#x5427;&#xFF01;</p>
-<p>&#x5982;&#x679C;&#x6709;&#x4EC0;&#x4E48;&#x95EE;&#x9898;&#x53EF;&#x4EE5;&#x968F;&#x65F6;&#x8054;&#x7CFB;&#x6211;&#x54E6;&#xFF0C;&#x8054;&#x7CFB;&#x65B9;&#x6CD5;&#x89C1;&#x672C;&#x535A;&#x5BA2;<strong>&#x5173;&#x4E8E;&#x6211;</strong>&#x4E2D;&#x3002;</p>
+<p>&#x5199;&#x5728;&#x6700;&#x540E;&#xFF1A;&#x4E0D;&#x540C;&#x7535;&#x8111;&#x64CD;&#x4F5C;&#x540C;&#x4E00;&#x4E2A;&#x535A;&#x5BA2;&#x7684;&#x65F6;&#x5019;&#xFF0C;&#x6267;&#x884C;<code>hexo d</code>&#x6709;&#x65F6;&#x4F1A;&#x82B1;&#x8D39;&#x8F83;&#x591A;&#x7684;&#x65F6;&#x95F4;&#xFF0C;&#x8010;&#x5FC3;&#x7B49;&#x5F85;deploy&#x5B8C;&#x6210;&#x5C31;&#x597D;&#x4E86;&#x3002;</p>
+<p>&#x5982;&#x679C;&#x6709;&#x4EC0;&#x4E48;&#x95EE;&#x9898;&#x53EF;&#x4EE5;&#x968F;&#x65F6;&#x8054;&#x7CFB;&#x6211;&#x54E6;&#xFF0C;&#x8054;&#x7CFB;&#x65B9;&#x6CD5;&#x89C1;&#x672C;&#x535A;&#x5BA2;<strong><a href="http://www.lzblog.cn/about/" target="_blank" rel="external">&#x5173;&#x4E8E;&#x6211;</a></strong>&#x4E2D;&#x3002;</p>
 ]]></content>
     
     <summary type="html">
