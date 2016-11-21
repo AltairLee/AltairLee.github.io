@@ -1,0 +1,876 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
+
+
+
+
+  <link href="//fonts.googleapis.com/css?family=Lato:300,400,700,400italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=0.5.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="ExtJs5," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Dear Blog" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=0.5.0" />
+
+
+
+
+
+
+<meta name="description" content="&amp;#x4E4B;&amp;#x524D;&amp;#x5B66;&amp;#x4E86;&amp;#x9875;&amp;#x9762;&amp;#x7684;&amp;#x5E03;&amp;#x5C40;&amp;#x7EC4;&amp;#x4EF6;&amp;#xFF0C;&amp;#x6211;&amp;#x4EEC;&amp;#x8981;&amp;#x5F80;&amp;#x5E03;&amp;#x5C40;&amp;#x7EC4;&amp;#x4EF6;&amp;#x4E0A;&amp;#x6DFB;&amp;#x52A0;&amp;#x5404;&amp;#x79CD;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ExtJs5学习笔记（六）EXt常用组件及表单组件">
+<meta property="og:url" content="http://lzblog.cn/2016/06/07/ExtJs5学习笔记（六）EXt常用组件及表单组件/index.html">
+<meta property="og:site_name" content="Dear Blog">
+<meta property="og:description" content="&amp;#x4E4B;&amp;#x524D;&amp;#x5B66;&amp;#x4E86;&amp;#x9875;&amp;#x9762;&amp;#x7684;&amp;#x5E03;&amp;#x5C40;&amp;#x7EC4;&amp;#x4EF6;&amp;#xFF0C;&amp;#x6211;&amp;#x4EEC;&amp;#x8981;&amp;#x5F80;&amp;#x5E03;&amp;#x5C40;&amp;#x7EC4;&amp;#x4EF6;&amp;#x4E0A;&amp;#x6DFB;&amp;#x52A0;&amp;#x5404;&amp;#x79CD;">
+<meta property="og:image" content="http://7xsp5x.com2.z0.glb.clouddn.com/extjs5-16.png">
+<meta property="og:image" content="http://7xsp5x.com2.z0.glb.clouddn.com/extjs5-17.png">
+<meta property="og:image" content="http://7xsp5x.com2.z0.glb.clouddn.com/extjs5-18.png">
+<meta property="og:image" content="http://7xsp5x.com2.z0.glb.clouddn.com/extjs5-19.png">
+<meta property="og:image" content="http://7xsp5x.com2.z0.glb.clouddn.com/extjs5-20.png">
+<meta property="og:image" content="http://7xsp5x.com2.z0.glb.clouddn.com/extjs5-21.png">
+<meta property="og:image" content="http://7xsp5x.com2.z0.glb.clouddn.com/extjs5-22.png">
+<meta property="og:image" content="http://7xsp5x.com2.z0.glb.clouddn.com/extjs5-23.png">
+<meta property="og:image" content="http://7xsp5x.com2.z0.glb.clouddn.com/extjs5-24.png">
+<meta property="og:image" content="http://7xsp5x.com2.z0.glb.clouddn.com/extjs5-25.png">
+<meta property="og:image" content="http://7xsp5x.com2.z0.glb.clouddn.com/extjs5-26.png">
+<meta property="og:image" content="http://7xsp5x.com2.z0.glb.clouddn.com/extjs5-27.png">
+<meta property="og:image" content="http://7xsp5x.com2.z0.glb.clouddn.com/extjs5-28.png">
+<meta property="og:image" content="http://7xsp5x.com2.z0.glb.clouddn.com/extjs5-29.png">
+<meta property="og:updated_time" content="2016-11-21T14:42:32.040Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="ExtJs5学习笔记（六）EXt常用组件及表单组件">
+<meta name="twitter:description" content="&amp;#x4E4B;&amp;#x524D;&amp;#x5B66;&amp;#x4E86;&amp;#x9875;&amp;#x9762;&amp;#x7684;&amp;#x5E03;&amp;#x5C40;&amp;#x7EC4;&amp;#x4EF6;&amp;#xFF0C;&amp;#x6211;&amp;#x4EEC;&amp;#x8981;&amp;#x5F80;&amp;#x5E03;&amp;#x5C40;&amp;#x7EC4;&amp;#x4EF6;&amp;#x4E0A;&amp;#x6DFB;&amp;#x52A0;&amp;#x5404;&amp;#x79CD;">
+<meta name="twitter:image" content="http://7xsp5x.com2.z0.glb.clouddn.com/extjs5-16.png">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+  <title> ExtJs5学习笔记（六）EXt常用组件及表单组件 | Dear Blog </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?3b9384b786cf80306a6f68370a3a802f";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Dear Blog</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">Busy to live or busy to die ?!</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-th fa-fw"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-tags fa-fw"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-user fa-fw"></i> <br />
+            
+            关于我
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-commonweal">
+          <a href="/404.html" rel="section">
+            
+              <i class="menu-item-icon fa fa-heartbeat fa-fw"></i> <br />
+            
+            公益404
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-search">
+          <a href="/search" rel="section">
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                ExtJs5学习笔记（六）EXt常用组件及表单组件
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-06-07T20:57:46+08:00" content="2016-06-07">
+              2016-06-07
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/ExtJs5/" itemprop="url" rel="index">
+                    <span itemprop="name">ExtJs5</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/06/07/ExtJs5学习笔记（六）EXt常用组件及表单组件/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/06/07/ExtJs5学习笔记（六）EXt常用组件及表单组件/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/2016/06/07/ExtJs5学习笔记（六）EXt常用组件及表单组件/" class="leancloud_visitors" data-flag-title="ExtJs5学习笔记（六）EXt常用组件及表单组件">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">阅读次数 </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>&#x4E4B;&#x524D;&#x5B66;&#x4E86;&#x9875;&#x9762;&#x7684;&#x5E03;&#x5C40;&#x7EC4;&#x4EF6;&#xFF0C;&#x6211;&#x4EEC;&#x8981;&#x5F80;&#x5E03;&#x5C40;&#x7EC4;&#x4EF6;&#x4E0A;&#x6DFB;&#x52A0;&#x5404;&#x79CD;&#x5C0F;&#x7EC4;&#x4EF6;&#x5B8C;&#x6210;&#x6574;&#x4E2A;&#x9875;&#x9762;&#x7684;&#x6784;&#x5EFA;&#xFF0C;&#x4E0B;&#x9762;&#x5C31;&#x6765;&#x5B66;&#x4E60;&#x4E0B;Extjs&#x4E2D;&#x4E30;&#x5BCC;&#x7684;&#x7EC4;&#x4EF6;&#x5BB6;&#x65CF;&#x3002;</p>
+<h1 id="&#x5E38;&#x7528;&#x7EC4;&#x4EF6;"><a href="#&#x5E38;&#x7528;&#x7EC4;&#x4EF6;" class="headerlink" title="&#x5E38;&#x7528;&#x7EC4;&#x4EF6;"></a>&#x5E38;&#x7528;&#x7EC4;&#x4EF6;</h1><a id="more"></a>
+<h2 id="Button&#xFF1A;"><a href="#Button&#xFF1A;" class="headerlink" title="Button&#xFF1A;"></a>Button&#xFF1A;</h2><p>&#x9996;&#x5148;&#x770B;&#x4E00;&#x4E2A;&#x4F8B;&#x5B50;&#xFF0C;&#x9996;&#x5148;&#x5B9A;&#x4E49;&#x4E00;&#x4E2A;window&#x5BF9;&#x8C61;&#xFF0C;&#x6765;&#x5B58;&#x653E;button&#x7B49;&#x7EC4;&#x4EF6;&#xFF1A;</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">var window = Ext.create(&apos;Ext.window.Window&apos;, {</div><div class="line">    title: &apos;ExtJsWindow&apos;,</div><div class="line">    height: 400,</div><div class="line">    width: 500,</div><div class="line">    layout: {</div><div class="line">	    type: &apos;vbox&apos;,</div><div class="line">	    align: &apos;left&apos;</div><div class="line">	},</div><div class="line">	constrain: true, //&#x8BBE;&#x7F6E;&#x7A97;&#x4F53;&#x62D6;&#x52A8;&#xFF0C;&#x4E0D;&#x80FD;&#x79FB;&#x9664;&#x6D4F;&#x89C8;&#x5668;&#x8FB9;&#x754C;</div><div class="line">    modal: true, //&#x8BBE;&#x7F6E;&#x6A21;&#x6001;&#x7A97;&#x4F53;&#xFF0C;&#x76F8;&#x5F53;&#x4E8E;&#x906E;&#x4F4F;&#x7A97;&#x4F53;&#x540E;&#x9762;&#x7684;&#x754C;&#x9762;&#xFF0C;&#x4F7F;&#x4E4B;&#x4E0D;&#x53EF;&#x7F16;&#x8F91;</div><div class="line">    plane: false, //</div><div class="line">    tbar: [button1,button2,button3,button4,button5],//&#x8FD9;&#x91CC;&#x662F;10&#x4E2A;button&#x5BF9;&#x8C61;&#xFF0C;&#x5177;&#x4F53;&#x5B9E;&#x73B0;&#x5728;&#x540E;&#x8FB9;&#xFF0C;&#x5B66;&#x4E60;&#x8FC7;&#x7A0B;&#x4E2D;&#x53EF;&#x4EE5;&#x4E00;&#x6B21;&#x6DFB;&#x52A0;button&#x6309;&#x94AE;</div><div class="line">	bbar: [msg1,msg2,msg3,msg4,msg5]</div><div class="line">}).show();</div></pre></td></tr></table></figure>
+<p>Button&#x5C5E;&#x6027;&#x76F8;&#x5F53;&#x7B80;&#x5355;&#xFF0C;&#x4E00;&#x822C;&#x60C5;&#x51B5;&#x4E0B;&#x90FD;&#x4F1A;&#x5728;&#x6309;&#x94AE;&#x4E0A;&#x6DFB;&#x52A0;&#x4E8B;&#x4EF6;&#xFF0C;&#x6211;&#x4EEC;&#x5C31;&#x770B;&#x4E00;&#x4E0B;&#x4E8B;&#x4EF6;&#x7684;&#x51E0;&#x79CD;&#x5B9E;&#x73B0;&#x65B9;&#x5F0F;&#xFF1A;</p>
+<p>Button1:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/*</span></div><div class="line"> * Button&#x5E38;&#x7528;&#x5C5E;&#x6027;&#x53CA;&#x6309;&#x94AE;&#x4E8B;&#x4EF6;&#x5B9E;&#x73B0;&#x7684;&#x4E09;&#x79CD;&#x65B9;&#x5F0F;</div><div class="line"> */</div><div class="line"><span class="keyword">var</span> button1 = Ext.create(<span class="string">&apos;Ext.Button&apos;</span>, {</div><div class="line">				<span class="attr">id</span> : <span class="string">&apos;button1&apos;</span>,</div><div class="line">				<span class="attr">renderTo</span>  : Ext.getBody(),</div><div class="line">			    <span class="attr">text</span>: <span class="string">&apos;&#x4E8B;&#x4EF6;&#x5B9E;&#x73B0;1&apos;</span>,</div><div class="line">			    <span class="attr">allowDepress</span>: <span class="literal">true</span>,     <span class="comment">//&#x662F;&#x5426;&#x5141;&#x8BB8;&#x6309;&#x94AE;&#x88AB;&#x6309;&#x4E0B;&#x7684;&#x72B6;&#x6001;</span></div><div class="line">			    enableToggle: <span class="literal">false</span>,     <span class="comment">//&#x6309;&#x94AE;&#x5728;&#x5F39;&#x8D77;&#x548C;&#x6309;&#x4E0B;&#x4E24;&#x79CD;&#x72B6;&#x6001;&#x4E2D;&#x5207;&#x6362;,ture:&#x5355;&#x51FB;&#x5207;&#x6362;&#xFF0C;false&#xFF1A;&#x81EA;&#x52A8;&#x5207;&#x6362;</span></div><div class="line">			    handler: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>{</div><div class="line">			        Ext.Msg.alert(<span class="string">&apos;&#x63D0;&#x793A;&apos;</span>, <span class="string">&apos;&#x7B2C;&#x4E00;&#x4E2A;&#x4E8B;&#x4EF6;&apos;</span>);</div><div class="line">			    }</div><div class="line">			});</div></pre></td></tr></table></figure>
+<p><img src="http://7xsp5x.com2.z0.glb.clouddn.com/extjs5-16.png"></p>
+<p>Button2:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">var button2 = Ext.create(&quot;Ext.Button&quot;, {</div><div class="line">				id: &apos;button2&apos;,</div><div class="line">				renderTo  : Ext.getBody(),</div><div class="line">			    text: &quot;&#x4E8B;&#x4EF6;&#x5B9E;&#x73B0;2&quot;,</div><div class="line">			    listeners: { &quot;click&quot;: function () {</div><div class="line">			        Ext.Msg.alert(&quot;&#x63D0;&#x793A;&quot;, &quot;&#x7B2C;&#x4E8C;&#x4E2A;&#x4E8B;&#x4EF6;&quot;);</div><div class="line">			    }</div><div class="line">			    },</div><div class="line">			    scale: &apos;medium&apos; //button&#x7684;&#x5927;&#x5C0F;--&apos;small&apos;&#xFF1A;16px high&#x3002;&apos;medium&apos;&#xFF1A; 24px high&#x3002;&apos;large&apos;&#xFF1A;32px high&#x3002;</div><div class="line">			});</div></pre></td></tr></table></figure>
+<p><img src="http://7xsp5x.com2.z0.glb.clouddn.com/extjs5-17.png"></p>
+<p>Button3:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">var button3 = Ext.create(&apos;Ext.Button&apos;, {</div><div class="line">				id : &apos;button3&apos;,</div><div class="line">				renderTo  : Ext.getBody(),</div><div class="line">			    text: &apos;&#x4E8B;&#x4EF6;&#x5B9E;&#x73B0;3&apos;,</div><div class="line">			    scale: &apos;large&apos;</div><div class="line">			});</div><div class="line">			</div><div class="line">button3.on(&apos;click&apos;, function () {</div><div class="line">    Ext.Msg.alert(&apos;&#x63D0;&#x793A;&apos;, &apos;&#x7B2C;&#x4E09;&#x4E2A;&#x4E8B;&#x4EF6;&apos;);</div><div class="line">});</div></pre></td></tr></table></figure>
+<p><img src="http://7xsp5x.com2.z0.glb.clouddn.com/extjs5-18.png"></p>
+<p>&#x6309;&#x94AE;&#x56FE;&#x6807;&#x548C;&#x83DC;&#x5355;&#x6309;&#x94AE;&#x3002;</p>
+<p>Button4:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line">/*</div><div class="line"> * &#x5E26;&#x56FE;&#x6807;&#x548C;&#x83DC;&#x5355;&#x7684;&#x6309;&#x94AE;&#x3002;</div><div class="line"> */</div><div class="line">var button4 = Ext.create(&apos;Ext.Button&apos;,{</div><div class="line">	id: &apos;button4&apos;,</div><div class="line">	text      : &apos;Menu button&apos;,</div><div class="line">   	renderTo  : Ext.getBody(),</div><div class="line">   	arrowAlign: &apos;right&apos;, //&#x83DC;&#x5355;&#x6807;&#x8BC6;&#x7BAD;&#x5934;&#x7684;&#x4F4D;&#x7F6E;</div><div class="line">	iconCls: &apos;icon-thumbs-up&apos;, //&#x56FE;&#x7247;&#xFF0C;&#x4F7F;&#x7528;&#x7684;&#x662F;fontawesome&#xFF0C;&#x5F53;&#x7136;&#x4E5F;&#x53EF;&#x4EE5;&#x81EA;&#x5B9A;&#x4E49;</div><div class="line">	iconAlign: &apos;right&apos;, //&#x56FE;&#x7247;&#x7684;&#x4F4D;&#x7F6E;</div><div class="line">	menu:{</div><div class="line">		items: [{</div><div class="line">			text:&apos;Item 1&apos;,</div><div class="line">			handler:function(){</div><div class="line">				Ext.Msg.alert(&apos;&#x63D0;&#x793A;&apos;,&apos;&#x70B9;&#x6211;&#xFF01;Item 1&apos;);</div><div class="line">			}</div><div class="line">		},{</div><div class="line">			text:&apos;Item 2&apos;,</div><div class="line">			handler:function(){</div><div class="line">				Ext.Msg.alert(&apos;&#x63D0;&#x793A;&apos;,&apos;&#x70B9;&#x6211;&#xFF01;Item 2&apos;);</div><div class="line">			}</div><div class="line">		},{</div><div class="line">			text:&apos;Item 3&apos;,</div><div class="line">			handler:function(){</div><div class="line">				Ext.Msg.alert(&apos;&#x63D0;&#x793A;&apos;,&apos;&#x70B9;&#x6211;&#xFF01;Item 3&apos;);</div><div class="line">			}</div><div class="line">		}]</div><div class="line">	}</div><div class="line">});</div></pre></td></tr></table></figure>
+<p><img src="http://7xsp5x.com2.z0.glb.clouddn.com/extjs5-19.png">    </p>
+<p>Button5:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line">/*</div><div class="line"> * &#x83DC;&#x5355;&#x5F0F;&#x6309;&#x94AE;</div><div class="line"> */</div><div class="line">var button5 = Ext.create(&apos;Ext.button.Cycle&apos;, {</div><div class="line">	id: &apos;button5&apos;,</div><div class="line">	renderTo  : Ext.getBody(),</div><div class="line">    showText: true,</div><div class="line">    prependText: &apos;View as &apos;,</div><div class="line">    menu: {</div><div class="line">        items: [{</div><div class="line">            text: &apos;text only&apos;,</div><div class="line">            iconCls: &apos;view-text&apos;,</div><div class="line">            checked: true</div><div class="line">        },{</div><div class="line">            text: &apos;HTML&apos;,</div><div class="line">            iconCls: &apos;view-html&apos;</div><div class="line">        }]</div><div class="line">    },</div><div class="line">    changeHandler: function(cycleBtn, activeItem) {</div><div class="line">        Ext.Msg.alert(&apos;Change View&apos;, activeItem.text);</div><div class="line">    }</div><div class="line">});</div></pre></td></tr></table></figure>
+<p><img src="http://7xsp5x.com2.z0.glb.clouddn.com/extjs5-20.png"></p>
+<h2 id="MessageBox&#xFF1A;"><a href="#MessageBox&#xFF1A;" class="headerlink" title="MessageBox&#xFF1A;"></a>MessageBox&#xFF1A;</h2><p>MessageBox1:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/*</span></div><div class="line"> * MessageBox&#x7684;alert&#x65B9;&#x6CD5;&#xFF1A;&#x63D0;&#x793A;&#x6846;</div><div class="line"> */</div><div class="line"><span class="keyword">var</span> msg1 = Ext.create(<span class="string">&apos;Ext.Button&apos;</span>, {</div><div class="line">				<span class="attr">id</span>: <span class="string">&apos;Msg1&apos;</span>,</div><div class="line">				<span class="attr">renderTo</span>  : Ext.getBody(),</div><div class="line">			    <span class="attr">text</span>: <span class="string">&apos;Msg1&apos;</span>,</div><div class="line">			    <span class="attr">handler</span>:<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>{</div><div class="line">			    	Ext.MessageBox.alert(<span class="string">&apos;&#x63D0;&#x9192;&apos;</span>, <span class="string">&apos;&#x8FD9;&#x662F;&#x4E00;&#x4E2A;alert&apos;</span>);</div><div class="line">			    }</div><div class="line">			});</div></pre></td></tr></table></figure>
+<p><img src="http://7xsp5x.com2.z0.glb.clouddn.com/extjs5-21.png"></p>
+<p>MessageBox2:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">/*</div><div class="line"> * Ext.MessageBox&#x662F;Ext.Msg&#x7684;&#x7B80;&#x5199;</div><div class="line"> * Msg&#x7684;confirm&#x65B9;&#x6CD5;:&#x786E;&#x8BA4;&#x6846;</div><div class="line"> */</div><div class="line">var msg2 = Ext.create(&apos;Ext.Button&apos;, {</div><div class="line">				id: &apos;Msg2&apos;,</div><div class="line">				renderTo  : Ext.getBody(),</div><div class="line">			    text: &apos;Msg2&apos;,</div><div class="line">			    handler:function(){</div><div class="line">				    	Ext.Msg.confirm( &apos;&#x63D0;&#x9192;&apos;, &apos;&#x67E5;&#x770B;&#x70B9;&#x51FB;&#x7684;&#x9009;&#x9879;&#xFF1F;&apos;, function(btn){</div><div class="line">				    		console.log(&apos;&#x4F60;&#x70B9;&#x51FB;&#x4E86;&apos;+btn);</div><div class="line">				    	} )</div><div class="line">			    }</div><div class="line">			});</div></pre></td></tr></table></figure>
+<p><img src="http://7xsp5x.com2.z0.glb.clouddn.com/extjs5-22.png"></p>
+<p>MessageBox3:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">/*</div><div class="line"> * Msg&#x7684;prompt&#x65B9;&#x6CD5;:&#x8F93;&#x5165;&#x5E76;&#x786E;&#x8BA4;&#x6846;</div><div class="line"> */</div><div class="line">var msg3 = Ext.create(&apos;Ext.Button&apos;, {</div><div class="line">				id: &apos;Msg3&apos;,</div><div class="line">				renderTo  : Ext.getBody(),</div><div class="line">			    text: &apos;Msg3&apos;,</div><div class="line">			    handler:function(){</div><div class="line">			    	Ext.Msg.prompt(&apos;Name&apos;, &apos;Please enter your name:&apos;, function(btn, text){</div><div class="line">					    if (btn == &apos;ok&apos;){</div><div class="line">					        console.log(&apos;&#x4F60;&#x8F93;&#x5165;&#x7684;&#x540D;&#x5B57;&#x662F;&#xFF1A;&apos;+text)</div><div class="line">					    }else{</div><div class="line">					    	console.log(&apos;&#x4F60;&#x53D6;&#x6D88;&#x4E86;&#x64CD;&#x4F5C;&apos;)</div><div class="line">					    }</div><div class="line">					});</div><div class="line">			    }</div><div class="line">			});</div></pre></td></tr></table></figure>
+<p><img src="http://7xsp5x.com2.z0.glb.clouddn.com/extjs5-23.png"></p>
+<p>MessageBox4:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">/*</div><div class="line"> * Msg&#x7684;show&#x65B9;&#x6CD5;&#xFF1A;</div><div class="line"> */			</div><div class="line">var msg4 = Ext.create(&apos;Ext.Button&apos;, {</div><div class="line">				id: &apos;Msg4&apos;,</div><div class="line">				renderTo  : Ext.getBody(),</div><div class="line">			    text: &apos;Msg4&apos;,</div><div class="line">			    handler:function(){</div><div class="line">			    	Ext.Msg.show({</div><div class="line">					    title:&apos;Save Changes?&apos;,</div><div class="line">					    message: &apos;You are closing a tab that has unsaved changes. Would you like to save your changes?&apos;,</div><div class="line">					    buttons: Ext.Msg.YESNOCANCEL,//&#x663E;&#x793A;&#x7684;&#x6309;&#x94AE;&#x7C7B;&#x578B;,&#x8BE6;&#x7EC6;&#x8BF7;&#x67E5;&#x770B;Ext.MessageBox&#x7684;properties</div><div class="line">					    icon: Ext.Msg.QUESTION,</div><div class="line">					    fn: function(btn) {</div><div class="line">					    	console.log(&apos;you pressed &apos;+btn);</div><div class="line">					    }</div><div class="line">					});</div><div class="line">			    }</div><div class="line">			});</div></pre></td></tr></table></figure>
+<p><img src="http://7xsp5x.com2.z0.glb.clouddn.com/extjs5-24.png"></p>
+<p>MessageBox5:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line">/*</div><div class="line"> * Msg&#x7684;show&#x65B9;&#x6CD5;&#xFF1A;</div><div class="line"> */	</div><div class="line">var msg5 = Ext.create(&apos;Ext.Button&apos;, {</div><div class="line">				id: &apos;Msg5&apos;,</div><div class="line">				renderTo  : Ext.getBody(),</div><div class="line">			    text: &apos;Msg5&apos;,</div><div class="line">			    handler:function(){</div><div class="line">			    	Ext.Msg.show({</div><div class="line">					    title: &apos;Address&apos;,</div><div class="line">					    message: &apos;Please enter your address:&apos;,</div><div class="line">					    width: 300,</div><div class="line">					    buttons: Ext.Msg.YESNO, </div><div class="line">					    multiline: true, //&#x591A;&#x884C;&#x6587;&#x672C;&#x8F93;&#x5165;&#x6846;</div><div class="line">					    animateTarget: &apos;button10&apos;, //&#x52A8;&#x753B;&#x6548;&#x679C;&#xFF0C;&#x7A97;&#x53E3;&#x4ECE;&#x54EA;&#x91CC;&#x5F39;&#x51FA;&#xFF0C;&#x503C;&#x4E3A;id&#x6216;&#x8005;Element&#x3002;</div><div class="line">					    icon: Ext.window.MessageBox.INFO,</div><div class="line">					    fn: function(btn){</div><div class="line">					    	console.log(&apos;you pressed &apos;+btn);</div><div class="line">					    }</div><div class="line">					});</div><div class="line">			    }</div><div class="line">			});</div></pre></td></tr></table></figure>
+<p><img src="http://7xsp5x.com2.z0.glb.clouddn.com/extjs5-25.png"></p>
+<h2 id="LoadMask"><a href="#LoadMask" class="headerlink" title="LoadMask"></a>LoadMask</h2><p>LoadMask:<br><img src="http://7xsp5x.com2.z0.glb.clouddn.com/extjs5-26.png"><br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/*</span></div><div class="line"> * &#x6B63;&#x5728;&#x52A0;&#x8F7D;&#x7EC4;&#x4EF6;</div><div class="line"> */</div><div class="line"><span class="keyword">var</span> myMask = <span class="keyword">new</span> Ext.LoadMask({</div><div class="line">    <span class="attr">msg</span>    : <span class="string">&apos;Please wait...&apos;</span>,</div><div class="line">    <span class="attr">target</span> : <span class="built_in">window</span></div><div class="line">});			</div><div class="line">myMask.show();	</div><div class="line">setTimeout(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>{</div><div class="line">       myMask.hide();</div><div class="line">       Ext.Msg.alert(<span class="string">&apos;&#x63D0;&#x793A;&apos;</span>, <span class="string">&apos;&#x52A0;&#x8F7D;&#x5B8C;&#x6210;&#xFF01;&apos;</span>);</div><div class="line">   }, <span class="number">3000</span>);</div></pre></td></tr></table></figure></p>
+<h2 id="ToolTip"><a href="#ToolTip" class="headerlink" title="ToolTip"></a>ToolTip</h2><p>ToolTip&#x4F8B;&#x4E00;&#xFF1A;</p>
+<p>&#x5C06;&#x9F20;&#x6807;&#x79FB;&#x52A8;&#x81F3;msg1&#x6309;&#x94AE;&#xFF0C;&#x53EF;&#x4EE5;&#x770B;&#x5230;&#x8BE5;&#x63D0;&#x793A;&#x81EA;&#x52A8;&#x5F39;&#x51FA;&#xFF0C;&#x79FB;&#x51FA;&#x540E;&#x81EA;&#x52A8;&#x6D88;&#x5931;&#x3002;</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">	/*</div><div class="line">    * &#x63D0;&#x793A;</div><div class="line">    */</div><div class="line">   var toolTip1 = Ext.create(&apos;Ext.tip.ToolTip&apos;, {</div><div class="line">    id : &apos;toolTip1&apos;,</div><div class="line">    target: &apos;Msg1&apos;,</div><div class="line">    html: &apos;&#x8FD9;&#x662F;&#x4EC0;&#x4E48;&#xFF1F;&apos;,</div><div class="line">    trackMouse: true  //&#x8DDF;&#x968F;&#x9F20;&#x6807;&#x79FB;&#x52A8;</div><div class="line">    //closable: true, //&#x5E26;&#x6709;&#x5173;&#x95ED;&#x6309;&#x94AE;&#x7684;</div><div class="line">    //draggable: true //&#x662F;&#x5426;&#x53EF;&#x62D6;&#x52A8;</div><div class="line">});</div></pre></td></tr></table></figure>
+<p><img src="http://7xsp5x.com2.z0.glb.clouddn.com/extjs5-27.png"></p>
+<p>ToolTip&#x4F8B;&#x4E8C;&#xFF1A;</p>
+<p>&#x63D0;&#x793A;&#x6709;&#x7BAD;&#x5934;&#xFF0C;&#x5E76;&#x6307;&#x5411;&#x6765;&#x6E90;&#xFF1A;</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">   var toolTip2 = Ext.create(&apos;Ext.tip.ToolTip&apos;, {</div><div class="line">    id : &apos;toolTip2&apos;,</div><div class="line">    target: &apos;Msg2&apos;,</div><div class="line">    anchor: &apos;left&apos;,   //&#x6307;&#x5B9A;&#x7BAD;&#x5934;&#x7684;&#x6307;&#x5411; top,buttom,left,right</div><div class="line">    width: 120,</div><div class="line">    anchorOffset: 10, //&#x6307;&#x5B9A;&#x7BAD;&#x5934;&#x7684;&#x4F4D;&#x7F6E;</div><div class="line">    html: &apos;&#x5E26;&#x7BAD;&#x5934;&#x7684;&#x63D0;&#x793A;&#xFF0C;&#x5E76;&#x6307;&#x5B9A;&#x65B9;&#x5411;&apos;</div><div class="line">});</div></pre></td></tr></table></figure>
+<p><img src="http://7xsp5x.com2.z0.glb.clouddn.com/extjs5-28.png"></p>
+<p>ToolTip&#x4F8B;&#x4E09;&#xFF1A;</p>
+<p>&#x5728;js&#x4E2D;&#x52A0;&#x5165;&#x6B64;&#x4EE3;&#x7801;&#x540E;&#xFF0C;<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Ext.QuickTips.init();</div></pre></td></tr></table></figure></p>
+<p>&#x53EF;&#x4EE5;&#x76F4;&#x63A5;&#x5728;&#x7EC4;&#x4EF6;&#x4E2D;&#x4F7F;&#x7528;<code>tooltip</code>&#x5C5E;&#x6027;&#xFF1A;</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">/*</div><div class="line"> * QuickTips</div><div class="line"> */</div><div class="line">var quickTipsButton = Ext.create(&quot;Ext.Button&quot;, {</div><div class="line">	id: &apos;quickTips&apos;,</div><div class="line">    text: &apos;quickTips&apos;,</div><div class="line">    tooltip: &apos;&#x63D0;&#x793A;&#x4FE1;&#x606F;&apos;</div><div class="line">});</div></pre></td></tr></table></figure>
+<p>&#x5C06;&#x8BE5;&#x6309;&#x94AE;&#x6DFB;&#x52A0;&#x81F3;bbar&#xFF0C;&#x67E5;&#x770B;&#x6548;&#x679C;&#x3002;</p>
+<p><img src="http://7xsp5x.com2.z0.glb.clouddn.com/extjs5-29.png"></p>
+<h1 id="&#x8868;&#x5355;&#x7EC4;&#x4EF6;"><a href="#&#x8868;&#x5355;&#x7EC4;&#x4EF6;" class="headerlink" title="&#x8868;&#x5355;&#x7EC4;&#x4EF6;"></a>&#x8868;&#x5355;&#x7EC4;&#x4EF6;</h1><p>displayfield&#x6587;&#x672C;&#x663E;&#x793A;</p>
+<p>label&#x6807;&#x7B7E;&#x5B57;&#x6BB5;</p>
+<p>textarea&#x591A;&#x884C;&#x6587;&#x672C;&#x6846;</p>
+<p>textfield&#x5355;&#x884C;&#x6587;&#x672C;&#x6846;</p>
+<p>numberfield&#x6570;&#x5B57;</p>
+<p>spinnerfield&#x5FAE;&#x8C03;&#x5B57;&#x6BB5;</p>
+<p>hidden&#x9690;&#x85CF;&#x8868;&#x5355;&#x57DF;</p>
+<p>checkbox&#x590D;&#x9009;&#x6846;</p>
+<p>checkboxgroup&#x590D;&#x9009;&#x6846;&#x7EC4;</p>
+<p>radio&#x5355;&#x9009;</p>
+<p>radiogroup&#x5355;&#x9009;&#x7EC4;</p>
+<p>combobox&#x7EC4;&#x5408;&#x6846;&#xFF08;&#x4E0B;&#x62C9;&#x6846;&#xFF09;</p>
+<p>datefield&#x65E5;&#x671F;</p>
+<p>displayfield&#x6587;&#x672C;&#x663E;&#x793A;</p>
+<p>filefield&#x6587;&#x4EF6;&#x9009;&#x62E9;</p>
+<p>timefield&#x65F6;&#x95F4;&#x9009;&#x62E9;&#x6846;</p>
+<p>fieldset&#x5B57;&#x6BB5;&#x96C6;</p>
+<p>htmleditorHTML&#x7F16;&#x8F91;&#x5668;</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/ExtJs5/" rel="tag">#ExtJs5</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/05/30/ExtJs5学习笔记（五）Ext容器及布局类组件/" rel="next" title="ExtJs5学习笔记（五）Ext容器及布局类组件">
+                <i class="fa fa-chevron-left"></i> ExtJs5学习笔记（五）Ext容器及布局类组件
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/06/28/2015-06小记/" rel="prev" title="2015-06小记">
+                2015-06小记 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/06/07/ExtJs5学习笔记（六）EXt常用组件及表单组件/"
+           data-title="ExtJs5学习笔记（六）EXt常用组件及表单组件" data-url="http://lzblog.cn/2016/06/07/ExtJs5学习笔记（六）EXt常用组件及表单组件/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.png"
+               alt="lizhen" />
+          <p class="site-author-name" itemprop="name">lizhen</p>
+          <p class="site-description motion-element" itemprop="description">Java攻城狮</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">40</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">11</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">37</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://hexo.io/zh-cn/" target="_blank">
+                  
+                    <i class="fa fa-plane"></i>
+                  
+                  Hexo
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/lingbage" target="_blank">
+                  
+                    <i class="fa fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://leancloud.cn/" target="_blank">
+                  
+                    <i class="fa fa-cloud"></i>
+                  
+                  LCloud
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.bootcss.com/p/font-awesome/" target="_blank">
+                  
+                    <i class="fa fa-leaf"></i>
+                  
+                  FontA
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://portal.qiniu.com/" target="_blank">
+                  
+                    <i class="fa fa-cloud-upload"></i>
+                  
+                  七牛图床
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        <div class="links-of-blogroll motion-element">
+          
+            <div class="links-of-blogroll-title">友情链接</div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.lzblog.cn/" target="_blank">None</a>
+                </li>
+              
+            </ul>
+          
+        </div>
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#常用组件"><span class="nav-text">常用组件</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Button："><span class="nav-text">Button：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#MessageBox："><span class="nav-text">MessageBox：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#LoadMask"><span class="nav-text">LoadMask</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ToolTip"><span class="nav-text">ToolTip</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#表单组件"><span class="nav-text">表单组件</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <script async src="/lib/jquery/busuanzi.pure.mini.js"></script>
+<div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">lizhen</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="powered-by">
+  主题  - 
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+<span id="busuanzi_container_site_pv">本站总访问量<span id="busuanzi_value_site_pv"></span>次</span>
+
+
+
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+
+  
+
+
+
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js"></script>
+
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js"></script>
+
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=0.5.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=0.5.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=0.5.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=0.5.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=0.5.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=0.5.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=0.5.0"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"lizhenblog"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+      <script src="/lib/ua-parser-js/dist/ua-parser.min.js"></script>
+      <script src="/js/src/hook-duoshuo.js"></script>
+    
+  
+
+
+
+
+
+  
+  
+  
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script>AV.initialize("DSUpqwXpCRk0yaVH0umWiadJ-gzGzoHsz", "b5jihkHKg0hUcy7gQ4rJz6dD");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+</body>
+</html>

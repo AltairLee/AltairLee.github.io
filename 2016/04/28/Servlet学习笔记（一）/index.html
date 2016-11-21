@@ -1,0 +1,912 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
+
+
+
+
+  <link href="//fonts.googleapis.com/css?family=Lato:300,400,700,400italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=0.5.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Servlet," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Dear Blog" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=0.5.0" />
+
+
+
+
+
+
+<meta name="description" content="1&amp;#x3001;Servlet&amp;#x57FA;&amp;#x7840;1.1&amp;#x3001;&amp;#x4EC0;&amp;#x4E48;&amp;#x662F;Servlet&amp;#xFF1F;sun&amp;#x516C;&amp;#x53F8;&amp;#x63D0;&amp;#x51FA;&amp;#x7684;&amp;#x4E00;&amp;#x79CD;&amp;#x7528;&amp;#x6237;&amp;#x62D3;&amp;#x5C55;web&amp;#x670D;&amp;#x52A1;&amp;#x5668;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Servlet学习笔记（一）">
+<meta property="og:url" content="http://lzblog.cn/2016/04/28/Servlet学习笔记（一）/index.html">
+<meta property="og:site_name" content="Dear Blog">
+<meta property="og:description" content="1&amp;#x3001;Servlet&amp;#x57FA;&amp;#x7840;1.1&amp;#x3001;&amp;#x4EC0;&amp;#x4E48;&amp;#x662F;Servlet&amp;#xFF1F;sun&amp;#x516C;&amp;#x53F8;&amp;#x63D0;&amp;#x51FA;&amp;#x7684;&amp;#x4E00;&amp;#x79CD;&amp;#x7528;&amp;#x6237;&amp;#x62D3;&amp;#x5C55;web&amp;#x670D;&amp;#x52A1;&amp;#x5668;">
+<meta property="og:updated_time" content="2016-11-21T14:42:32.045Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Servlet学习笔记（一）">
+<meta name="twitter:description" content="1&amp;#x3001;Servlet&amp;#x57FA;&amp;#x7840;1.1&amp;#x3001;&amp;#x4EC0;&amp;#x4E48;&amp;#x662F;Servlet&amp;#xFF1F;sun&amp;#x516C;&amp;#x53F8;&amp;#x63D0;&amp;#x51FA;&amp;#x7684;&amp;#x4E00;&amp;#x79CD;&amp;#x7528;&amp;#x6237;&amp;#x62D3;&amp;#x5C55;web&amp;#x670D;&amp;#x52A1;&amp;#x5668;">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+  <title> Servlet学习笔记（一） | Dear Blog </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?3b9384b786cf80306a6f68370a3a802f";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Dear Blog</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">Busy to live or busy to die ?!</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-th fa-fw"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-tags fa-fw"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-user fa-fw"></i> <br />
+            
+            关于我
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-commonweal">
+          <a href="/404.html" rel="section">
+            
+              <i class="menu-item-icon fa fa-heartbeat fa-fw"></i> <br />
+            
+            公益404
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-search">
+          <a href="/search" rel="section">
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Servlet学习笔记（一）
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-04-28T11:53:46+08:00" content="2016-04-28">
+              2016-04-28
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Java/" itemprop="url" rel="index">
+                    <span itemprop="name">Java</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/04/28/Servlet学习笔记（一）/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/04/28/Servlet学习笔记（一）/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/2016/04/28/Servlet学习笔记（一）/" class="leancloud_visitors" data-flag-title="Servlet学习笔记（一）">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">阅读次数 </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="1&#x3001;Servlet&#x57FA;&#x7840;"><a href="#1&#x3001;Servlet&#x57FA;&#x7840;" class="headerlink" title="1&#x3001;Servlet&#x57FA;&#x7840;"></a>1&#x3001;Servlet&#x57FA;&#x7840;</h1><h2 id="1-1&#x3001;&#x4EC0;&#x4E48;&#x662F;Servlet&#xFF1F;"><a href="#1-1&#x3001;&#x4EC0;&#x4E48;&#x662F;Servlet&#xFF1F;" class="headerlink" title="1.1&#x3001;&#x4EC0;&#x4E48;&#x662F;Servlet&#xFF1F;"></a>1.1&#x3001;&#x4EC0;&#x4E48;&#x662F;Servlet&#xFF1F;</h2><p>sun&#x516C;&#x53F8;&#x63D0;&#x51FA;&#x7684;&#x4E00;&#x79CD;&#x7528;&#x6237;&#x62D3;&#x5C55;web&#x670D;&#x52A1;&#x5668;&#x529F;&#x80FD;&#x7684;&#x7EC4;&#x4EF6;&#x3002;&#x6240;&#x8C13;&#x7EC4;&#x4EF6;&#xFF0C;&#x6307;&#x7684;&#x662F;&#x7B26;&#x5408;&#x67D0;&#x79CD;&#x89C4;&#x8303;&#xFF0C;&#x5E76;&#x4E14;&#x63D0;&#x4F9B;&#x4E86;&#x90E8;&#x5206;&#x529F;&#x80FD;&#x7684;&#x8F6F;&#x4EF6;&#x6A21;&#x5757;&#x3002;</p>
+<h2 id="1-2&#x3001;&#x4EC0;&#x4E48;&#x662F;Servlet&#x5BB9;&#x5668;&#xFF1F;"><a href="#1-2&#x3001;&#x4EC0;&#x4E48;&#x662F;Servlet&#x5BB9;&#x5668;&#xFF1F;" class="headerlink" title="1.2&#x3001;&#x4EC0;&#x4E48;&#x662F;Servlet&#x5BB9;&#x5668;&#xFF1F;"></a>1.2&#x3001;&#x4EC0;&#x4E48;&#x662F;Servlet&#x5BB9;&#x5668;&#xFF1F;</h2><a id="more"></a>
+<p>&#x5BB9;&#x5668;&#x662F;&#x4E00;&#x79CD;&#x7A0B;&#x5E8F;&#xFF0C;&#x63D0;&#x4F9B;&#x7EC4;&#x4EF6;&#x7684;&#x8FD0;&#x884C;&#x73AF;&#x5883;&#x5E76;&#x4E14;&#x7BA1;&#x7406;&#x7EC4;&#x4EF6;&#x7684;&#x751F;&#x547D;&#x5468;&#x671F;&#x3002;&#x7EC4;&#x4EF6;&#x5FC5;&#x987B;&#x4F9D;&#x8D56;&#x4E8E;&#x76F8;&#x5E94;&#x7684;&#x5BB9;&#x5668;&#x624D;&#x80FD;&#x8FD0;&#x884C;&#xFF0C;&#x4F46;&#x5E76;&#x4E0D;&#x4F9D;&#x8D56;&#x4E8E;&#x7279;&#x5B9A;&#x7684;&#x5BB9;&#x5668;&#xFF08;&#x53EA;&#x8981;&#x7EC4;&#x4EF6;&#x548C;&#x5BB9;&#x5668;&#x7B26;&#x5408;&#x76F8;&#x540C;&#x7684;&#x89C4;&#x8303;&#x5373;&#x53EF;&#xFF09;&#x3002;</p>
+<h2 id="1-3&#x3001;&#x5982;&#x4F55;&#x5F00;&#x53D1;&#x4E00;&#x4E2A;Servlet&#xFF1F;"><a href="#1-3&#x3001;&#x5982;&#x4F55;&#x5F00;&#x53D1;&#x4E00;&#x4E2A;Servlet&#xFF1F;" class="headerlink" title="1.3&#x3001;&#x5982;&#x4F55;&#x5F00;&#x53D1;&#x4E00;&#x4E2A;Servlet&#xFF1F;"></a>1.3&#x3001;&#x5982;&#x4F55;&#x5F00;&#x53D1;&#x4E00;&#x4E2A;Servlet&#xFF1F;</h2><ul>
+<li>&#x5199;&#x4E00;&#x4E2A;java&#x7C7B;&#xFF0C;&#x5B9E;&#x73B0;Servlet&#x63A5;&#x53E3;&#x6216;&#x8005;&#x7EE7;&#x627F;HttpServlet&#x62BD;&#x8C61;&#x7C7B;&#x3002;</li>
+<li>&#x7F16;&#x8BD1;</li>
+<li>&#x6253;&#x5305;</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">appname(&#x5E94;&#x7528;&#x540D;)</div><div class="line">	|-- WEB-INF</div><div class="line">		|-- classes(class&#x6587;&#x4EF6;)</div><div class="line">		|-- lib(&#x53EF;&#x9009;&#xFF0C;&#x653E;&#x7F6E;jar&#x5305;)</div><div class="line">		|-- web.xml(&#x63CF;&#x8FF0;&#x6587;&#x4EF6;)</div></pre></td></tr></table></figure>
+<ul>
+<li>&#x90E8;&#x7F72;&#xFF1A;&#x5C06;&#x7B2C;&#x4E09;&#x6B65;&#x751F;&#x6210;&#x7684;&#x6574;&#x4E2A;&#x6587;&#x4EF6;&#x5939;&#x62F7;&#x8D1D;&#x9760;&#x5BB9;&#x5668;&#x7279;&#x5B9A;&#x7684;&#x6587;&#x4EF6;&#x5939;&#x4E0B;&#x9762;&#x3002;</li>
+<li>&#x8FD0;&#x884C;&#xFF1A;&#x542F;&#x52A8;&#x5BB9;&#x5668;&#xFF0C;&#x5728;&#x6D4F;&#x89C8;&#x5668;&#x5730;&#x5740;&#x680F;&#x8F93;&#x5165;&#xFF1A;<a href="http://ip:port/appname/servlet-url" target="_blank" rel="external">http://ip:port/appname/servlet-url</a></li>
+</ul>
+<h2 id="1-4&#x3001;&#x4EC0;&#x4E48;&#x662F;http&#x534F;&#x8BAE;&#xFF1F;&#xFF08;&#x4E86;&#x89E3;&#xFF09;"><a href="#1-4&#x3001;&#x4EC0;&#x4E48;&#x662F;http&#x534F;&#x8BAE;&#xFF1F;&#xFF08;&#x4E86;&#x89E3;&#xFF09;" class="headerlink" title="1.4&#x3001;&#x4EC0;&#x4E48;&#x662F;http&#x534F;&#x8BAE;&#xFF1F;&#xFF08;&#x4E86;&#x89E3;&#xFF09;"></a>1.4&#x3001;&#x4EC0;&#x4E48;&#x662F;http&#x534F;&#x8BAE;&#xFF1F;&#xFF08;&#x4E86;&#x89E3;&#xFF09;</h2><p>&#x5B83;&#x662F;&#x7531;w3c&#x6307;&#x5B9A;&#x7684;&#x4E00;&#x79CD;&#x7F51;&#x7EDC;&#x901A;&#x4FE1;&#x534F;&#x8BAE;&#xFF0C;&#x5B83;&#x5B9A;&#x4E49;&#x4E86;&#x6D4F;&#x89C8;&#x5668;&#x4E0E;web&#x670D;&#x52A1;&#x5668;&#x4E4B;&#x95F4;&#x6570;&#x636E;<br>&#x4F20;&#x8F93;&#x7684;&#x65B9;&#x5F0F;&#x53CA;&#x6570;&#x636E;&#x7684;&#x683C;&#x5F0F;&#x3002;</p>
+<p>&#x5B83;&#x7684;&#x7279;&#x70B9;&#x7684;&#x201C;&#x4E00;&#x6B21;&#x8BF7;&#x6C42;&#xFF0C;&#x4E00;&#x6B21;&#x8FDE;&#x63A5;&#x201D;</p>
+<h2 id="1-5&#x3001;&#x8BF7;&#x6C42;&#x6570;&#x636E;&#x5305;&#x548C;&#x54CD;&#x5E94;&#x6570;&#x636E;&#x5305;&#x7684;&#x7ED3;&#x6784;&#xFF1F;&#xFF08;&#x4E86;&#x89E3;&#xFF09;"><a href="#1-5&#x3001;&#x8BF7;&#x6C42;&#x6570;&#x636E;&#x5305;&#x548C;&#x54CD;&#x5E94;&#x6570;&#x636E;&#x5305;&#x7684;&#x7ED3;&#x6784;&#xFF1F;&#xFF08;&#x4E86;&#x89E3;&#xFF09;" class="headerlink" title="1.5&#x3001;&#x8BF7;&#x6C42;&#x6570;&#x636E;&#x5305;&#x548C;&#x54CD;&#x5E94;&#x6570;&#x636E;&#x5305;&#x7684;&#x7ED3;&#x6784;&#xFF1F;&#xFF08;&#x4E86;&#x89E3;&#xFF09;"></a>1.5&#x3001;&#x8BF7;&#x6C42;&#x6570;&#x636E;&#x5305;&#x548C;&#x54CD;&#x5E94;&#x6570;&#x636E;&#x5305;&#x7684;&#x7ED3;&#x6784;&#xFF1F;&#xFF08;&#x4E86;&#x89E3;&#xFF09;</h2><ol>
+<li>&#x8BF7;&#x6C42;&#x6570;&#x636E;&#x5305;&#xFF1A;&#x7531;&#x6D4F;&#x89C8;&#x5668;&#x53D1;&#x9001;&#x7ED9;&#x670D;&#x52A1;&#x5668;<br>&#x8BF7;&#x6C42;&#x884C;&#xFF1A;&#x8BF7;&#x6C42;&#x65B9;&#x5F0F;&#x3001;&#x8BF7;&#x6C42;&#x8D44;&#x6E90;&#x8DEF;&#x5F84;&#x3001;&#x534F;&#x8BAE;&#x7684;&#x7C7B;&#x578B;&#x548C;&#x7248;&#x672C;&#x3002;<br>&#x82E5;&#x5E72;&#x6D88;&#x606F;&#x5934;&#xFF1A;&#x4E00;&#x822C;&#x7684;&#x952E;&#x503C;&#x5BF9;&#xFF0C;&#x7528;&#x6765;&#x53D1;&#x9001;&#x4E00;&#x4E9B;&#x5916;&#x56F4;&#x5C5E;&#x6027;&#x3002;<br>&#x5B9E;&#x4F53;&#x5185;&#x5BB9;&#xFF1A;&#x53EA;&#x6709;&#x5F53;&#x8BF7;&#x6C42;&#x65B9;&#x5F0F;&#x662F;post&#x65F6;&#xFF0C;&#x6D4F;&#x89C8;&#x5668;&#x624D;&#x4F1A;&#x5C06;&#x8BF7;&#x6C42;&#x53C2;&#x6570;&#x653E;&#x5728;&#x5B9E;&#x4F53;&#x5185;&#x5BB9;&#x91CC;&#x9762;&#xFF0C;&#x5982;&#x679C;&#x662F;get&#x65B9;&#x5F0F;&#xFF0C;&#x4F1A;&#x5C06;&#x53C2;&#x6570;&#x653E;&#x5728;URL&#x4E2D;&#x3002;</li>
+<li>&#x54CD;&#x5E94;&#x6570;&#x636E;&#x5305;</li>
+</ol>
+<h1 id="2&#x3001;servlet&#x6838;&#x5FC3;"><a href="#2&#x3001;servlet&#x6838;&#x5FC3;" class="headerlink" title="2&#x3001;servlet&#x6838;&#x5FC3;"></a>2&#x3001;servlet&#x6838;&#x5FC3;</h1><h2 id="2-1&#x3001;get&#x8BF7;&#x6C42;&#x4E0E;post&#x8BF7;&#x6C42;"><a href="#2-1&#x3001;get&#x8BF7;&#x6C42;&#x4E0E;post&#x8BF7;&#x6C42;" class="headerlink" title="2.1&#x3001;get&#x8BF7;&#x6C42;&#x4E0E;post&#x8BF7;&#x6C42;"></a>2.1&#x3001;get&#x8BF7;&#x6C42;&#x4E0E;post&#x8BF7;&#x6C42;</h2><ol>
+<li><p>&#x54EA;&#x4E9B;&#x662F;get&#x8BF7;&#x6C42;&#xFF1A;<br>&#xFF08;1&#xFF09;&#x76F4;&#x63A5;&#x5728;&#x6D4F;&#x89C8;&#x5668;&#x5730;&#x5740;&#x680F;&#x8F93;&#x5165;&#x5730;&#x5740;&#x3002;<br>&#xFF08;2&#xFF09;&#x70B9;&#x51FB;&#x94FE;&#x63A5;<br>&#xFF08;3&#xFF09;&#x8868;&#x5355;&#x9ED8;&#x8BA4;&#x7684;&#x63D0;&#x4EA4;&#x65B9;&#x5F0F;&#xFF08;&#x6CA1;&#x6709;&#x8BBE;&#x7F6E;method=&#x201D;post&#x201D;&#xFF09;</p>
+</li>
+<li><p>get&#x8BF7;&#x6C42;&#x7684;&#x7279;&#x70B9;&#xFF1A;<br>&#x8BF7;&#x6C42;&#x53C2;&#x6570;&#x90FD;&#x4F1A;&#x653E;&#x5728;&#x8BF7;&#x6C42;&#x8D44;&#x6E90;&#x8DEF;&#x5F84;&#x91CC;&#x9762;&#xFF0C;&#x56E0;&#x4E3A;&#x8BF7;&#x6C42;&#x884C;&#x7684;&#x5927;&#x5C0F;&#x662F;&#x6709;&#x9650;&#x5236;&#x7684;&#xFF0C;&#x6240;&#x4EE5;get&#x65B9;&#x5F0F;&#x4E0D;&#x9002;&#x5408;&#x53D1;&#x9001;&#x5927;&#x91CF;&#x7684;&#x8BF7;&#x6C42;&#x53C2;&#x6570;&#x7ED9;&#x670D;&#x52A1;&#x5668;&#x3002;&#x8BF7;&#x6C42;&#x53C2;&#x6570;&#x4F1A;&#x663E;&#x793A;&#x5728;&#x5730;&#x5740;&#x680F;&#xFF0C;&#x4E0D;&#x5B89;&#x5168;&#x3002;</p>
+</li>
+<li><p>&#x54EA;&#x4E9B;&#x7684;post&#x8BF7;&#x6C42;&#xFF1A;<br>&#x5F53;&#x8BBE;&#x7F6E;&#x8868;&#x5355;&#x7684;method=&#x201D;post&#x201D; &#x65F6;&#x3002;</p>
+</li>
+<li><p>post&#x8BF7;&#x6C42;&#x7684;&#x7279;&#x70B9;&#xFF1A;<br>&#x8BF7;&#x6C42;&#x53C2;&#x6570;&#x4F1A;&#x653E;&#x5728;&#x8BF7;&#x6C42;&#x6570;&#x636E;&#x5305;&#x7684;&#x5B9E;&#x4F53;&#x5185;&#x5BB9;&#x4E2D;&#xFF0C;&#x4ECE;&#x7406;&#x8BBA;&#x4E0A;&#x8BB2;&#x8BF7;&#x6C42;&#x53C2;&#x6570;&#x7684;&#x5927;&#x5C0F;&#x6CA1;&#x6709;&#x9650;&#x5236;&#x3002;post&#x65B9;&#x5F0F;&#x9002;&#x5408;&#x53D1;&#x9001;&#x5927;&#x91CF;&#x7684;&#x8BF7;&#x6C42;&#x53C2;&#x6570;&#x7ED9;&#x670D;&#x52A1;&#x5668;&#x3002;&#x8BF7;&#x6C42;&#x53C2;&#x6570;&#x4E0D;&#x4F1A;&#x663E;&#x793A;&#x5728;&#x6D4F;&#x89C8;&#x5668;&#x5730;&#x5740;&#x680F;&#xFF0C;&#x76F8;&#x5BF9;&#x5B89;&#x5168;&#xFF08;&#x6B64;&#x65F6;&#x6570;&#x636E;&#x5E76;&#x6CA1;&#x6709;&#x52A0;&#x5BC6;&#xFF09;&#x3002;</p>
+</li>
+</ol>
+<h2 id="2-2&#x3001;&#x8868;&#x5355;&#x5904;&#x7406;"><a href="#2-2&#x3001;&#x8868;&#x5355;&#x5904;&#x7406;" class="headerlink" title="2.2&#x3001;&#x8868;&#x5355;&#x5904;&#x7406;"></a>2.2&#x3001;&#x8868;&#x5355;&#x5904;&#x7406;</h2><ol>
+<li><p>&#x5982;&#x4F55;&#x83B7;&#x53D6;&#x8868;&#x5355;&#x4E2D;&#x7684;&#x53C2;&#x6570;&#x503C;<br>String request.getParameter(String paraName); &#x5982;&#x679C;paraName&#x4E0D;&#x6B63;&#x786E;&#xFF0C;&#x8FD4;&#x56DE;null&#x3002;<br>String[] request.getParameterValues(String  paraName);&#x7528;&#x6765;&#x83B7;&#x53D6;&#x591A;&#x4E2A;&#x53C2;&#x6570;&#x503C;&#x3002;</p>
+</li>
+<li><p>&#x5982;&#x4F55;&#x83B7;&#x53D6;&#x4E2D;&#x6587;&#x53C2;&#x6570;&#x907F;&#x514D;&#x4E71;&#x7801;<br>&#x4FDD;&#x8BC1;&#x8868;&#x5355;&#x6240;&#x5728;&#x7684;&#x9875;&#x9762;&#x6309;&#x7167;&#x6211;&#x4EEC;&#x8BBE;&#x5B9A;&#x7684;&#x7F16;&#x7801;&#x683C;&#x5F0F;&#x6765;&#x6253;&#x5F00;&#x3002;<br>&#x5728;&#x670D;&#x52A1;&#x5668;&#x7AEF;&#xFF0C;&#x4F7F;&#x7528;request.setCharacterEncoding(String code)&#x6765;&#x8BBE;&#x5B9A;&#x89E3;&#x7801;&#x683C;&#x5F0F;&#x3002;</p>
+</li>
+</ol>
+<h2 id="2-3&#x3001;&#x8F6C;&#x53D1;&#x4E0E;&#x91CD;&#x5B9A;&#x5411;"><a href="#2-3&#x3001;&#x8F6C;&#x53D1;&#x4E0E;&#x91CD;&#x5B9A;&#x5411;" class="headerlink" title="2.3&#x3001;&#x8F6C;&#x53D1;&#x4E0E;&#x91CD;&#x5B9A;&#x5411;"></a>2.3&#x3001;&#x8F6C;&#x53D1;&#x4E0E;&#x91CD;&#x5B9A;&#x5411;</h2><ol>
+<li><p>&#x4EC0;&#x4E48;&#x662F;&#x91CD;&#x5B9A;&#x5411;&#xFF1F;<br>&#x670D;&#x52A1;&#x5668;&#x5411;&#x6D4F;&#x89C8;&#x5668;&#x53D1;&#x9001;&#x4E00;&#x4E2A;&#x72B6;&#x6001;&#x7801;302&#x53CA;&#x4E00;&#x4E2A;&#x6D88;&#x606F;&#x5934;location&#xFF08;location&#x7684;&#x503C;&#x662F;&#x4E00;&#x4E2A;&#x5730;&#x5740;&#xFF0C;&#x79F0;&#x4E3A;&#x91CD;&#x5B9A;&#x5411;&#x5730;&#x5740;&#xFF09;&#xFF0C;&#x6D4F;&#x89C8;&#x5668;&#x4F1A;&#x7ACB;&#x5373;&#x5411;&#x91CD;&#x5B9A;&#x5411;&#x5730;&#x5740;&#x53D1;&#x9001;&#x8BF7;&#x6C42;&#x3002;</p>
+</li>
+<li><p>&#x5982;&#x4F55;&#x91CD;&#x5B9A;&#x5411;&#xFF1F;</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">response.sendRedirect(String url);</div></pre></td></tr></table></figure>
+</li>
+<li><p>&#x91CD;&#x5B9A;&#x5411;&#x9700;&#x8981;&#x6CE8;&#x610F;&#x7684;&#x95EE;&#x9898;&#xFF1A;<br>&#xFF08;1&#xFF09;&#x91CD;&#x5B9A;&#x5411;&#x4E4B;&#x524D;&#xFF0C;&#x4E0D;&#x8981;&#x8C03;&#x7528;out.close()&#xFF0C;out.flush()<br>&#xFF08;2&#xFF09;&#x91CD;&#x5B9A;&#x5411;&#x4E4B;&#x524D;&#xFF0C;&#x670D;&#x52A1;&#x5668;&#x4F1A;&#x5148;&#x5C06;response&#x4E2D;&#x7F13;&#x5B58;&#x7684;&#x6570;&#x636E;&#x6E05;&#x7A7A;&#x3002;</p>
+</li>
+<li><p>&#x91CD;&#x5B9A;&#x5411;&#x7684;&#x7279;&#x70B9;&#xFF1A;<br>&#xFF08;1&#xFF09;&#x91CD;&#x5B9A;&#x5411;&#x7684;&#x5730;&#x5740;&#x662F;&#x4EFB;&#x610F;&#x7684;&#x3002;<br>&#xFF08;2&#xFF09;&#x91CD;&#x5B9A;&#x5411;&#x4E4B;&#x540E;&#xFF0C;&#x6D4F;&#x89C8;&#x5668;&#x7684;&#x5730;&#x5740;&#x680F;&#x4F1A;&#x53D1;&#x751F;&#x6539;&#x53D8;&#xFF0C;&#x53D8;&#x6210;&#x4E86;&#x91CD;&#x5B9A;&#x5411;&#x5730;&#x5740;&#x3002;</p>
+</li>
+<li><p>&#x4EC0;&#x4E48;&#x662F;&#x8F6C;&#x53D1;&#xFF1F;<br>&#x4E00;&#x4E2A;web&#x7EC4;&#x4EF6;&#xFF08;servlet/jsp&#xFF09;&#x5C06;&#x672A;&#x5B8C;&#x6210;&#x7684;&#x5904;&#x7406;&#x901A;&#x8FC7;&#x5BB9;&#x5668;&#x8F6C;&#x4EA4;&#x7ED9;&#x53E6;&#x5916;&#x4E00;&#x4E2A;web&#x7EC4;&#x4EF6;&#x7EE7;&#x7EED;&#x5B8C;&#x6210;&#x3002;&#x6700;&#x5E38;&#x89C1;&#x7684;&#x8F6C;&#x53D1;&#x662F;&#x4E00;&#x4E2A;servlet&#x83B7;&#x53D6;&#x6570;&#x636E;&#x540E;&#xFF0C;&#x8F6C;&#x53D1;&#x7ED9;&#x4E00;&#x4E2A;jsp&#xFF0C;&#x7531;&#x8FD9;&#x4E2A;jsp&#x4F9D;&#x636E;&#x6570;&#x636E;&#x751F;&#x6210;&#x76F8;&#x5E94;&#x7684;&#x754C;&#x9762;&#x3002;</p>
+</li>
+<li><p>&#x5982;&#x4F55;&#x8F6C;&#x53D1;&#xFF1F;</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">request.serAttribute(String name , Object obj);</div><div class="line">RequestDispatcher rd = request.getRequestDispatcher(String url);</div><div class="line">rd.forward(requeset , response);</div></pre></td></tr></table></figure>
+</li>
+<li><p>&#x8F6C;&#x53D1;&#x9700;&#x8981;&#x6CE8;&#x610F;&#x7684;&#x95EE;&#x9898;&#xFF1A;<br>&#xFF08;1&#xFF09;&#x8F6C;&#x53D1;&#x4E4B;&#x524D;&#xFF0C;&#x4E0D;&#x80FD;&#x591F;&#x8C03;&#x7528;out.close,out.flush&#x65B9;&#x6CD5;&#x3002;<br>&#xFF08;2&#xFF09;&#x8F6C;&#x53D1;&#x4E4B;&#x524D;&#xFF0C;&#x5BB9;&#x5668;&#x4F1A;&#x5C06;response&#x7F13;&#x5B58;&#x7684;&#x6570;&#x636E;&#x6E05;&#x7A7A;&#x3002;</p>
+</li>
+<li><p>&#x8F6C;&#x53D1;&#x7684;&#x7279;&#x70B9;&#xFF1A;<br>&#xFF08;1&#xFF09;&#x8F6C;&#x53D1;&#x7684;&#x5730;&#x5740;&#x5FC5;&#x987B;&#x7684;&#x540C;&#x4E00;&#x4E2A;&#x5E94;&#x7528;&#x5185;&#x90E8;&#x7684;&#x67D0;&#x4E2A;&#x7EC4;&#x4EF6;&#x3002;<br>&#xFF08;2&#xFF09;&#x8F6C;&#x53D1;&#x4E4B;&#x540E;&#xFF0C;&#x6D4F;&#x89C8;&#x5668;&#x5730;&#x5740;&#x680F;&#x7684;&#x5730;&#x5740;&#x4E0D;&#x53D8;&#x3002;<br>&#xFF08;3&#xFF09;&#x8F6C;&#x53D1;&#x6240;&#x6D89;&#x53CA;&#x7684;&#x5404;&#x4E2A;&#x7EC4;&#x4EF6;&#x5171;&#x4EAB;&#x540C;&#x4E00;&#x4E2A;request&#x548C;response&#x5BF9;&#x8C61;&#x3002;</p>
+</li>
+<li><p>&#x8F6C;&#x53D1;&#x4E0E;&#x91CD;&#x5B9A;&#x5411;&#x7684;&#x533A;&#x522B;&#xFF1A;<br>&#xFF08;1&#xFF09;&#x76F8;&#x540C;&#x70B9;&#xFF1A;&#x4E00;&#x4E2A;web&#x7EC4;&#x4EF6;&#x5728;&#x6267;&#x884C;&#x8FC7;&#x7A0B;&#x4E2D;&#xFF0C;&#x518D;&#x53BB;&#x8C03;&#x7528;&#x53E6;&#x5916;&#x4E00;&#x4E2A;web&#x7EC4;&#x4EF6;&#x3002;<br>&#xFF08;2&#xFF09;&#x4E0D;&#x540C;&#x70B9;&#xFF1A;&#x8F6C;&#x53D1;&#x7684;&#x5730;&#x5740;&#x5FC5;&#x987B;&#x7684;&#x540C;&#x4E00;&#x4E2A;&#x5E94;&#x7528;&#x5185;&#x90E8;&#x7684;&#x67D0;&#x4E2A;&#x7EC4;&#x4EF6;&#xFF0C;&#x800C;&#x91CD;&#x5B9A;&#x5411;&#x662F;&#x4EFB;&#x610F;&#x7684;&#x3002;</p>
+</li>
+</ol>
+<p>&#x8F6C;&#x53D1;&#x4E4B;&#x540E;&#xFF0C;&#x6D4F;&#x89C8;&#x5668;&#x5730;&#x5740;&#x680F;&#x5730;&#x5740;&#x4E0D;&#x53D8;&#xFF0C;&#x800C;&#x91CD;&#x5B9A;&#x5411;&#xFF0C;&#x5730;&#x5740;&#x4F1A;&#x53D8;&#x6210;&#x91CD;&#x5B9A;&#x5411;&#x7684;&#x5730;&#x5740;&#x3002;&#x8F6C;&#x53D1;&#x53EF;&#x4EE5;&#x5171;&#x4EAB;request&#xFF0C;&#x800C;&#x91CD;&#x5B9A;&#x5411;&#x4E0D;&#x53EF;&#x4EE5;&#x3002;request&#x548C;response&#x5BF9;&#x8C61;&#x7684;&#x751F;&#x5B58;&#x65F6;&#x95F4;&#x662F;&#x4E00;&#x6B21;&#x8BF7;&#x6C42;&#x4E0E;&#x76F8;&#x5E94;&#x671F;&#x95F4;&#xFF0C;&#x5B8C;&#x6210;&#x4E4B;&#x540E;&#xFF0C;request&#x548C;response&#x4F1A;&#x7ACB;&#x5373;&#x88AB;&#x9500;&#x6BC1;&#x3002;</p>
+<h2 id="2-4&#x3001;servlet&#x7684;&#x751F;&#x547D;&#x5468;&#x671F;"><a href="#2-4&#x3001;servlet&#x7684;&#x751F;&#x547D;&#x5468;&#x671F;" class="headerlink" title="2.4&#x3001;servlet&#x7684;&#x751F;&#x547D;&#x5468;&#x671F;"></a>2.4&#x3001;servlet&#x7684;&#x751F;&#x547D;&#x5468;&#x671F;</h2><ol>
+<li><p>&#x751F;&#x547D;&#x5468;&#x671F;&#x7684;&#x542B;&#x4E49;&#xFF1A;<br>servlet&#x5BB9;&#x5668;&#x521B;&#x5EFA;servlet&#x5BF9;&#x8C61;&#x3001;&#x5206;&#x914D;&#x5176;&#x8D44;&#x6E90;&#x3001;&#x8C03;&#x7528;&#x5176;&#x65B9;&#x6CD5;&#x5904;&#x7406;&#x8BF7;&#x6C42;&#x4EE5;&#x53CA;&#x9500;&#x6BC1;&#x5176;&#x5B9E;&#x4F8B;&#x7684;&#x6574;&#x4E2A;&#x8FC7;&#x7A0B;&#x3002;</p>
+</li>
+<li><p>&#x58F0;&#x660E;&#x5468;&#x671F;&#x7684;&#x56DB;&#x4E2A;&#x9636;&#x6BB5;&#xFF1A;<br><strong>&#x7B2C;&#x4E00;&#x9636;&#x6BB5;&#xFF1A;&#x5B9E;&#x4F8B;&#x5316;&#xFF1A;</strong><br>&#x5BB9;&#x5668;&#x521B;&#x5EFA;servlet&#x5BF9;&#x8C61;&#x7684;&#x65F6;&#x673A;&#xFF1A;<br>&#xFF08;1&#xFF09;&#x5F53;&#x8BF7;&#x6C42;&#x5230;&#x8FBE;&#x5BB9;&#x5668;&#x65F6;&#xFF0C;&#x5BB9;&#x5668;&#x4F9D;&#x636E;&#x8BF7;&#x6C42;&#x8D44;&#x6E90;&#x8DEF;&#x5F84;&#xFF0C;&#x627E;&#x4E0D;&#x5230;&#x5BF9;&#x5E94;&#x7684;servlet&#x5BF9;&#x8C61;&#x65F6;&#xFF0C;&#x5BB9;&#x5668;&#x4F1A;&#x521B;&#x5EFA;&#x4E00;&#x4E2A;servlet&#x5BF9;&#x8C61;&#x3002;<br>&#xFF08;2&#xFF09;&#x5BB9;&#x5668;&#x542F;&#x52A8;&#x65F6;&#xFF0C;&#x4F1A;&#x5BF9;&#x914D;&#x7F6E;&#x6709;<load-on-starup>&#x53C2;&#x6570;&#x7684;servlet&#x8FDB;&#x884C;&#x5B9E;&#x4F8B;&#x5316;&#x3002;<load-on-starup>&#x53C2;&#x6570;&#x503C;&#x5FC5;&#x987B;&#x662F;&gt;=0&#x7684;&#x6574;&#x6570;&#xFF0C;&#x503C;&#x8D8A;&#x5C0F;&#xFF0C;&#x4F18;&#x5148;&#x7EA7;&#x8D8A;&#x9AD8;&#xFF08;&#x5148;&#x88AB;&#x521B;&#x5EFA;&#xFF09;&#x3002;<br><strong>&#x7B2C;&#x4E8C;&#x9636;&#x6BB5;&#xFF1A;&#x521D;&#x59CB;&#x5316;&#xFF1A;</strong><br>&#x5BB9;&#x5668;&#x4F1A;&#x8C03;&#x7528;servlet&#x5BF9;&#x8C61;&#x7684;init&#x65B9;&#x6CD5;&#x3002;<br><code>public void init(ServletConfig config) throws ServletException
+{
+ // init&#x5B9E;&#x73B0;
+}</code><br>&#x5BB9;&#x5668;&#x5728;&#x8C03;&#x7528;init&#x65B9;&#x6CD5;&#x4E4B;&#x524D;&#xFF0C;&#x4F1A;&#x5148;&#x521B;&#x5EFA;&#x4E00;&#x4E2A;&#x7B26;&#x5408;ServletConfig&#x63A5;&#x53E3;&#x8981;&#x6C42;&#x7684;&#x5BF9;&#x8C61;&#xFF0C;&#x7136;&#x540E;&#x5C06;&#x8BE5;&#x5BF9;&#x8C61;&#x4F5C;&#x4E3A;&#x53C2;&#x6570;&#x4F20;&#x7ED9;init&#x65B9;&#x6CD5;&#x3002;<br>ServletConfig&#x5BF9;&#x8C61;&#x521D;&#x59CB;&#x5316;&#x5206;&#x4E3A;&#x4E24;&#x6B65;&#xFF1A;<br>&#xFF08;1&#xFF09;&#x5728;web.xml&#x6587;&#x4EF6;&#x5F53;&#x4E2D;&#x914D;&#x7F6E;&#xFF1A;<br><code>&lt;init-param&gt;
+ &lt;para-name&gt;company&lt;/para-name&gt;
+ &lt;para-value&gt;tarena&lt;/param-value&gt;
+&lt;/init-param&gt;</code><br>&#xFF08;2&#xFF09;&#x4F7F;&#x7528;String ServletConfig.getinitParameter(&#x201C;company&#x201D;);<br>&#x5982;&#x679C;&#x8981;&#x5B9E;&#x73B0;&#x81EA;&#x5DF1;&#x7684;&#x521D;&#x59CB;&#x5316;&#x903B;&#x8F91;&#xFF0C;&#x53EA;&#x9700;&#x8981;override init()&#x65B9;&#x6CD5;&#xFF0C;&#x521D;&#x59CB;&#x5316;&#x65B9;&#x6CD5;&#x53EA;&#x4F1A;&#x6267;&#x884C;&#x4E00;&#x6B21;&#x3002;<br><strong>&#x7B2C;&#x4E09;&#x9636;&#x6BB5;&#xFF1A;&#x5C31;&#x7EEA;&#xFF1A;</strong><br>&#x53EF;&#x4EE5;&#x63A5;&#x53D7;&#x5BB9;&#x5668;&#x7684;&#x8C03;&#x7528;&#xFF0C;&#x5904;&#x7406;&#x8BF7;&#x6C42;&#xFF0C;&#x5BB9;&#x5668;&#x4F1A;&#x8C03;&#x7528;service&#x65B9;&#x6CD5;&#xFF0C;&#x7136;&#x540E;&#x6839;&#x636E;&#x8BF7;&#x6C42;&#x65B9;&#x5F0F;&#x8C03;&#x7528;doGet&#x6216;&#x8005;doPost&#x65B9;&#x6CD5;&#x3002;(&#x5B9E;&#x73B0;service&#x65B9;&#x6CD5;&#x4E0E;&#x5B9E;&#x73B0;doGet&#x548C;doPost&#x65B9;&#x6CD5;&#x672C;&#x8D28;&#x4E0A;&#x662F;&#x4E00;&#x6837;&#x7684;)&#x3002;<br><strong>&#x7B2C;&#x56DB;&#x9636;&#x6BB5;&#xFF1A;&#x9500;&#x6BC1;&#xFF1A;</strong><br>&#x5C06;&#x5BF9;&#x8C61;&#x4ECE;&#x5BB9;&#x8D77;&#x4E2D;&#x5220;&#x9664;&#x3002;&#x5BB9;&#x5668;&#x4F1A;&#x5728;&#x5220;&#x9664;servlet&#x5BF9;&#x8C61;&#x4E4B;&#x524D;&#xFF0C;&#x4F1A;&#x8C03;&#x7528;destroy&#x65B9;&#x6CD5;&#xFF0C;&#x8BE5;&#x65B9;&#x6CD5;&#x53EA;&#x4F1A;&#x8C03;&#x7528;&#x4E00;&#x6B21;&#x3002;</load-on-starup></load-on-starup></p>
+</li>
+<li><p>&#x76F8;&#x5173;&#x7684;&#x51E0;&#x4E2A;&#x63A5;&#x53E3;&#x4E0E;&#x7C7B;</p>
+</li>
+</ol>
+<p>&#xFF08;1&#xFF09;servlet&#x63A5;&#x53E3;&#xFF1A;<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">init(ServletConfig config);</div><div class="line">service(ServletRequest req , ServletResponse res);</div><div class="line">destroy();</div></pre></td></tr></table></figure></p>
+<p>&#xFF08;2&#xFF09;GenericServlet&#x62BD;&#x8C61;&#x7C7B;&#xFF1A;&#x5B9E;&#x73B0;Servlet&#x63A5;&#x53E3;&#x4E2D;&#x7684;&#x90E8;&#x5206;&#x65B9;&#x6CD5;&#x2014;&gt;init(),destroy()&#x3002;</p>
+<p>&#xFF08;3&#xFF09;HttpServlet&#x62BD;&#x8C61;&#x7C7B;&#xFF1A;&#x7EE7;&#x627F;&#x4E86;GenericServlet&#x62BD;&#x8C61;&#x7C7B;&#xFF0C;&#x5B9E;&#x73B0;&#x4E86;service&#x65B9;&#x6CD5;&#x3002;&#x8BE5;&#x65B9;&#x6CD5;&#x4F1A;&#x4F9D;&#x636E;&#x8BF7;&#x6C42;&#x7C7B;&#x578B;&#x8C03;&#x7528;&#x5BF9;&#x5E94;&#x7684;doGet,doPost&#x65B9;&#x6CD5;&#x3002;HttpServlet&#x63D0;&#x4F9B;&#x4E86;doGet,doPost&#x65B9;&#x6CD5;&#x7684;&#x5B9E;&#x73B0;&#xFF0C;&#x4F46;&#x662F;&#xFF0C;&#x90FD;&#x662F;&#x629B;&#x51FA;&#x4E00;&#x4E2A;&#x5F02;&#x5E38;&#xFF0C;&#x9700;&#x8981;&#x5F00;&#x53D1;&#x4EBA;&#x5458;&#x53BB;override&#x3002;</p>
+<h2 id="2-5&#x3001;servlet&#x7EBF;&#x7A0B;&#x5B89;&#x5168;&#x95EE;&#x9898;"><a href="#2-5&#x3001;servlet&#x7EBF;&#x7A0B;&#x5B89;&#x5168;&#x95EE;&#x9898;" class="headerlink" title="2.5&#x3001;servlet&#x7EBF;&#x7A0B;&#x5B89;&#x5168;&#x95EE;&#x9898;"></a>2.5&#x3001;servlet&#x7EBF;&#x7A0B;&#x5B89;&#x5168;&#x95EE;&#x9898;</h2><ol>
+<li><p>&#x7EBF;&#x7A0B;&#x5B89;&#x5168;&#x95EE;&#x9898;&#x4EA7;&#x751F;&#x7684;&#x539F;&#x56E0;&#xFF1F;<br>&#xFF08;1&#xFF09;&#x5728;&#x9ED8;&#x8BA4;&#x60C5;&#x51B5;&#x4E0B;&#xFF0C;&#x67D0;&#x4E2A;servlet&#x5728;&#x5BB9;&#x5668;&#x5185;&#x90E8;&#x53EA;&#x4F1A;&#x6709;&#x4E00;&#x4E2A;&#x5B9E;&#x4F8B;&#x3002;<br>&#xFF08;2&#xFF09;&#x5F53;&#x5BB9;&#x5668;&#x53D7;&#x5230;&#x8BF7;&#x6C42;&#x4EE5;&#x540E;&#xFF0C;&#x4F1A;&#x542F;&#x52A8;&#x4E00;&#x4E2A;&#x7EBF;&#x7A0B;&#x6765;&#x5904;&#x7406;&#x8BF7;&#x6C42;&#x3002;<br>&#x5982;&#x679C;&#x6709;&#x591A;&#x4E2A;&#x7EBF;&#x7A0B;&#x540C;&#x65F6;&#x8BBF;&#x95EE;&#x67D0;&#x4E2A;servlet&#x5B9E;&#x4F8B;&#xFF0C;&#x5E76;&#x4E14;&#x4FEE;&#x6539;&#x8BE5;servlet&#x5B9E;&#x4F8B;&#x5C5E;&#x6027;&#xFF0C;&#x5C31;&#x6709;&#x53EF;&#x80FD;&#x53D1;&#x751F;&#x7EBF;&#x7A0B;&#x5B89;&#x5168;&#x95EE;&#x9898;&#x3002;</p>
+</li>
+<li><p>&#x89E3;&#x51B3;&#x65B9;&#x6CD5;&#xFF1A;<br>&#xFF08;1&#xFF09;&#x52A0;&#x9501;&#xFF1A;&#x53EF;&#x4EE5;&#x4F7F;&#x7528;synchronized&#x5BF9;&#x6574;&#x4E2A;service&#x65B9;&#x6CD5;&#x6216;&#x8005;&#x5BF9;&#x6709;&#x7EBF;&#x7A0B;&#x5B89;&#x5168;&#x95EE;&#x9898;&#x7684;&#x4EE3;&#x7801;&#x5757;&#x52A0;&#x9501;&#x3002;&#x5EFA;&#x8BAE;&#x5C3D;&#x91CF;&#x4F7F;&#x7528;synchronized&#x3002;&#x5BF9;&#x4EE3;&#x7801;&#x5757;&#x52A0;&#x9501;&#x3002;<br>&#xFF08;2&#xFF09;&#x8BA9;servelet&#x5B9E;&#x73B0;&#x4E86;SingleThreadModel&#x63A5;&#x53E3;&#x3002;&#x5BB9;&#x5668;&#x4F1A;&#x521B;&#x5EFA;&#x591A;&#x4E2A;servlet&#x5B9E;&#x4F8B;&#xFF0C;&#x5373;&#xFF0C;&#x4E00;&#x4E2A;&#x7EBF;&#x7A0B;&#x5206;&#x914D;&#x4E00;&#x4E2A;servlet&#x5B9E;&#x4F8B;&#x3002;&#x4E0D;&#x63A8;&#x8350;&#xFF0C;&#x5360;&#x7528;&#x8FC7;&#x591A;&#x5185;&#x5B58;&#x3002;</p>
+</li>
+</ol>
+<h1 id="3&#x3001;&#x72B6;&#x6001;&#x7BA1;&#x7406;"><a href="#3&#x3001;&#x72B6;&#x6001;&#x7BA1;&#x7406;" class="headerlink" title="3&#x3001;&#x72B6;&#x6001;&#x7BA1;&#x7406;"></a>3&#x3001;&#x72B6;&#x6001;&#x7BA1;&#x7406;</h1><h2 id="3-1&#x3001;&#x4EC0;&#x4E48;&#x662F;&#x72B6;&#x6001;&#x7BA1;&#x7406;"><a href="#3-1&#x3001;&#x4EC0;&#x4E48;&#x662F;&#x72B6;&#x6001;&#x7BA1;&#x7406;" class="headerlink" title="3.1&#x3001;&#x4EC0;&#x4E48;&#x662F;&#x72B6;&#x6001;&#x7BA1;&#x7406;?"></a>3.1&#x3001;&#x4EC0;&#x4E48;&#x662F;&#x72B6;&#x6001;&#x7BA1;&#x7406;?</h2><p>&#x5C06;&#x6D4F;&#x89C8;&#x5668;&#x4E0E;web&#x670D;&#x52A1;&#x5668;&#x4E4B;&#x95F4;&#x591A;&#x6B21;&#x4EA4;&#x4E92;&#x6240;&#x6D89;&#x53CA;&#x7684;&#x6570;&#x636E;&#x4FDD;&#x5B58;&#x4E0B;&#x6765;&#x3002;(&#x5C06;&#x72B6;&#x6001;&#x4FDD;&#x5B58;&#x5728;&#x5BA2;&#x6237;&#x7AEF;&#x6216;&#x8005;&#x4FDD;&#x5B58;&#x5728;&#x670D;&#x52A1;&#x5668;&#x7AEF;)&#x3002;</p>
+<h2 id="3-2&#x3001;cookie&#x6280;&#x672F;"><a href="#3-2&#x3001;cookie&#x6280;&#x672F;" class="headerlink" title="3.2&#x3001;cookie&#x6280;&#x672F;"></a>3.2&#x3001;cookie&#x6280;&#x672F;</h2><ol>
+<li><p>&#x4EC0;&#x4E48;&#x662F;cookie?<br>&#x6D4F;&#x89C8;&#x5668;&#x5728;&#x8BBF;&#x95EE;&#x670D;&#x52A1;&#x5668;&#x65F6;&#xFF0C;&#x670D;&#x52A1;&#x5668;&#x4F1A;&#x5C06;&#x5C11;&#x91CF;&#x7684;&#x6570;&#x636E;&#xFF08;&#x5927;&#x7EA6;4k&#xFF09;&#x4EE5;set-cookie&#x6D88;&#x606F;<br>&#x5934;&#x7684;&#x65B9;&#x5F0F;&#x53D1;&#x9001;&#x7ED9;&#x6D4F;&#x89C8;&#x5668;&#xFF0C;&#x6D4F;&#x89C8;&#x5668;&#x4F1A;&#x5C06;&#x8FD9;&#x4E9B;&#x6570;&#x636E;&#x4FDD;&#x5B58;&#x4E0B;&#x6765;&#xFF0C;&#x5F53;&#x6D4F;&#x89C8;&#x5668;&#x518D;&#x6B21;&#x8BBF;&#x95EE;&#x670D;&#x52A1;&#x5668;&#x65F6;&#xFF0C;&#x4F1A;&#x5C06;&#x4E4B;&#x524D;&#x4FDD;&#x5B58;&#x7684;&#x8FD9;&#x4E9B;&#x6570;&#x636E;&#x4EE5;cookie&#x6D88;&#x606F;&#x5934;&#x7684;&#x65B9;&#x5F0F;&#x53D1;&#x9001;&#x7ED9;&#x670D;&#x52A1;&#x5668;&#x3002;</p>
+</li>
+<li><p>&#x5982;&#x4F55;&#x521B;&#x5EFA;&#x4E00;&#x4E2A;cookie?<br>&#xFF08;1&#xFF09;&#x521B;&#x5EFA;&#x4E00;&#x4E2A;cookie&#x5BF9;&#x8C61;&#xFF1A;<br><code>Cookie c = new Cookie(String name , String value);</code><br>&#xFF08;2&#xFF09;response.addCookie(c);</p>
+</li>
+<li><p>&#x5982;&#x4F55;&#x67E5;&#x8BE2;cookie?<br>Cookie[] request.getCookies();<br>&#x6CE8;&#x610F;&#xFF1A;request.getCookies&#x65B9;&#x6CD5;&#x6709;&#x53EF;&#x80FD;&#x8FD4;&#x56DE;null&#x3002;</p>
+</li>
+<li><p>&#x83B7;&#x53D6;cookie&#x4E2D;&#x6570;&#x636E;<br><code>String cookie.getName();</code><br><code>String cookie.getValues();</code></p>
+</li>
+<li><p>cookie&#x7684;&#x751F;&#x5B58;&#x65F6;&#x95F4;&#xFF1A;<br><code>cookie.setMaxAge(int seconds);//&#x5355;&#x4F4D;&#x662F;&#x79D2;</code><br><strong>&#x6CE8;&#x610F;&#xFF1A;</strong><br>&#x5F53;second&gt;0&#x65F6;&#xFF0C;&#x6D4F;&#x89C8;&#x5668;&#x4F1A;&#x5C06;cookie&#x4FDD;&#x5B58;&#x5728;&#x786C;&#x76D8;&#x4E0A;&#xFF0C;&#x5F53;&#x8D85;&#x8FC7;&#x6307;&#x5B9A;&#x7684;&#x65F6;&#x95F4;&#xFF0C;&#x6D4F;&#x89C8;&#x5668;&#x4F1A;&#x5220;&#x9664;&#x8FD9;&#x4E2A;cookie&#x3002;<br>&#x5F53;second&lt;0&#x65F6;&#xFF0C;&#xFF08;&#x7F3A;&#x7701;&#x503C;&#xFF09;&#x6D4F;&#x89C8;&#x5668;&#x4F1A;&#x5C06;cookie&#x4FDD;&#x5B58;&#x5728;&#x6D4F;&#x89C8;&#x5668;&#x5185;&#x5B58;&#x4E2D;&#xFF0C;&#x5F53;&#x6D4F;&#x89C8;&#x5668;&#x5173;&#x95ED;&#xFF0C;cookie&#x4F1A;&#x88AB;&#x5220;&#x9664;&#x3002;<br>&#x5F53;second=0&#x65F6;&#xFF0C;&#x5220;&#x9664;cookie</p>
+</li>
+<li><p>&#x5220;&#x9664;&#x4E00;&#x4E2A;cookie&#xFF1A;<br>&#x6BD4;&#x5982;&#x8981;&#x5220;&#x9664;&#x4E00;&#x4E2A;&#x540D;&#x4E3A;&#x201D;company&#x201C;&#x7684;cookie<br><code>Cookie c = new Cookie(&quot;company&quot;,&quot;&quot;);</code><br><code>c.setMaxAge(0);</code><br><code>response.addCookie(c);</code></p>
+</li>
+<li><p>&#x7F16;&#x7801;&#x95EE;&#x9898;&#xFF1A;<br>cookie&#x53EA;&#x80FD;&#x4FDD;&#x5B58;ascii&#x5B57;&#x7B26;&#x4E32;&#xFF0C;&#x5982;&#x679C;&#x51FA;&#x73B0;&#x975E;ascii&#x5B57;&#x7B26;&#xFF0C;&#x9700;&#x8981;&#x5C06;&#x5176;&#x8F6C;&#x6362;&#x6210;ascii&#x5B57;&#x7B26;&#x7684;&#x8868;&#x793A;&#x5F62;&#x5F0F;&#xFF0C;&#x53EF;&#x4EE5;&#x4F7F;&#x7528;&#xFF1A;<br><code>String URLEncoder.encode(String str , String code);</code><br><code>String URLDecode.decode(String str , String code);</code><br>//&#x521B;&#x5EFA;cookie<br><code>Cookie c = new Cookie(&quot;username&quot;,URLEncoder.encode(&quot;&#x5C0F;&#x98DE;&#x867E;&quot;,&quot;utf-8&quot;));</code><br>//&#x8BFB;&#x53D6;cookie&#x5C5E;&#x6027;<br><code>out.println(cookie.getName()+&quot;&quot;+URLDecoder.decode(cookie.getValue(),&quot;utf-8&quot;));</code></p>
+</li>
+<li><p>cookie&#x7684;&#x8DEF;&#x5F84;&#x95EE;&#x9898;&#xFF1A;<br>&#x6D4F;&#x89C8;&#x5668;&#x5728;&#x8BBF;&#x95EE;&#x670D;&#x52A1;&#x5668;&#x7684;&#x65F6;&#x5019;&#xFF0C;&#x5E76;&#x4E0D;&#x4F1A;&#x5C06;&#x6240;&#x6709;&#x7684;cookie&#x5168;&#x90E8;&#x53D1;&#x9001;&#x7ED9;&#x670D;&#x52A1;&#x5668;&#xFF0C;&#x800C;&#x662F;&#x6BD4;&#x8F83;&#x670D;&#x52A1;&#x5668;&#x5730;&#x5740;&#x4E0E;cookie&#x7684;&#x5730;&#x5740;&#x662F;&#x5426;&#x5339;&#x914D;&#xFF0C;&#x53EA;&#x6709;&#x7B26;&#x5408;&#x8981;&#x6C42;&#x7684;cookie&#x624D;&#x4F1A;&#x53D1;&#x9001;&#x7ED9;&#x670D;&#x52A1;&#x5668;&#x3002;&#x9ED8;&#x8BA4;&#x60C5;&#x51B5;&#x4E0B;&#xFF0C;cookie&#x7684;&#x8DEF;&#x5F84;&#x7B49;&#x4E8E;&#x6DFB;&#x52A0;&#x8BE5;cookie&#x7684;&#x7EC4;&#x4EF6;&#x7684;&#x5730;&#x5740;&#x3002;<br>&#x6BD4;&#x5982;&#xFF1A;/web07/jsp01/addCookie.jsp&#x6DFB;&#x52A0;&#x4E86;&#x4E00;&#x4E2A;cookie,&#x5219;&#x8BE5;cookie&#x7684;&#x8DEF;&#x5F84;&#x5C31;&#x662F; &#x201C;/web07/jsp01&#x201D;&#x3002;<br>&#x5982;&#x679C;&#x8981;&#x8BBF;&#x95EE;&#x670D;&#x52A1;&#x5668;&#xFF1A;<br>/web07/findCookie1.jsp     &#x4E0D;&#x53D1;&#x9001;cookie<br>/web07/jsp01/findCookie2.jsp  &#x53D1;&#x9001;cookie<br>/web07/jsp01/jsp02/findCookie3.jsp  &#x53D1;&#x9001;cookie<br>&#x53EF;&#x4EE5;&#x901A;&#x8FC7;&#x8C03;&#x7528;cookie.setPath(String path)&#x65B9;&#x6CD5;&#x4FEE;&#x6539;cookie&#x7684;&#x8DEF;&#x5F84;&#xFF0C;&#x4E00;&#x822C;&#x5C06;&#x5176;&#x66F4;&#x6539;&#x4E3A;&#x5E94;&#x7528;&#x7684;&#x8DEF;&#x5F84;:cookie.setPath(&#x201C;/appname&#x201D;);<br>&#x56E0;&#x6B64;&#xFF1A;&#x5982;&#x679C;&#x8981;&#x6DFB;&#x52A0;&#x4E00;&#x4E2A;cookie&#x7684;&#x6B65;&#x9AA4;&#xFF1A;</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">Cookie cookie = <span class="keyword">new</span> Cookie(<span class="string">&quot;username&quot;</span>,URLEncode.encode(<span class="string">&quot;&#x5F20;&#x4E09;&quot;</span>,<span class="string">&quot;utf-8&quot;</span>));</div><div class="line">cookie.setMaxAge(<span class="number">1000</span>);</div><div class="line">cookie.setPath(<span class="string">&quot;/web07&quot;</span>);</div><div class="line">response.addCookie(c);</div></pre></td></tr></table></figure>
+</li>
+<li><p>cookie&#x7684;&#x7F3A;&#x70B9;&#xFF1A;<br>&#xFF08;1&#xFF09;cookie&#x53EF;&#x4EE5;&#x88AB;&#x7528;&#x6237;&#x7981;&#x6B62;&#x3002;<br>&#xFF08;2&#xFF09;cookie&#x4E0D;&#x5B89;&#x5168;&#x3002;<br>&#xFF08;3&#xFF09;cookie&#x80FD;&#x591F;&#x4FDD;&#x5B58;&#x7684;&#x6570;&#x636E;&#x5927;&#x5C0F;&#x6709;&#x9650;&#x5236;&#xFF0C;&#x53EA;&#x80FD;&#x4FDD;&#x5B58;&#x5C11;&#x91CF;&#x7684;&#x6570;&#x636E;&#xFF08;4k&#xFF09;<br>&#xFF08;4&#xFF09;cookie&#x7684;&#x4E2A;&#x6570;&#x4E5F;&#x6709;&#x9650;&#x5236;&#xFF0C;&#x5927;&#x7EA6;300&#x4E2A;<br>&#xFF08;5&#xFF09;cookie&#x53EA;&#x80FD;&#x4FDD;&#x5B58;&#x5B57;&#x7B26;&#x4E32;&#x3002;</p>
+</li>
+</ol>
+<h2 id="3-3&#x3001;session&#x6280;&#x672F;"><a href="#3-3&#x3001;session&#x6280;&#x672F;" class="headerlink" title="3.3&#x3001;session&#x6280;&#x672F;"></a>3.3&#x3001;session&#x6280;&#x672F;</h2><ol>
+<li><p>&#x4EC0;&#x4E48;&#x662F;session?<br>&#x662F;&#x4E00;&#x79CD;&#x5C06;&#x72B6;&#x6001;&#x4FDD;&#x5B58;&#x5728;&#x670D;&#x52A1;&#x5668;&#x7AEF;&#x7684;&#x72B6;&#x6001;&#x7BA1;&#x7406;&#x6280;&#x672F;&#x3002;&#x5F53;&#x6D4F;&#x89C8;&#x5668;&#x8BBF;&#x95EE;&#x670D;&#x52A1;&#x5668;&#x65F6;&#xFF0C;&#x670D;&#x52A1;&#x5668;&#x4F1A;&#x521B;&#x5EFA;&#x4E00;&#x4E2A;&#x5BF9;&#x8C61;&#xFF08;&#x79F0;&#x4E4B;&#x4E3A;session&#x5BF9;&#x8C61;&#xFF0C;&#x5B83;&#x62E5;&#x6709;&#x4E00;&#x4E2A;&#x552F;&#x4E00;&#x7684;sessionId&#xFF09;&#xFF0C;&#x63A5;&#x4E0B;&#x6765;&#xFF0C;&#x670D;&#x52A1;&#x5668;&#x4F1A;&#x5C06;sessioId&#x53D1;&#x9001;&#x7ED9;&#x6D4F;&#x89C8;&#x5668;&#xFF08;&#x9ED8;&#x8BA4;&#x60C5;&#x51B5;&#x4E0B;&#xFF0C;&#x670D;&#x52A1;&#x5668;&#x4F1A;&#x4F7F;&#x7528;cookie&#x673A;&#x5236;&#x6765;&#x53D1;&#x9001;sessionId&#xFF09;&#x6D4F;&#x89C8;&#x5668;&#x4F1A;&#x5C06;sessionId&#x4FDD;&#x5B58;&#x4E0B;&#x6765;&#xFF0C;&#x5F53;&#x6D4F;&#x89C8;&#x5668;&#x518D;&#x6B21;&#x8BBF;&#x95EE;&#x670D;&#x52A1;&#x5668;&#x65F6;&#xFF0C;&#x4F1A;&#x5C06;sessionId&#x53D1;&#x9001;&#x7ED9;&#x670D;&#x52A1;&#x5668;&#xFF0C;&#x670D;&#x52A1;&#x5668;&#x6839;&#x636E;sessionId&#x627E;&#x5230;&#x4E4B;&#x524D;&#x521B;&#x5EFA;&#x597D;&#x7684;session&#x5BF9;&#x8C61;&#x3002;</p>
+</li>
+<li><p>&#x5982;&#x4F55;&#x83B7;&#x5F97;&#x4E00;&#x4E2A;session&#x5BF9;&#x8C61;&#xFF1F;<br>&#xFF08;1&#xFF09;HttpSession s1 = request.getSession(boolean flag);<br>&#x5F53;flag=true&#x65F6;&#xFF1A;<br>&#x670D;&#x52A1;&#x5668;&#x68C0;&#x67E5;&#x8BF7;&#x6C42;&#x5F53;&#x4E2D;&#x662F;&#x5426;&#x542B;&#x6709;sessionId,&#x5982;&#x679C;&#x6CA1;&#x6709;&#xFF0C;&#x5219;&#x521B;&#x5EFA;&#x4E00;&#x4E2A;session&#x5BF9;&#x8C61;;&#x5982;&#x679C;&#x6709;&#xFF0C;&#x4F1A;&#x4F9D;&#x636E;sessionId&#x67E5;&#x627E;&#x5BF9;&#x5E94;&#x7684;session&#x5BF9;&#x8C61;&#xFF0C;&#x5982;&#x679C;&#x627E;&#x5230;&#x4E86;&#xFF0C;&#x5219;&#x8FD4;&#x56DE;,&#x5982;&#x679C;&#x627E;&#x4E0D;&#x5230;&#xFF08;session&#x5DF2;&#x8D85;&#x65F6;&#x7B49;&#xFF09;&#x5219;&#x4F1A;&#x521B;&#x5EFA;&#x4E00;&#x4E2A;&#x65B0;&#x7684;session&#x5BF9;&#x8C61;&#x3002;<br>&#x5F53;flag=false&#x65F6;&#xFF1A;<br>&#x670D;&#x52A1;&#x5668;&#x4F1A;&#x68C0;&#x67E5;&#x8BF7;&#x6C42;&#x5F53;&#x4E2D;&#x662F;&#x5426;&#x542B;&#x6709;sessionId&#xFF0C;&#x5982;&#x679C;&#x6CA1;&#x6709;&#xFF0C;&#x5219;&#x8FD4;&#x56DE;null;&#x5982;&#x679C;&#x6709;&#xFF0C;&#x5219;&#x4F1A;&#x4F9D;&#x636E;sessionId&#x67E5;&#x627E;&#x5BF9;&#x5E94;&#x7684;session&#x5BF9;&#x8C61;&#xFF0C;&#x5982;&#x679C;&#x627E;&#x5230;&#x4E86;&#xFF0C;&#x5219;&#x8FD4;&#x56DE;&#xFF0C;&#x5982;&#x679C;&#x627E;&#x4E0D;&#x5230;&#xFF0C;&#x5219;&#x8FD4;&#x56DE;null&#x3002;<br>&#xFF08;2&#xFF09;HttpSession s2 = request.getSession();<br>&#x7B49;&#x4EF7;&#x4E8E;request.getSession(true);</p>
+</li>
+<li><p>session&#x7684;&#x51E0;&#x4E2A;&#x5E38;&#x7528;&#x65B9;&#x6CD5;&#xFF1A;</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">String session.getId();</div><div class="line">session.setAttirbute(String name,Object obj);</div><div class="line">Object session.getAttribute(String name)</div><div class="line">session.removeAttribute(String name)</div></pre></td></tr></table></figure>
+</li>
+<li><p>session&#x7684;&#x8D85;&#x65F6;<br>&#x5BB9;&#x5668;&#x4F1A;&#x5C06;&#x7A7A;&#x95F2;&#x65F6;&#x95F4;&#x8FC7;&#x957F;&#x7684;session&#x5BF9;&#x8C61;&#x4ECE;&#x5185;&#x5B58;&#x91CC;&#x5220;&#x9664;&#x6389;&#xFF0C;&#x5927;&#x90E8;&#x5206;&#x670D;&#x52A1;&#x5668;&#x7F3A;&#x7701;&#x65F6;&#x95F4;&#x662F;30&#x5206;&#x949F;&#xFF0C;&#x53EF;&#x4EE5;&#x4FEE;&#x6539;&#x670D;&#x52A1;&#x5668;&#x7684;&#x7F3A;&#x7701;&#x8D85;&#x65F6;&#x65F6;&#x95F4;&#x9650;&#x5236;&#xFF1A;<br>&#x6BD4;&#x5982;&#xFF1A;tomcat&#x53EF;&#x4EE5;&#x4FEE;&#x6539;/conf/web.xml&#x6587;&#x4EF6;<br><code>&lt;session-config&gt;&lt;session-timeout&gt;30&lt;/session-timeout&gt;&lt;/session-config&gt;</code><br>&#x4FEE;&#x6539;&#x5B8C;&#x6210;&#x4EE5;&#x540E;&#xFF0C;&#x9700;&#x8981;&#x91CD;&#x65B0;&#x542F;&#x52A8;&#x670D;&#x52A1;&#x5668;&#x3002;<br>&#x4E5F;&#x53EF;&#x4EE5;&#x53EA;&#x4FEE;&#x6539;&#x67D0;&#x4E2A;&#x5E94;&#x7528;&#x7684;web.xml&#x3002;<br>&#x53E6;&#x5916;&#xFF0C;&#x4E5F;&#x53EF;&#x4EE5;&#x8C03;&#x7528;session.setMaxInactiveInterval(int seconds); &#x8BBE;&#x7F6E;&#x67D0;&#x4E2A;session&#x7684;&#x751F;&#x5B58;&#x65F6;&#x95F4;&#x3002;</p>
+</li>
+<li><p>&#x5220;&#x9664;session<br>session.invalidate()&#x53EF;&#x4EE5;&#x76F4;&#x63A5;&#x5220;&#x9664;session&#x3002;</p>
+</li>
+<li><p>&#x5F53;&#x7528;&#x6237;&#x7981;&#x6B62;cookie&#x4EE5;&#x540E;&#xFF0C;&#x5982;&#x4F55;&#x7EE7;&#x7EED;&#x4F7F;&#x7528;session?(&#x4E86;&#x89E3;)<br>&#xFF08;1&#xFF09;&#x89E3;&#x51B3;&#x65B9;&#x6CD5;&#xFF1A;&#x53EF;&#x4EE5;&#x4F7F;&#x7528;url&#x91CD;&#x5199;&#x673A;&#x5236;&#x3002;url&#x91CD;&#x5199;&#x6307;&#x7684;&#x662F;,&#x5728;&#x8BBF;&#x95EE;&#x67D0;&#x4E2A;&#x7EC4;&#x4EF6;&#x65F6;&#xFF0C;&#x4E0D;&#x76F4;&#x63A5;&#x4F7F;&#x7528;&#x5176;&#x5730;&#x5740;&#xFF0C;&#x800C;&#x662F;&#x4F7F;&#x7528;&#x670D;&#x52A1;&#x5668;&#x751F;&#x6210;&#x7684;&#x4E00;&#x4E2A;&#x5305;&#x542B;sessionId&#x7684;&#x5730;&#x5740;&#x3002;<br>&#xFF08;2&#xFF09;&#x5982;&#x4F55;&#x8FDB;&#x884C;url&#x91CD;&#x5199;?<br>&#x94FE;&#x63A5;&#x5730;&#x5740;&#x3001;&#x8868;&#x5355;&#x63D0;&#x4EA4;&#x5730;&#x5740;&#xFF0C;&#x4F7F;&#x7528;response.encodeURL(String url)&#x5904;&#x7406;<br>&#x91CD;&#x5B9A;&#x5411;&#x5730;&#x5740;&#xFF0C;&#x4F7F;&#x7528;response.encodeRedirectURL(String url)&#x5904;&#x7406;</p>
+</li>
+<li><p>session&#x7684;&#x4F18;&#x7F3A;&#x70B9;&#xFF1A;<br>&#x8DDF;cookie&#x76F8;&#x6BD4;&#xFF0C;session&#x76F8;&#x5BF9;&#x6765;&#x8BB2;&#x4F1A;&#x66F4;&#x5B89;&#x5168;&#xFF0C;&#x4FDD;&#x5B58;&#x7684;&#x6570;&#x636E;&#x5927;&#x5C0F;&#x4ECE;&#x7406;&#x8BBA;&#x4E0A;&#x6CA1;&#x6709;&#x9650;&#x5236;&#x3001;&#x4FDD;&#x5B58;&#x7684;&#x6570;&#x636E;&#x7C7B;&#x578B;&#x66F4;&#x4E30;&#x5BCC;&#x3002;session&#x662F;&#x4E00;&#x79CD;&#x670D;&#x52A1;&#x5668;&#x7AEF;&#x72B6;&#x6001;&#x7BA1;&#x7406;&#x6280;&#x672F;&#xFF0C;&#x4F1A;&#x5C06;&#x6240;&#x6709;&#x7684;&#x72B6;&#x6001;&#x4FDD;&#x5B58;&#x5728;&#x670D;&#x52A1;&#x5668;&#x7AEF;&#xFF0C;&#x6240;&#x4EE5;&#xFF0C;&#x670D;&#x52A1;&#x5668;&#x538B;&#x529B;&#x4F1A;&#x66F4;&#x5927;&#xFF08;&#x670D;&#x52A1;&#x5668;&#x53EF;&#x4EE5;&#x5C06;session&#x4E2D;&#x7684;&#x6570;&#x636E;&#x4E34;&#x65F6;&#x4FDD;&#x5B58;&#x5230;&#x6570;&#x636E;&#x5E93;&#x6216;&#x8005;&#x786C;&#x76D8;&#x4E0A;&#xFF09;&#x3002;&#x6709;&#x4E9B;&#x65F6;&#x5019;&#xFF0C;&#x4F1A;&#x4F7F;&#x7528;session&#x548C;cookie&#x4E00;&#x8D77;&#x6765;&#x89E3;&#x51B3;&#x6BD4;&#x8F83;&#x590D;&#x6742;&#x7684;&#x72B6;&#x6001;&#x7BA1;&#x7406;&#x95EE;&#x9898;&#x3002;</p>
+</li>
+</ol>
+
+      
+    </div>
+
+    <div>
+      
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Servlet/" rel="tag">#Servlet</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/04/14/字符集和字符编码的关系/" rel="next" title="字符集和字符编码的关系">
+                <i class="fa fa-chevron-left"></i> 字符集和字符编码的关系
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/04/28/Servlet学习笔记（二）/" rel="prev" title="Servlet学习笔记（二）">
+                Servlet学习笔记（二） <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/04/28/Servlet学习笔记（一）/"
+           data-title="Servlet学习笔记（一）" data-url="http://lzblog.cn/2016/04/28/Servlet学习笔记（一）/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.png"
+               alt="lizhen" />
+          <p class="site-author-name" itemprop="name">lizhen</p>
+          <p class="site-description motion-element" itemprop="description">Java攻城狮</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">40</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">11</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">37</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://hexo.io/zh-cn/" target="_blank">
+                  
+                    <i class="fa fa-plane"></i>
+                  
+                  Hexo
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/lingbage" target="_blank">
+                  
+                    <i class="fa fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://leancloud.cn/" target="_blank">
+                  
+                    <i class="fa fa-cloud"></i>
+                  
+                  LCloud
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.bootcss.com/p/font-awesome/" target="_blank">
+                  
+                    <i class="fa fa-leaf"></i>
+                  
+                  FontA
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://portal.qiniu.com/" target="_blank">
+                  
+                    <i class="fa fa-cloud-upload"></i>
+                  
+                  七牛图床
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        <div class="links-of-blogroll motion-element">
+          
+            <div class="links-of-blogroll-title">友情链接</div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.lzblog.cn/" target="_blank">None</a>
+                </li>
+              
+            </ul>
+          
+        </div>
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1、Servlet基础"><span class="nav-text">1、Servlet基础</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-1、什么是Servlet？"><span class="nav-text">1.1、什么是Servlet？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-2、什么是Servlet容器？"><span class="nav-text">1.2、什么是Servlet容器？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-3、如何开发一个Servlet？"><span class="nav-text">1.3、如何开发一个Servlet？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-4、什么是http协议？（了解）"><span class="nav-text">1.4、什么是http协议？（了解）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-5、请求数据包和响应数据包的结构？（了解）"><span class="nav-text">1.5、请求数据包和响应数据包的结构？（了解）</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2、servlet核心"><span class="nav-text">2、servlet核心</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#2-1、get请求与post请求"><span class="nav-text">2.1、get请求与post请求</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-2、表单处理"><span class="nav-text">2.2、表单处理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-3、转发与重定向"><span class="nav-text">2.3、转发与重定向</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-4、servlet的生命周期"><span class="nav-text">2.4、servlet的生命周期</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-5、servlet线程安全问题"><span class="nav-text">2.5、servlet线程安全问题</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3、状态管理"><span class="nav-text">3、状态管理</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#3-1、什么是状态管理"><span class="nav-text">3.1、什么是状态管理?</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-2、cookie技术"><span class="nav-text">3.2、cookie技术</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-3、session技术"><span class="nav-text">3.3、session技术</span></a></li></ol></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <script async src="/lib/jquery/busuanzi.pure.mini.js"></script>
+<div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">lizhen</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="powered-by">
+  主题  - 
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+<span id="busuanzi_container_site_pv">本站总访问量<span id="busuanzi_value_site_pv"></span>次</span>
+
+
+
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+
+  
+
+
+
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js"></script>
+
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js"></script>
+
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=0.5.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=0.5.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=0.5.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=0.5.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=0.5.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=0.5.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=0.5.0"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"lizhenblog"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+      <script src="/lib/ua-parser-js/dist/ua-parser.min.js"></script>
+      <script src="/js/src/hook-duoshuo.js"></script>
+    
+  
+
+
+
+
+
+  
+  
+  
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script>AV.initialize("DSUpqwXpCRk0yaVH0umWiadJ-gzGzoHsz", "b5jihkHKg0hUcy7gQ4rJz6dD");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+</body>
+</html>

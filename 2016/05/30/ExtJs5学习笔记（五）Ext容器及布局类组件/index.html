@@ -1,0 +1,849 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
+
+
+
+
+  <link href="//fonts.googleapis.com/css?family=Lato:300,400,700,400italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=0.5.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="ExtJs5," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Dear Blog" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=0.5.0" />
+
+
+
+
+
+
+<meta name="description" content="&amp;#x8FD9;&amp;#x91CC;&amp;#x6211;&amp;#x4EEC;&amp;#x770B;&amp;#x4E00;&amp;#x4E0B;&amp;#x5E38;&amp;#x7528;&amp;#x7684;&amp;#x5E03;&amp;#x5C40;&amp;#x7C7B;&amp;#x7EC4;&amp;#x4EF6;&amp;#x3002;
+1&amp;#x3001;&amp;#x89C6;&amp;#x56FE;&amp;#x7EC4;&amp;#x4EF6;&amp;#x2013;Ext.container.Viewport">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ExtJs5学习笔记（五）Ext容器及布局类组件">
+<meta property="og:url" content="http://lzblog.cn/2016/05/30/ExtJs5学习笔记（五）Ext容器及布局类组件/index.html">
+<meta property="og:site_name" content="Dear Blog">
+<meta property="og:description" content="&amp;#x8FD9;&amp;#x91CC;&amp;#x6211;&amp;#x4EEC;&amp;#x770B;&amp;#x4E00;&amp;#x4E0B;&amp;#x5E38;&amp;#x7528;&amp;#x7684;&amp;#x5E03;&amp;#x5C40;&amp;#x7C7B;&amp;#x7EC4;&amp;#x4EF6;&amp;#x3002;
+1&amp;#x3001;&amp;#x89C6;&amp;#x56FE;&amp;#x7EC4;&amp;#x4EF6;&amp;#x2013;Ext.container.Viewport">
+<meta property="og:image" content="http://7xsp5x.com2.z0.glb.clouddn.com/extjs5-4-1.png">
+<meta property="og:image" content="http://7xsp5x.com2.z0.glb.clouddn.com/extjs5-4-2.png">
+<meta property="og:image" content="http://7xsp5x.com2.z0.glb.clouddn.com/extjs5-4-3.png">
+<meta property="og:image" content="http://7xsp5x.com2.z0.glb.clouddn.com/extjs5-4-4.png">
+<meta property="og:image" content="http://7xsp5x.com2.z0.glb.clouddn.com/extjs5-4-5.png">
+<meta property="og:image" content="http://7xsp5x.com2.z0.glb.clouddn.com/extjs5-4-6.png">
+<meta property="og:image" content="http://7xsp5x.com2.z0.glb.clouddn.com/extjs5-4-7.png">
+<meta property="og:image" content="http://7xsp5x.com2.z0.glb.clouddn.com/extjs5-4-8.png">
+<meta property="og:updated_time" content="2016-11-21T14:42:32.040Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="ExtJs5学习笔记（五）Ext容器及布局类组件">
+<meta name="twitter:description" content="&amp;#x8FD9;&amp;#x91CC;&amp;#x6211;&amp;#x4EEC;&amp;#x770B;&amp;#x4E00;&amp;#x4E0B;&amp;#x5E38;&amp;#x7528;&amp;#x7684;&amp;#x5E03;&amp;#x5C40;&amp;#x7C7B;&amp;#x7EC4;&amp;#x4EF6;&amp;#x3002;
+1&amp;#x3001;&amp;#x89C6;&amp;#x56FE;&amp;#x7EC4;&amp;#x4EF6;&amp;#x2013;Ext.container.Viewport">
+<meta name="twitter:image" content="http://7xsp5x.com2.z0.glb.clouddn.com/extjs5-4-1.png">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+  <title> ExtJs5学习笔记（五）Ext容器及布局类组件 | Dear Blog </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?3b9384b786cf80306a6f68370a3a802f";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Dear Blog</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">Busy to live or busy to die ?!</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-th fa-fw"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-tags fa-fw"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-user fa-fw"></i> <br />
+            
+            关于我
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-commonweal">
+          <a href="/404.html" rel="section">
+            
+              <i class="menu-item-icon fa fa-heartbeat fa-fw"></i> <br />
+            
+            公益404
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-search">
+          <a href="/search" rel="section">
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                ExtJs5学习笔记（五）Ext容器及布局类组件
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-05-30T18:34:27+08:00" content="2016-05-30">
+              2016-05-30
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/ExtJs5/" itemprop="url" rel="index">
+                    <span itemprop="name">ExtJs5</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/05/30/ExtJs5学习笔记（五）Ext容器及布局类组件/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/05/30/ExtJs5学习笔记（五）Ext容器及布局类组件/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/2016/05/30/ExtJs5学习笔记（五）Ext容器及布局类组件/" class="leancloud_visitors" data-flag-title="ExtJs5学习笔记（五）Ext容器及布局类组件">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">阅读次数 </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>&#x8FD9;&#x91CC;&#x6211;&#x4EEC;&#x770B;&#x4E00;&#x4E0B;&#x5E38;&#x7528;&#x7684;&#x5E03;&#x5C40;&#x7C7B;&#x7EC4;&#x4EF6;&#x3002;</p>
+<h1 id="1&#x3001;&#x89C6;&#x56FE;&#x7EC4;&#x4EF6;&#x2013;Ext-container-Viewport&#xFF1A;"><a href="#1&#x3001;&#x89C6;&#x56FE;&#x7EC4;&#x4EF6;&#x2013;Ext-container-Viewport&#xFF1A;" class="headerlink" title="1&#x3001;&#x89C6;&#x56FE;&#x7EC4;&#x4EF6;&#x2013;Ext.container.Viewport&#xFF1A;"></a>1&#x3001;&#x89C6;&#x56FE;&#x7EC4;&#x4EF6;&#x2013;Ext.container.Viewport&#xFF1A;</h1><p>&#x8FD9;&#x4E2A;&#x662F;Ext&#x63D0;&#x4F9B;&#x7684;&#x4E00;&#x4E2A;&#x9875;&#x9762;&#x5E03;&#x5C40;&#xFF0C;&#x4ED6;&#x5206;&#x4E3A;&#x4E0A;&#x3001;&#x4E0B;&#x3001;&#x5DE6;&#x3001;&#x53F3;&#x3001;&#x4E2D;&#xFF0C;&#x4E94;&#x90E8;&#x5206;&#xFF0C;&#x6211;&#x4EEC;&#x53EF;&#x4EE5;&#x5728;&#x6BCF;&#x4E00;&#x90E8;&#x5206;&#x8FDB;&#x884C;&#x518D;&#x5F00;&#x53D1;&#x3002;</p>
+<a id="more"></a>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div></pre></td><td class="code"><pre><div class="line">Ext.onReady(function(){</div><div class="line">	/*</div><div class="line">	 * Ext.container.Viewport</div><div class="line">	 */</div><div class="line">	Ext.create(&apos;Ext.container.Viewport&apos;, {</div><div class="line">	    layout: &apos;border&apos;,//layout&#x4E00;&#x822C;&#x9ED8;&#x8BA4;&#x4E3A;auto&#xFF0C;&#x4F46;Viewport&#x5FC5;&#x987B;&#x4E3A;border&#x3002;</div><div class="line">	    items: [{</div><div class="line">	    	//&#x53EF;&#x4EE5;&#x7528;&#x6765;&#x5199;&#x6574;&#x4E2A;&#x9875;&#x9762;&#x7684;&#x6807;&#x9898;&#xFF0C;logo&#x7B49;&#x4FE1;&#x606F;</div><div class="line">	        region: &apos;north&apos;, //region&#x8BBE;&#x7F6E;&#x6240;&#x5904;&#x7684;&#x4F4D;&#x7F6E;</div><div class="line">	        html: &apos;&lt;h1 class=&quot;x-panel-header&quot;&gt;&#x9875;&#x9762;&#x6807;&#x9898;&lt;/h1&gt;&apos;,</div><div class="line">	        border: false,</div><div class="line">	        margin: &apos;0 0 5 0&apos;</div><div class="line">	    }, {</div><div class="line">	    	//&#x5DE6;&#x4FA7;&#x9762;&#x677F;&#x53EF;&#x4EE5;&#x5199;&#x4E00;&#x68F5;&#x6811;&#x4F5C;&#x4E3A;&#x5BFC;&#x822A;&#x4E4B;&#x7C7B;&#x7684;&#x4E1C;&#x897F;</div><div class="line">	        region: &apos;west&apos;,</div><div class="line">	        collapsible: true,</div><div class="line">	        title: &apos;Navigation&apos;,</div><div class="line">	        width: 150</div><div class="line">	    }, {</div><div class="line">	    	//&#x8FD9;&#x91CC;&#x53EF;&#x4EE5;&#x5199;&#x4E00;&#x4E0B;&#x8865;&#x5145;&#x4FE1;&#x606F;&#x7B49;&#x5185;&#x5BB9;</div><div class="line">	        region: &apos;south&apos;,</div><div class="line">	        title: &apos;South Panel&apos;,</div><div class="line">	        collapsible: true,</div><div class="line">	        html: &apos;Information goes here&apos;,</div><div class="line">	        split: true,</div><div class="line">	        height: 100,</div><div class="line">	        minHeight: 100</div><div class="line">	    }, {</div><div class="line">	        region: &apos;east&apos;,</div><div class="line">	        title: &apos;East Panel&apos;,</div><div class="line">	        collapsible: true,</div><div class="line">	        split: true,</div><div class="line">	        width: 150</div><div class="line">	    }, {</div><div class="line">	    	//&#x4E3B;&#x9762;&#x677F;&#xFF0C;&#x9875;&#x9762;&#x4E3B;&#x8981;&#x5185;&#x5BB9;&#x4E00;&#x822C;&#x5728;&#x8FD9;&#x91CC;</div><div class="line">	        region: &apos;center&apos;,</div><div class="line">	        xtype: &apos;tabpanel&apos;, // TabPanel itself has no title</div><div class="line">	        activeTab: 0,      // First tab active by default</div><div class="line">	        items: {</div><div class="line">	            title: &apos;Default Tab&apos;,</div><div class="line">	            html: &apos;The first tab\&apos;s content. Others may be added dynamically&apos;</div><div class="line">	        }</div><div class="line">	    }]</div><div class="line">	});</div><div class="line">});</div></pre></td></tr></table></figure>
+<p>&#x8FD0;&#x884C;&#x5982;&#x4E0B;&#xFF1A;</p>
+<p><img src="http://7xsp5x.com2.z0.glb.clouddn.com/extjs5-4-1.png"></p>
+<h1 id="2&#x3001;&#x7A97;&#x53E3;&#x7EC4;&#x4EF6;&#x2013;Ext-window-Window&#xFF1A;"><a href="#2&#x3001;&#x7A97;&#x53E3;&#x7EC4;&#x4EF6;&#x2013;Ext-window-Window&#xFF1A;" class="headerlink" title="2&#x3001;&#x7A97;&#x53E3;&#x7EC4;&#x4EF6;&#x2013;Ext.window.Window&#xFF1A;"></a>2&#x3001;&#x7A97;&#x53E3;&#x7EC4;&#x4EF6;&#x2013;Ext.window.Window&#xFF1A;</h1><p>&#x53EF;&#x4EE5;&#x914D;&#x7F6E;&#x5173;&#x95ED;&#x3001;&#x6700;&#x5927;&#x5316;&#x7B49;&#x6309;&#x94AE;&#xFF0C;&#x5927;&#x90E8;&#x5206;&#x60C5;&#x51B5;&#x4E0B;&#x4F7F;&#x7528;&#x5728;&#x5F39;&#x7A97;&#x7684;&#x9700;&#x6C42;&#x4E2D;&#x3002;</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">Ext.onReady(function(){</div><div class="line">	Ext.create(&apos;Ext.window.Window&apos;, {</div><div class="line">	    title: &apos;Hello&apos;,</div><div class="line">	    height: 200,</div><div class="line">	    width: 400,</div><div class="line">	    layout: &apos;fit&apos;,</div><div class="line">//	    items: [],//&#x8FD9;&#x91CC;&#x53EF;&#x4EE5;&#x6DFB;&#x52A0;&#x5176;&#x4ED6;Ext&#x7EC4;&#x4EF6;,&#x4E00;&#x822C;&#x60C5;&#x51B5;&#x4F1A;&#x6DFB;&#x52A0;panel&#x7684;&#x5B50;&#x7C7B;</div><div class="line">	    html:&apos;World!&apos; </div><div class="line">	}).show();</div><div class="line">});</div></pre></td></tr></table></figure>
+<p>&#x8FD0;&#x884C;&#x5982;&#x4E0B;&#xFF1A;</p>
+<p><img src="http://7xsp5x.com2.z0.glb.clouddn.com/extjs5-4-2.png"></p>
+<h1 id="3&#x3001;&#x9762;&#x677F;&#x7EC4;&#x4EF6;&#x2013;Ext-panel-Panel&#xFF1A;"><a href="#3&#x3001;&#x9762;&#x677F;&#x7EC4;&#x4EF6;&#x2013;Ext-panel-Panel&#xFF1A;" class="headerlink" title="3&#x3001;&#x9762;&#x677F;&#x7EC4;&#x4EF6;&#x2013;Ext.panel.Panel&#xFF1A;"></a>3&#x3001;&#x9762;&#x677F;&#x7EC4;&#x4EF6;&#x2013;Ext.panel.Panel&#xFF1A;</h1><p>&#x662F;Ext&#x4E2D;&#x6240;&#x6709;panel&#x7684;&#x7236;&#x7C7B;&#xFF0C;&#x4E00;&#x822C;&#x5728;&#x5B83;&#x91CC;&#x9762;&#x4F1A;&#x5305;&#x542B;&#x591A;&#x4E2A;panel&#x5B50;&#x7C7B;&#xFF0C;&#x5B8C;&#x6210;&#x9875;&#x9762;&#x5E03;&#x5C40;&#x3002;</p>
+<p>Panel&#x4E2D;&#x5E38;&#x7528;&#x7684;&#x5C5E;&#x6027;&#xFF1A;</p>
+<ol>
+<li>title:&#x8BBE;&#x7F6E;&#x9762;&#x677F;&#x6807;&#x9898;</li>
+<li>items&#xFF1A;&#x6B63;&#x6587;&#x90E8;&#x5206;&#x7684;Ext&#x63A7;&#x4EF6;</li>
+<li>html&#xFF1A;&#x6B63;&#x6587;&#x90E8;&#x5206;&#x7684;&#x6587;&#x5B57;</li>
+<li>tbar&#xFF1A;&#x5DE5;&#x5177;&#x680F;&#xFF0C;&#x53EF;&#x4EE5;&#x653E;&#x7F6E;&#x5728;&#x56DB;&#x4E2A;&#x4F4D;&#x7F6E;&#xFF0C;&#x5206;&#x522B;&#x4E3A;tbar,lbar,rbar,bbar</li>
+<li>buttons&#xFF1A;&#x6309;&#x94AE;&#x533A;&#x57DF;</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">Ext.onReady(function(){</div><div class="line">	var filterPanel = Ext.create(&apos;Ext.panel.Panel&apos;, {</div><div class="line">	    bodyPadding: 5,</div><div class="line">	    width: 300,</div><div class="line">	    title: &apos;Filters&apos;,</div><div class="line">	    items: [{ //items&#x4E2D;&#x53EF;&#x4EE5;&#x5B58;&#x653E;&#x5176;&#x4ED6;Ext&#x7EC4;&#x4EF6;,&#x8FD9;&#x91CC;&#x53EA;&#x662F;&#x793A;&#x4F8B;</div><div class="line">	        xtype: &apos;datefield&apos;,</div><div class="line">	        fieldLabel: &apos;Start date&apos;</div><div class="line">	    }, {</div><div class="line">	        xtype: &apos;datefield&apos;,</div><div class="line">	        fieldLabel: &apos;End date&apos;</div><div class="line">	    }],</div><div class="line">	    renderTo: Ext.getBody()</div><div class="line">	});</div><div class="line">});</div></pre></td></tr></table></figure>
+<p>&#x8FD0;&#x884C;&#x5982;&#x4E0B;&#xFF1A;</p>
+<p><img src="http://7xsp5x.com2.z0.glb.clouddn.com/extjs5-4-3.png"></p>
+<h1 id="4&#x3001;&#x6811;&#x7EC4;&#x4EF6;&#x2013;Ext-tree-Panel&#xFF1A;"><a href="#4&#x3001;&#x6811;&#x7EC4;&#x4EF6;&#x2013;Ext-tree-Panel&#xFF1A;" class="headerlink" title="4&#x3001;&#x6811;&#x7EC4;&#x4EF6;&#x2013;Ext.tree.Panel&#xFF1A;"></a>4&#x3001;&#x6811;&#x7EC4;&#x4EF6;&#x2013;Ext.tree.Panel&#xFF1A;</h1><p>&#x7528;&#x4E8E;&#x6811;&#x7684;&#x5F00;&#x53D1;&#xFF0C;&#x4E00;&#x822C;&#x4F1A;&#x653E;&#x7F6E;&#x5728;&#x7236;Panel&#x4E2D;&#x3002;</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line">Ext.onReady(function(){</div><div class="line">	//store&#x7528;&#x6765;&#x5B58;&#x50A8;&#x6570;&#x636E;&#xFF0C;&#x9879;&#x76EE;&#x4E2D;&#x4E00;&#x822C;&#x6570;&#x636E;&#x6765;&#x81EA;&#x6570;&#x636E;&#x5E93;</div><div class="line">	var store = Ext.create(&apos;Ext.data.TreeStore&apos;, {</div><div class="line">	    root: {</div><div class="line">	        expanded: true,</div><div class="line">	        children: [</div><div class="line">	            { text: &quot;detention&quot;, leaf: true },</div><div class="line">	            { text: &quot;homework&quot;, expanded: true, children: [</div><div class="line">	                { text: &quot;book report&quot;, leaf: true },</div><div class="line">	                { text: &quot;algebra&quot;, leaf: true}</div><div class="line">	            ] },</div><div class="line">	            { text: &quot;buy lottery tickets&quot;, leaf: true }</div><div class="line">	        ]</div><div class="line">	    }</div><div class="line">	});</div><div class="line">	</div><div class="line">	Ext.create(&apos;Ext.tree.Panel&apos;, {</div><div class="line">	    title: &apos;Simple Tree&apos;,</div><div class="line">	    width: 200,</div><div class="line">	    height: 300,</div><div class="line">	    store: store, //tree&#x4E2D;&#x7684;&#x6570;&#x636E;&#x6765;&#x81EA;store</div><div class="line">	    rootVisible: false,</div><div class="line">	    renderTo: Ext.getBody()</div><div class="line">	});</div><div class="line">});</div></pre></td></tr></table></figure>
+<p>&#x8FD0;&#x884C;&#x5982;&#x4E0B;&#xFF1A;</p>
+<p><img src="http://7xsp5x.com2.z0.glb.clouddn.com/extjs5-4-4.png"></p>
+<p>&#x81EA;&#x5B9A;&#x4E49;&#x6570;&#x7684;&#x5B9E;&#x73B0;<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div></pre></td><td class="code"><pre><div class="line">Ext.onReady(function(){</div><div class="line">	/*</div><div class="line">	 * &#x81EA;&#x5B9A;&#x4E49;&#x6811;&#x7684;&#x5B9E;&#x73B0;</div><div class="line">	 */</div><div class="line">	//&#x81EA;&#x5B9A;&#x4E49;&#x7C7B;myApp.Territory&#xFF0C;&#x7EE7;&#x627F;&#x81EA;Ext.data.TreeModel</div><div class="line">	Ext.define(&apos;myApp.Territory&apos;, {</div><div class="line">	    extend: &apos;Ext.data.TreeModel&apos;,</div><div class="line">	    fields: [{</div><div class="line">	        name: &apos;text&apos;,</div><div class="line">	        mapping: &apos;name&apos;</div><div class="line">	    }]</div><div class="line">	});</div><div class="line">	Ext.define(&apos;myApp.Country&apos;, {</div><div class="line">	    extend: &apos;Ext.data.TreeModel&apos;,</div><div class="line">	    fields: [{</div><div class="line">	        name: &apos;text&apos;,</div><div class="line">	        mapping: &apos;name&apos;</div><div class="line">	    }]</div><div class="line">	});</div><div class="line">	Ext.define(&apos;myApp.City&apos;, {</div><div class="line">	    extend: &apos;Ext.data.TreeModel&apos;,</div><div class="line">	    fields: [{</div><div class="line">	        name: &apos;text&apos;,</div><div class="line">	        mapping: &apos;name&apos;</div><div class="line">	    }]</div><div class="line">	});</div><div class="line">	Ext.create(&apos;Ext.tree.Panel&apos;, {</div><div class="line">	    renderTo: Ext.getBody(),</div><div class="line">	    height: 200,</div><div class="line">	    width: 400,</div><div class="line">	    title: &apos;Sales Areas - using typeProperty&apos;,</div><div class="line">	    rootVisible: false,</div><div class="line">	    store: {</div><div class="line">	        // Child types use namespace of store&apos;s model by default</div><div class="line">	        model: &apos;myApp.Territory&apos;,</div><div class="line">	        proxy: {</div><div class="line">	            type: &apos;memory&apos;,</div><div class="line">	            reader: {</div><div class="line">	                typeProperty: &apos;mtype&apos;</div><div class="line">	            }</div><div class="line">	        },</div><div class="line">	        root: {</div><div class="line">	            children: [{</div><div class="line">	                name: &apos;Europe, ME, Africa&apos;,</div><div class="line">	                mtype: &apos;Territory&apos;,</div><div class="line">	                children: [{</div><div class="line">	                    name: &apos;UK of GB &amp; NI&apos;,</div><div class="line">	                    mtype: &apos;Country&apos;,</div><div class="line">	                    children: [{</div><div class="line">	                        name: &apos;London&apos;,</div><div class="line">	                        mtype: &apos;City&apos;,</div><div class="line">	                        leaf: true</div><div class="line">	                    }]</div><div class="line">	                }]</div><div class="line">	            }, {</div><div class="line">	                name: &apos;North America&apos;,</div><div class="line">	                mtype: &apos;Territory&apos;,</div><div class="line">	                children: [{</div><div class="line">	                    name: &apos;USA&apos;,</div><div class="line">	                    mtype: &apos;Country&apos;,</div><div class="line">	                    children: [{</div><div class="line">	                        name: &apos;Redwood City&apos;,</div><div class="line">	                        mtype: &apos;City&apos;,</div><div class="line">	                        leaf: true</div><div class="line">	                    }]</div><div class="line">	                }]</div><div class="line">	            }]</div><div class="line">	        }</div><div class="line">	    }</div><div class="line">	});</div><div class="line">});</div></pre></td></tr></table></figure></p>
+<p>&#x8FD0;&#x884C;&#x5982;&#x4E0B;&#xFF1A;</p>
+<p><img src="http://7xsp5x.com2.z0.glb.clouddn.com/extjs5-4-5.png"></p>
+<h1 id="5&#x3001;&#x8868;&#x5355;&#x7EC4;&#x4EF6;&#x2013;Ext-form-Panel&#xFF1A;"><a href="#5&#x3001;&#x8868;&#x5355;&#x7EC4;&#x4EF6;&#x2013;Ext-form-Panel&#xFF1A;" class="headerlink" title="5&#x3001;&#x8868;&#x5355;&#x7EC4;&#x4EF6;&#x2013;Ext.form.Panel&#xFF1A;"></a>5&#x3001;&#x8868;&#x5355;&#x7EC4;&#x4EF6;&#x2013;Ext.form.Panel&#xFF1A;</h1><p>&#x7528;&#x4E8E;&#x8868;&#x5355;&#x5F00;&#x53D1;&#xFF0C;&#x5728;&#x8868;&#x5355;&#x4E0A;&#x53EF;&#x4EE5;&#x6DFB;&#x52A0;&#x66F4;&#x591A;&#x7684;&#x7EC4;&#x4EF6;&#x7EC4;&#x6210;&#x5B8C;&#x6210;&#x7684;&#x8868;&#x5355;&#xFF0C;&#x5B8C;&#x6210;&#x540E;&#x7684;&#x8868;&#x5355;&#x4E0E;JSP&#x7684;&#x8868;&#x5355;&#x7ED3;&#x6784;&#x76F8;&#x7C7B;&#x4F3C;&#x3002;</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div></pre></td><td class="code"><pre><div class="line">Ext.onReady(function(){</div><div class="line">	Ext.create(&apos;Ext.form.Panel&apos;, {</div><div class="line">	    title: &apos;Simple Form&apos;,</div><div class="line">	    bodyPadding: 5,</div><div class="line">	    width: 350,</div><div class="line"></div><div class="line">	    // from&#x7684;submmit&#x65B9;&#x6CD5;&#x4F1A;&#x4EE5;ajax&#x7684;&#x65B9;&#x5F0F;&#x8BF7;&#x6C42;&#x8BE5;url</div><div class="line">	    url: &apos;ajax-url.do&apos;,</div><div class="line"></div><div class="line">	    // anchor&#x8868;&#x793A;&#x81EA;&#x52A8;&#x586B;&#x5145;&#x9AD8;&#x5EA6;&#x548C;&#x5BBD;&#x5EA6;</div><div class="line">	    layout: &apos;anchor&apos;,</div><div class="line">	    defaults: {</div><div class="line">	        anchor: &apos;100%&apos;</div><div class="line">	    },</div><div class="line">	    defaultType: &apos;textfield&apos;, //&#x9ED8;&#x8BA4;&#x7EC4;&#x4EF6;&#x7C7B;&#x578B;</div><div class="line">	    items: [{ //items&#x4E2D;&#x7EC4;&#x4EF6;&#x4E0D;&#x5199;&#x7C7B;&#x578B;&#x7684;&#x8BDD;&#xFF0C;&#x4F1A;&#x4F7F;&#x7528;&#x9ED8;&#x8BA4;&#x7C7B;&#x578B;defaultType</div><div class="line">	        fieldLabel: &apos;First Name&apos;,</div><div class="line">	        name: &apos;first&apos;,</div><div class="line">	        allowBlank: false //&#x662F;&#x5426;&#x53EF;&#x4EE5;&#x4E3A;&#x7A7A;&#xFF0C;false&#x8868;&#x793A;&#x975E;&#x7A7A;</div><div class="line">	    },{</div><div class="line">	        fieldLabel: &apos;Last Name&apos;,</div><div class="line">	        name: &apos;last&apos;,</div><div class="line">	        allowBlank: false</div><div class="line">	    }],</div><div class="line">	</div><div class="line">	    // Reset and Submit buttons</div><div class="line">	    buttons: [{</div><div class="line">	        text: &apos;Reset&apos;,</div><div class="line">	        handler: function() {</div><div class="line">	            this.up(&apos;form&apos;).getForm().reset();//&#x91CD;&#x7F6E;&#x6240;&#x4EE5;&#x7EC4;&#x4EF6;&#x7684;&#x503C;</div><div class="line">	        }</div><div class="line">	    }, {</div><div class="line">	        text: &apos;Submit&apos;,</div><div class="line">	        formBind: true, //&#x5F53;&#x6240;&#x6709;&#x975E;&#x7A7A;&#x7EC4;&#x4EF6;&#x90FD;&#x5F55;&#x5165;&#x6570;&#x636E;&#x4E4B;&#x540E;&#xFF0C;submit&#x624D;&#x53EF;&#x7528;</div><div class="line">	        disabled: true,</div><div class="line">	        handler: function() {</div><div class="line">	            var form = this.up(&apos;form&apos;).getForm();</div><div class="line">	            if (form.isValid()) {</div><div class="line">	                form.submit({</div><div class="line">	                    success: function(form, action) {</div><div class="line">	                       Ext.Msg.alert(&apos;Success&apos;, action.result.msg);</div><div class="line">	                    },</div><div class="line">	                    failure: function(form, action) {</div><div class="line">	                        Ext.Msg.alert(&apos;Failed&apos;, action.result.msg);</div><div class="line">	                    }</div><div class="line">	                });</div><div class="line">	            }</div><div class="line">	        }</div><div class="line">	    }],</div><div class="line">	    renderTo: Ext.getBody()</div><div class="line">	});</div><div class="line">});</div></pre></td></tr></table></figure>
+<p>&#x8FD0;&#x884C;&#x5982;&#x4E0B;&#xFF1A;</p>
+<p><img src="http://7xsp5x.com2.z0.glb.clouddn.com/extjs5-4-6.png"></p>
+<h1 id="6&#x3001;&#x8868;&#x683C;&#x7EC4;&#x4EF6;&#x2013;Ext-grid-Panel&#xFF1A;"><a href="#6&#x3001;&#x8868;&#x683C;&#x7EC4;&#x4EF6;&#x2013;Ext-grid-Panel&#xFF1A;" class="headerlink" title="6&#x3001;&#x8868;&#x683C;&#x7EC4;&#x4EF6;&#x2013;Ext.grid.Panel&#xFF1A;"></a>6&#x3001;&#x8868;&#x683C;&#x7EC4;&#x4EF6;&#x2013;Ext.grid.Panel&#xFF1A;</h1><p>&#x901A;&#x5E38;&#x7528;&#x6765;&#x5C55;&#x793A;&#x8868;&#x683C;&#x7C7B;&#x7684;&#x6570;&#x636E;&#x3002;</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div></pre></td><td class="code"><pre><div class="line">Ext.onReady(function(){</div><div class="line">	//store&#x4E2D;&#x5B58;&#x50A8;&#x5217;&#x8868;&#x4E2D;&#x8981;&#x5C55;&#x793A;&#x7684;&#x6570;&#x636E;</div><div class="line">	Ext.create(&apos;Ext.data.Store&apos;, {</div><div class="line">	    storeId:&apos;simpsonsStore&apos;,</div><div class="line">	    fields:[&apos;name&apos;, &apos;email&apos;, &apos;phone&apos;],</div><div class="line">	    data:{&apos;items&apos;:[</div><div class="line">	        { &apos;name&apos;: &apos;Lisa&apos;,  &quot;email&quot;:&quot;lisa@simpsons.com&quot;,  &quot;phone&quot;:&quot;555-111-1224&quot;  },</div><div class="line">	        { &apos;name&apos;: &apos;Bart&apos;,  &quot;email&quot;:&quot;bart@simpsons.com&quot;,  &quot;phone&quot;:&quot;555-222-1234&quot; },</div><div class="line">	        { &apos;name&apos;: &apos;Homer&apos;, &quot;email&quot;:&quot;homer@simpsons.com&quot;,  &quot;phone&quot;:&quot;555-222-1244&quot;  },</div><div class="line">	        { &apos;name&apos;: &apos;Marge&apos;, &quot;email&quot;:&quot;marge@simpsons.com&quot;, &quot;phone&quot;:&quot;555-222-1254&quot;  }</div><div class="line">	    ]},</div><div class="line">	    proxy: {</div><div class="line">	        type: &apos;memory&apos;,</div><div class="line">	        reader: {</div><div class="line">	            type: &apos;json&apos;,</div><div class="line">	            rootProperty: &apos;items&apos;</div><div class="line">	        }</div><div class="line">	    }</div><div class="line">	});</div><div class="line">	</div><div class="line">	//&#x5217;&#x8868;</div><div class="line">	Ext.create(&apos;Ext.grid.Panel&apos;, {</div><div class="line">	    title: &apos;Simpsons&apos;,</div><div class="line">	    //&#x6570;&#x636E;&#x6765;&#x6E90;</div><div class="line">	    store: Ext.data.StoreManager.lookup(&apos;simpsonsStore&apos;),</div><div class="line">	    //&#x5B9A;&#x4E49;&#x5217;&#x8868;&#x4E2D;&#x8981;&#x663E;&#x793A;&#x7684;&#x5217;&#xFF0C;&#x8FD9;&#x91CC;&#x7684;dataIndex&#x8981;&#x548C;store&#x4E2D;&#x7684;name&#x4FDD;&#x6301;&#x4E00;&#x81F4;&#xFF0C;&#x8FD9;&#x91CC;&#x7684;text&#x662F;&#x8868;&#x5934;&#xFF0C;&#x4E5F;&#x53EF;&#x4EE5;&#x4F7F;&#x7528;header</div><div class="line">	    columns: [ </div><div class="line">	        { text: &apos;Name&apos;,  dataIndex: &apos;name&apos; },</div><div class="line">	        { text: &apos;Email&apos;, dataIndex: &apos;email&apos;, flex: 1 },</div><div class="line">	        { text: &apos;Phone&apos;, dataIndex: &apos;phone&apos; }</div><div class="line">	    ],</div><div class="line">	    height: 200,</div><div class="line">	    width: 400,</div><div class="line">	    renderTo: Ext.getBody()</div><div class="line">	});</div><div class="line">});</div></pre></td></tr></table></figure>
+<p>&#x8FD0;&#x884C;&#x5982;&#x4E0B;&#xFF1A;</p>
+<p><img src="http://7xsp5x.com2.z0.glb.clouddn.com/extjs5-4-7.png"></p>
+<p>&#x53EF;&#x7F16;&#x8F91;&#x5217;&#x8868;&#x914D;&#x7F6E;&#x65B9;&#x6CD5;&#xFF1A;</p>
+<p>&#xFF08;1&#xFF09;columns&#x914D;&#x7F6E;&#x4E2D;&#x589E;&#x52A0;editor:{xtype: &#x2018;textfield&#x2019;}</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">{text: &apos;Last Name&apos;,  dataIndex:&apos;lastname&apos;,editor:{xtype: &apos;textfield&apos;},width:50},</div></pre></td></tr></table></figure>
+<p>&#xFF08;2&#xFF09;&#x6DFB;&#x52A0;plugins&#x5C5E;&#x6027;&#xFF1A;<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">plugins: {</div><div class="line">    ptype: &apos;cellediting&apos;,</div><div class="line">    clicksToEdit: 1</div><div class="line">}</div></pre></td></tr></table></figure></p>
+<h1 id="7&#x3001;&#x9009;&#x9879;&#x9762;&#x677F;&#x2013;Ext-tab-Panel&#xFF1A;"><a href="#7&#x3001;&#x9009;&#x9879;&#x9762;&#x677F;&#x2013;Ext-tab-Panel&#xFF1A;" class="headerlink" title="7&#x3001;&#x9009;&#x9879;&#x9762;&#x677F;&#x2013;Ext.tab.Panel&#xFF1A;"></a>7&#x3001;&#x9009;&#x9879;&#x9762;&#x677F;&#x2013;Ext.tab.Panel&#xFF1A;</h1><p>&#x4E00;&#x822C;&#x7528;&#x6765;&#x663E;&#x73B0;&#x6807;&#x7B7E;&#x9875;</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line">Ext.onReady(function(){</div><div class="line">	/*</div><div class="line">	 * &#x5B98;&#x65B9;API&#x4E2D;&#x6709;&#x5F88;&#x591A;&#x4F8B;&#x5B50;&#xFF0C;&#x53EF;&#x4EE5;&#x81EA;&#x5DF1;&#x5B66;&#x4E60;</div><div class="line">	 */</div><div class="line">	Ext.create(&apos;Ext.tab.Panel&apos;, {</div><div class="line">	    width: 300,</div><div class="line">	    height: 200,</div><div class="line">	    activeTab: 0,</div><div class="line">	    //&#x8FD9;&#x91CC;&#x5B9A;&#x4E49;&#x4E86;&#x4E24;&#x4E2A;tab&#x9875;&#xFF0C;&#x53EF;&#x4EE5;&#x6BCF;&#x4E2A;tab&#x4E2D;&#x7684;items&#x4E2D;&#x6DFB;&#x52A0;&#x5176;&#x4ED6;&#x7EC4;&#x4EF6;.</div><div class="line">	    items: [</div><div class="line">	        {</div><div class="line">	            title: &apos;Tab 1&apos;,</div><div class="line">	            bodyPadding: 10,</div><div class="line">	            html : &apos;A simple tab&apos;</div><div class="line">	        },</div><div class="line">	        {</div><div class="line">	            title: &apos;Tab 2&apos;,</div><div class="line">	            html : &apos;Another one&apos;</div><div class="line">	        }</div><div class="line">	    ],</div><div class="line">	    renderTo : Ext.getBody()</div><div class="line">	});</div><div class="line">});</div></pre></td></tr></table></figure>
+<p>&#x8FD0;&#x884C;&#x5982;&#x4E0B;&#xFF1A;</p>
+<p><img src="http://7xsp5x.com2.z0.glb.clouddn.com/extjs5-4-8.png"></p>
+
+      
+    </div>
+
+    <div>
+      
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/ExtJs5/" rel="tag">#ExtJs5</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/05/27/ExtJs5学习笔记（四）Ext常见知识点补充/" rel="next" title="ExtJs5学习笔记（四）Ext常见知识点补充">
+                <i class="fa fa-chevron-left"></i> ExtJs5学习笔记（四）Ext常见知识点补充
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/06/07/ExtJs5学习笔记（六）EXt常用组件及表单组件/" rel="prev" title="ExtJs5学习笔记（六）EXt常用组件及表单组件">
+                ExtJs5学习笔记（六）EXt常用组件及表单组件 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/05/30/ExtJs5学习笔记（五）Ext容器及布局类组件/"
+           data-title="ExtJs5学习笔记（五）Ext容器及布局类组件" data-url="http://lzblog.cn/2016/05/30/ExtJs5学习笔记（五）Ext容器及布局类组件/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.png"
+               alt="lizhen" />
+          <p class="site-author-name" itemprop="name">lizhen</p>
+          <p class="site-description motion-element" itemprop="description">Java攻城狮</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">40</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">11</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">37</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://hexo.io/zh-cn/" target="_blank">
+                  
+                    <i class="fa fa-plane"></i>
+                  
+                  Hexo
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/lingbage" target="_blank">
+                  
+                    <i class="fa fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://leancloud.cn/" target="_blank">
+                  
+                    <i class="fa fa-cloud"></i>
+                  
+                  LCloud
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.bootcss.com/p/font-awesome/" target="_blank">
+                  
+                    <i class="fa fa-leaf"></i>
+                  
+                  FontA
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://portal.qiniu.com/" target="_blank">
+                  
+                    <i class="fa fa-cloud-upload"></i>
+                  
+                  七牛图床
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        <div class="links-of-blogroll motion-element">
+          
+            <div class="links-of-blogroll-title">友情链接</div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.lzblog.cn/" target="_blank">None</a>
+                </li>
+              
+            </ul>
+          
+        </div>
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1、视图组件–Ext-container-Viewport："><span class="nav-text">1、视图组件–Ext.container.Viewport：</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2、窗口组件–Ext-window-Window："><span class="nav-text">2、窗口组件–Ext.window.Window：</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3、面板组件–Ext-panel-Panel："><span class="nav-text">3、面板组件–Ext.panel.Panel：</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#4、树组件–Ext-tree-Panel："><span class="nav-text">4、树组件–Ext.tree.Panel：</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#5、表单组件–Ext-form-Panel："><span class="nav-text">5、表单组件–Ext.form.Panel：</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#6、表格组件–Ext-grid-Panel："><span class="nav-text">6、表格组件–Ext.grid.Panel：</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#7、选项面板–Ext-tab-Panel："><span class="nav-text">7、选项面板–Ext.tab.Panel：</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <script async src="/lib/jquery/busuanzi.pure.mini.js"></script>
+<div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">lizhen</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="powered-by">
+  主题  - 
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+<span id="busuanzi_container_site_pv">本站总访问量<span id="busuanzi_value_site_pv"></span>次</span>
+
+
+
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+
+  
+
+
+
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js"></script>
+
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js"></script>
+
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=0.5.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=0.5.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=0.5.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=0.5.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=0.5.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=0.5.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=0.5.0"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"lizhenblog"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+      <script src="/lib/ua-parser-js/dist/ua-parser.min.js"></script>
+      <script src="/js/src/hook-duoshuo.js"></script>
+    
+  
+
+
+
+
+
+  
+  
+  
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script>AV.initialize("DSUpqwXpCRk0yaVH0umWiadJ-gzGzoHsz", "b5jihkHKg0hUcy7gQ4rJz6dD");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+</body>
+</html>

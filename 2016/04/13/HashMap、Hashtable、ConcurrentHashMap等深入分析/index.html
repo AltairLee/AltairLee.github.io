@@ -1,0 +1,822 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
+
+
+
+
+  <link href="//fonts.googleapis.com/css?family=Lato:300,400,700,400italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=0.5.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Java,HashMap,Hashtable,ConcurrentHashMap," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Dear Blog" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=0.5.0" />
+
+
+
+
+
+
+<meta name="description" content="Map&amp;#x7528;&amp;#x4E8E;&amp;#x5B58;&amp;#x50A8;&amp;#x201C;key-value&amp;#x201D;&amp;#x5143;&amp;#x7D20;&amp;#x5BF9;&amp;#xFF0C;&amp;#x5B83;&amp;#x5C06;&amp;#x4E00;&amp;#x4E2A;key&amp;#x6620;&amp;#x5C04;&amp;#x5230;&amp;#x4E00;&amp;#x4E2A;&amp;#x800C;&amp;#x4E14;&amp;#x53EA;&amp;#x80FD;&amp;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="HashMap、Hashtable、ConcurrentHashMap等深入分析">
+<meta property="og:url" content="http://lzblog.cn/2016/04/13/HashMap、Hashtable、ConcurrentHashMap等深入分析/index.html">
+<meta property="og:site_name" content="Dear Blog">
+<meta property="og:description" content="Map&amp;#x7528;&amp;#x4E8E;&amp;#x5B58;&amp;#x50A8;&amp;#x201C;key-value&amp;#x201D;&amp;#x5143;&amp;#x7D20;&amp;#x5BF9;&amp;#xFF0C;&amp;#x5B83;&amp;#x5C06;&amp;#x4E00;&amp;#x4E2A;key&amp;#x6620;&amp;#x5C04;&amp;#x5230;&amp;#x4E00;&amp;#x4E2A;&amp;#x800C;&amp;#x4E14;&amp;#x53EA;&amp;#x80FD;&amp;">
+<meta property="og:image" content="http://7xsp5x.com2.z0.glb.clouddn.com/Java-1.jpg">
+<meta property="og:updated_time" content="2016-11-21T14:42:32.041Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="HashMap、Hashtable、ConcurrentHashMap等深入分析">
+<meta name="twitter:description" content="Map&amp;#x7528;&amp;#x4E8E;&amp;#x5B58;&amp;#x50A8;&amp;#x201C;key-value&amp;#x201D;&amp;#x5143;&amp;#x7D20;&amp;#x5BF9;&amp;#xFF0C;&amp;#x5B83;&amp;#x5C06;&amp;#x4E00;&amp;#x4E2A;key&amp;#x6620;&amp;#x5C04;&amp;#x5230;&amp;#x4E00;&amp;#x4E2A;&amp;#x800C;&amp;#x4E14;&amp;#x53EA;&amp;#x80FD;&amp;">
+<meta name="twitter:image" content="http://7xsp5x.com2.z0.glb.clouddn.com/Java-1.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+  <title> HashMap、Hashtable、ConcurrentHashMap等深入分析 | Dear Blog </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?3b9384b786cf80306a6f68370a3a802f";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Dear Blog</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">Busy to live or busy to die ?!</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-th fa-fw"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-tags fa-fw"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-user fa-fw"></i> <br />
+            
+            关于我
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-commonweal">
+          <a href="/404.html" rel="section">
+            
+              <i class="menu-item-icon fa fa-heartbeat fa-fw"></i> <br />
+            
+            公益404
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-search">
+          <a href="/search" rel="section">
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                HashMap、Hashtable、ConcurrentHashMap等深入分析
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-04-13T10:22:54+08:00" content="2016-04-13">
+              2016-04-13
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Java/" itemprop="url" rel="index">
+                    <span itemprop="name">Java</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/04/13/HashMap、Hashtable、ConcurrentHashMap等深入分析/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/04/13/HashMap、Hashtable、ConcurrentHashMap等深入分析/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/2016/04/13/HashMap、Hashtable、ConcurrentHashMap等深入分析/" class="leancloud_visitors" data-flag-title="HashMap、Hashtable、ConcurrentHashMap等深入分析">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">阅读次数 </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>Map&#x7528;&#x4E8E;&#x5B58;&#x50A8;&#x201C;key-value&#x201D;&#x5143;&#x7D20;&#x5BF9;&#xFF0C;&#x5B83;&#x5C06;&#x4E00;&#x4E2A;key&#x6620;&#x5C04;&#x5230;&#x4E00;&#x4E2A;&#x800C;&#x4E14;&#x53EA;&#x80FD;&#x662F;&#x552F;&#x4E00;&#x7684;&#x4E00;&#x4E2A;value&#x3002;Map&#x53EF;&#x4EE5;&#x4F7F;&#x7528;&#x591A;&#x79CD;&#x5B9E;&#x73B0;&#x65B9;&#x5F0F;&#xFF0C;HashMap&#x7684;&#x5B9E;&#x73B0;&#x91C7;&#x7528;&#x7684;&#x662F;Hash&#x8868;&#xFF1B;&#x800C;TreeMap&#x91C7;&#x7528;&#x7684;&#x662F;&#x7EA2;&#x9ED1;&#x6811;&#x3002;</p>
+<h1 id="1&#x3001;HashMap&#x7684;&#x5B9E;&#x73B0;&#x539F;&#x7406;&#xFF1A;"><a href="#1&#x3001;HashMap&#x7684;&#x5B9E;&#x73B0;&#x539F;&#x7406;&#xFF1A;" class="headerlink" title="1&#x3001;HashMap&#x7684;&#x5B9E;&#x73B0;&#x539F;&#x7406;&#xFF1A;"></a>1&#x3001;HashMap&#x7684;&#x5B9E;&#x73B0;&#x539F;&#x7406;&#xFF1A;</h1><p>HashMap&#x4F7F;&#x7528;hash&#x7684;&#x65B9;&#x5F0F;&#x5B9E;&#x73B0;&#x3002;&#x800C;hash&#x8868;&#x6700;&#x5E38;&#x89C1;&#x7684;&#x5B9E;&#x73B0;&#x65B9;&#x5F0F;&#x5C31;&#x662F;&#x6570;&#x7EC4;+&#x94FE;&#x8868;&#x7684;&#x5F62;&#x5F0F;&#x3002;Hash&#x8868;&#x7ED3;&#x5408;&#x4E86;&#x6570;&#x7EC4;&#x548C;&#x94FE;&#x8868;&#x4E24;&#x8005;&#x7684;&#x4F18;&#x70B9;&#xFF0C;&#x6570;&#x7EC4;&#x5BFB;&#x5740;&#x5BB9;&#x6613;&#x4F46;&#x63D2;&#x5165;&#x5220;&#x9664;&#x56F0;&#x96BE;&#xFF0C;&#x800C;&#x94FE;&#x8868;&#x5BFB;&#x5740;&#x56F0;&#x96BE;&#x4F46;&#x63D2;&#x5165;&#x5220;&#x9664;&#x5BB9;&#x6613;&#x3002;HashMap&#x5176;&#x5B9E;&#x5C31;&#x662F;&#x4E00;&#x4E2A;&#x201C;&#x94FE;&#x8868;&#x7684;&#x6570;&#x7EC4;&#x201D;&#x3002;<br><a id="more"></a><br><img src="http://7xsp5x.com2.z0.glb.clouddn.com/Java-1.jpg" alt="Alt text"></p>
+<p>&#x4E0A;&#x56FE;&#x662F;HashMap&#x7684;&#x7ED3;&#x6784;&#x793A;&#x610F;&#x56FE;&#x3002;HashMap&#x5E95;&#x5C42;&#x5C31;&#x662F;&#x4E00;&#x4E2A;&#x6570;&#x7EC4;&#xFF0C;&#x800C;&#x6570;&#x7EC4;&#x4E2D;&#x7684;&#x6BCF;&#x4E00;&#x9879;&#x53C8;&#x662F;&#x4E00;&#x4E2A;&#x94FE;&#x8868;&#x3002;&#x5F53;HashMap&#x65B0;&#x5EFA;&#x65F6;&#xFF0C;&#x5C31;&#x4F1A;&#x521D;&#x59CB;&#x5316;&#x6570;&#x7EC4;&#xFF0C;Entry&#x5C31;&#x662F;&#x6570;&#x7EC4;&#x4E2D;&#x7684;&#x5143;&#x7D20;&#x3002;&#x800C;&#x4E00;&#x4E2A;&#x5143;&#x7D20;&#x5230;&#x5E95;&#x8BE5;&#x5B58;&#x5728;&#x4EC0;&#x4E48;&#x4F4D;&#x7F6E;&#x662F;&#x600E;&#x4E48;&#x786E;&#x5B9A;&#x7684;&#x5462;&#xFF1F;&#x4E00;&#x822C;&#x60C5;&#x51B5;&#x662F;&#x901A;&#x8FC7;hash(key)&amp;(len-1)&#x83B7;&#x5F97;&#x7684;&#x7ED3;&#x679C;&#x8868;&#x793A;&#x6570;&#x7EC4;&#x7684;&#x4E0B;&#x6807;&#xFF0C;&#x4E5F;&#x5C31;&#x662F;&#x5143;&#x7D20;&#x7684;key&#x7684;&#x54C8;&#x5E0C;&#x503C;&#x5BF9;&#x6570;&#x7EC4;&#x957F;&#x5EA6;&#x53D6;&#x6A21;&#x5F97;&#x5230;&#x3002;&#x5982;&#x679C;&#x901A;&#x8FC7;&#x6B64;&#x65B9;&#x6CD5;&#x83B7;&#x53D6;&#x5230;&#x76F8;&#x540C;&#x7684;&#x4E0B;&#x6807;&#xFF0C;&#x5219;&#x4F1A;&#x6839;&#x636E;Entry&#x6765;&#x5F62;&#x6210;&#x94FE;&#x8868;&#x3002;Entry&#x662F;HashMap&#x4E2D;&#x7684;&#x4E00;&#x4E2A;&#x9759;&#x6001;&#x5185;&#x90E8;&#x7C7B;&#xFF0C;&#x5B83;&#x5305;&#x62EC;key&#x3001;value&#x3001;next&#x7B49;&#x5C5E;&#x6027;&#xFF0C;&#x5176;&#x4E2D;next&#x7684;&#x4F5C;&#x7528;&#x662F;&#x6307;&#x5411;&#x4E0B;&#x4E00;&#x4E2A;Entry&#x3002;&#x6253;&#x4E2A;&#x6BD4;&#x65B9;&#xFF0C; &#x7B2C;&#x4E00;&#x4E2A;&#x952E;&#x503C;&#x5BF9;A&#x8FDB;&#x6765;&#xFF0C;&#x901A;&#x8FC7;&#x8BA1;&#x7B97;&#x5176;key&#x7684;hash&#x5F97;&#x5230;&#x7684;index=0&#xFF0C;&#x8BB0;&#x505A;:Entry[0] = A&#x3002;&#x4E00;&#x4F1A;&#x540E;&#x53C8;&#x8FDB;&#x6765;&#x4E00;&#x4E2A;&#x952E;&#x503C;&#x5BF9;B&#xFF0C;&#x901A;&#x8FC7;&#x8BA1;&#x7B97;&#x5176;index&#x4E5F;&#x7B49;&#x4E8E;0&#xFF0C;&#x73B0;&#x5728;&#x600E;&#x4E48;&#x529E;&#xFF1F;HashMap&#x4F1A;&#x8FD9;&#x6837;&#x505A;:B.next = A,Entry[0] = B,&#x5982;&#x679C;&#x53C8;&#x8FDB;&#x6765;C,index&#x4E5F;&#x7B49;&#x4E8E;0,&#x90A3;&#x4E48;C.next = B,Entry[0] = C&#xFF1B;&#x8FD9;&#x6837;&#x6211;&#x4EEC;&#x53D1;&#x73B0;index=0&#x7684;&#x5730;&#x65B9;&#x5176;&#x5B9E;&#x5B58;&#x53D6;&#x4E86;A,B,C&#x4E09;&#x4E2A;&#x952E;&#x503C;&#x5BF9;,&#x4ED6;&#x4EEC;&#x901A;&#x8FC7;next&#x8FD9;&#x4E2A;&#x5C5E;&#x6027;&#x94FE;&#x63A5;&#x5728;&#x4E00;&#x8D77;&#x3002;&#x6240;&#x4EE5;&#x7591;&#x95EE;&#x4E0D;&#x7528;&#x62C5;&#x5FC3;&#x3002;&#x4E5F;&#x5C31;&#x662F;&#x8BF4;&#x6570;&#x7EC4;&#x4E2D;&#x5B58;&#x50A8;&#x7684;&#x662F;&#x6700;&#x540E;&#x63D2;&#x5165;&#x7684;&#x5143;&#x7D20;&#x3002;</p>
+<p>HashMap&#x91CC;&#x9762;&#x4E5F;&#x5305;&#x542B;&#x4E00;&#x4E9B;&#x4F18;&#x5316;&#x65B9;&#x9762;&#x7684;&#x5B9E;&#x73B0;&#x3002;&#x6BD4;&#x5982;&#xFF1A;Entry[]&#x7684;&#x957F;&#x5EA6;&#x4E00;&#x5B9A;&#x540E;&#xFF0C;&#x968F;&#x7740;map&#x91CC;&#x9762;&#x6570;&#x636E;&#x7684;&#x8D8A;&#x6765;&#x8D8A;&#x957F;&#xFF0C;&#x8FD9;&#x6837;&#x540C;&#x4E00;&#x4E2A;index&#x7684;&#x94FE;&#x5C31;&#x4F1A;&#x5F88;&#x957F;&#xFF0C;&#x4F1A;&#x4E0D;&#x4F1A;&#x5F71;&#x54CD;&#x6027;&#x80FD;&#xFF1F;HashMap&#x91CC;&#x9762;&#x8BBE;&#x7F6E;&#x4E00;&#x4E2A;&#x8D1F;&#x8F7D;&#x56E0;&#x5B50;&#xFF08;&#x4E5F;&#x79F0;&#x4E3A;&#x5BB9;&#x5BA2;&#x7387;&#xFF09;&#xFF0C;&#x968F;&#x7740;map&#x7684;size&#x8D8A;&#x6765;&#x8D8A;&#x5927;&#xFF0C;Entry[]&#x4F1A;&#x4EE5;&#x4E00;&#x5B9A;&#x7684;&#x89C4;&#x5219;&#x52A0;&#x957F;&#x957F;&#x5EA6;&#x3002;</p>
+<h1 id="2&#x3001;HashMap&#x7684;&#x5B58;&#x53D6;&#x5B9E;&#x73B0;&#xFF1A;"><a href="#2&#x3001;HashMap&#x7684;&#x5B58;&#x53D6;&#x5B9E;&#x73B0;&#xFF1A;" class="headerlink" title="2&#x3001;HashMap&#x7684;&#x5B58;&#x53D6;&#x5B9E;&#x73B0;&#xFF1A;"></a>2&#x3001;HashMap&#x7684;&#x5B58;&#x53D6;&#x5B9E;&#x73B0;&#xFF1A;</h1><p>&#x5B58;&#x50A8;&#x64CD;&#x4F5C;&#xFF1A;<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> V <span class="title">put</span><span class="params">(K key, V value)</span> </span>{</div><div class="line">    <span class="keyword">return</span> putImpl(key, value);</div><div class="line">}</div><div class="line"><span class="function">V <span class="title">putImpl</span><span class="params">(K key, V value)</span> </span>{</div><div class="line">    Entry&lt;K,V&gt; entry;</div><div class="line">	<span class="comment">// HashMap&#x5141;&#x8BB8;&#x5B58;&#x653E;null&#x952E;&#x548C;null&#x503C;&#x3002;</span></div><div class="line">    <span class="keyword">if</span>(key == <span class="keyword">null</span>) {</div><div class="line">	<span class="comment">// &#x5F53;key&#x4E3A;null&#x65F6;&#xFF0C;&#x8C03;&#x7528;putForNullKey&#x65B9;&#x6CD5;&#xFF0C;&#x5C06;value&#x653E;&#x7F6E;&#x5728;&#x6570;&#x7EC4;&#x7B2C;&#x4E00;&#x4E2A;&#x4F4D;&#x7F6E;&#x3002;</span></div><div class="line">        entry = findNullKeyEntry();</div><div class="line">        <span class="keyword">if</span> (entry == <span class="keyword">null</span>) {</div><div class="line">            modCount++;</div><div class="line">            entry = createHashedEntry(<span class="keyword">null</span>, <span class="number">0</span>, <span class="number">0</span>);</div><div class="line">            <span class="keyword">if</span> (++elementCount &gt; threshold) {</div><div class="line">                rehash();</div><div class="line">            }</div><div class="line">        }</div><div class="line">    } <span class="keyword">else</span> {</div><div class="line">	    <span class="comment">// &#x6839;&#x636E;key&#x7684;hashCode&#x91CD;&#x65B0;&#x8BA1;&#x7B97;hash&#x503C;&#x3002;</span></div><div class="line">        <span class="keyword">int</span> hash = key.hashCode();</div><div class="line">	    <span class="comment">// &#x641C;&#x7D22;&#x6307;&#x5B9A;hash&#x503C;&#x6240;&#x5BF9;&#x5E94;table&#x4E2D;&#x7684;&#x7D22;&#x5F15;&#x3002;</span></div><div class="line">        <span class="keyword">int</span> index = hash &amp; (elementData.length - <span class="number">1</span>);</div><div class="line">        entry = findNonNullKeyEntry(key, index, hash);</div><div class="line">        <span class="keyword">if</span> (entry == <span class="keyword">null</span>) {</div><div class="line">            modCount++;</div><div class="line">            entry = createHashedEntry(key, index, hash);</div><div class="line">            <span class="keyword">if</span> (++elementCount &gt; threshold) {</div><div class="line">                rehash();</div><div class="line">            }</div><div class="line">        }</div><div class="line">        <span class="keyword">if</span> ((cache != <span class="keyword">null</span>) &amp;&amp; (hash &gt;&gt; CACHE_BIT_SIZE == <span class="number">0</span>)</div><div class="line">                &amp;&amp; (key <span class="keyword">instanceof</span> Integer)) {</div><div class="line">            cache[hash] = value;</div><div class="line">        }</div><div class="line">    }</div><div class="line">    V result = entry.value;</div><div class="line">    entry.value = value;</div><div class="line">    <span class="keyword">return</span> result;</div><div class="line">}</div></pre></td></tr></table></figure></p>
+<p>&#x4ECE;&#x6E90;&#x4EE3;&#x7801;&#x4E2D;&#x53EF;&#x4EE5;&#x770B;&#x51FA;&#xFF1A;&#x5F53;&#x6211;&#x4EEC;&#x5F80;HashMap&#x4E2D;put&#x5143;&#x7D20;&#x7684;&#x65F6;&#x5019;&#xFF0C;&#x5148;&#x6839;&#x636E;key&#x7684;hashCode&#x91CD;&#x65B0;&#x8BA1;&#x7B97;hash&#x503C;&#xFF0C;&#x6839;&#x636E;hash&#x503C;&#x5F97;&#x5230;&#x8FD9;&#x4E2A;&#x5143;&#x7D20;&#x5728;&#x6570;&#x7EC4;&#x4E2D;&#x7684;&#x4F4D;&#x7F6E;&#xFF08;&#x5373;&#x4E0B;&#x6807;&#xFF09;&#xFF0C;&#x5982;&#x679C;&#x6570;&#x7EC4;&#x8BE5;&#x4F4D;&#x7F6E;&#x4E0A;&#x5DF2;&#x7ECF;&#x5B58;&#x653E;&#x6709;&#x5176;&#x4ED6;&#x5143;&#x7D20;&#x4E86;&#xFF0C;&#x90A3;&#x4E48;&#x5728;&#x8FD9;&#x4E2A;&#x4F4D;&#x7F6E;&#x4E0A;&#x7684;&#x5143;&#x7D20;&#x5C06;&#x4EE5;&#x94FE;&#x8868;&#x7684;&#x5F62;&#x5F0F;&#x5B58;&#x653E;&#xFF0C;&#x65B0;&#x52A0;&#x5165;&#x7684;&#x653E;&#x5728;&#x94FE;&#x5934;&#xFF0C;&#x6700;&#x5148;&#x52A0;&#x5165;&#x7684;&#x653E;&#x5728;&#x94FE;&#x5C3E;&#x3002;&#x5982;&#x679C;&#x6570;&#x7EC4;&#x8BE5;&#x4F4D;&#x7F6E;&#x4E0A;&#x6CA1;&#x6709;&#x5143;&#x7D20;&#xFF0C;&#x5C31;&#x76F4;&#x63A5;&#x5C06;&#x8BE5;&#x5143;&#x7D20;&#x653E;&#x5230;&#x6B64;&#x6570;&#x7EC4;&#x4E2D;&#x7684;&#x8BE5;&#x4F4D;&#x7F6E;&#x4E0A;&#x3002;</p>
+<p>&#x8BFB;&#x53D6;&#x64CD;&#x4F5C;&#xFF1A;<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> V <span class="title">get</span><span class="params">(Object key)</span> </span>{</div><div class="line">    <span class="keyword">if</span> (key != <span class="keyword">null</span> &amp;&amp; cache != <span class="keyword">null</span> &amp;&amp; key <span class="keyword">instanceof</span> Integer) {</div><div class="line">        <span class="keyword">int</span> index = ((Integer) key).intValue();</div><div class="line">        <span class="keyword">if</span> (index &gt;&gt; CACHE_BIT_SIZE == <span class="number">0</span>) {</div><div class="line">            <span class="keyword">return</span> (V) cache[index];</div><div class="line">        }</div><div class="line">    }</div><div class="line">    Entry&lt;K, V&gt; m = getEntry(key);</div><div class="line">    <span class="keyword">if</span> (m != <span class="keyword">null</span>) {</div><div class="line">        <span class="keyword">return</span> m.value;</div><div class="line">    }</div><div class="line">    <span class="keyword">return</span> <span class="keyword">null</span>;</div><div class="line">}</div></pre></td></tr></table></figure></p>
+<p>&#x6709;&#x4E86;&#x4E0A;&#x9762;&#x5B58;&#x50A8;&#x65F6;&#x7684;hash&#x7B97;&#x6CD5;&#x4F5C;&#x4E3A;&#x57FA;&#x7840;&#xFF0C;&#x7406;&#x89E3;&#x8D77;&#x6765;&#x8FD9;&#x6BB5;&#x4EE3;&#x7801;&#x5C31;&#x5F88;&#x5BB9;&#x6613;&#x4E86;&#x3002;&#x4ECE;&#x4E0A;&#x9762;&#x7684;&#x6E90;&#x4EE3;&#x7801;&#x4E2D;&#x53EF;&#x4EE5;&#x770B;&#x51FA;&#xFF1A;&#x4ECE;HashMap&#x4E2D;get&#x5143;&#x7D20;&#x65F6;&#xFF0C;&#x9996;&#x5148;&#x8BA1;&#x7B97;key&#x7684;hashCode&#xFF0C;&#x627E;&#x5230;&#x6570;&#x7EC4;&#x4E2D;&#x5BF9;&#x5E94;&#x4F4D;&#x7F6E;&#x7684;&#x67D0;&#x4E00;&#x5143;&#x7D20;&#xFF0C;&#x7136;&#x540E;&#x901A;&#x8FC7;key&#x7684;equals&#x65B9;&#x6CD5;&#x5728;&#x5BF9;&#x5E94;&#x4F4D;&#x7F6E;&#x7684;&#x94FE;&#x8868;&#x4E2D;&#x627E;&#x5230;&#x9700;&#x8981;&#x7684;&#x5143;&#x7D20;&#x3002;</p>
+<h1 id="3&#x3001;HashMap&#x548C;Hashtable&#x4E3B;&#x8981;&#x533A;&#x522B;&#xFF1A;"><a href="#3&#x3001;HashMap&#x548C;Hashtable&#x4E3B;&#x8981;&#x533A;&#x522B;&#xFF1A;" class="headerlink" title="3&#x3001;HashMap&#x548C;Hashtable&#x4E3B;&#x8981;&#x533A;&#x522B;&#xFF1A;"></a>3&#x3001;HashMap&#x548C;Hashtable&#x4E3B;&#x8981;&#x533A;&#x522B;&#xFF1A;</h1><ol>
+<li>HashMap&#x548C;Hashtable&#x90FD;&#x5B9E;&#x73B0;&#x4E86;Map&#x63A5;&#x53E3;&#xFF0C;&#x4F46;&#x662F;Hashtable&#x7684;&#x5B9E;&#x73B0;&#x662F;&#x57FA;&#x4E8E;Dictionary&#x62BD;&#x8C61;&#x7C7B;&#x3002;</li>
+<li>HashMap&#x5141;&#x8BB8;null&#x503C;(key&#x548C;value&#x90FD;&#x53EF;&#x4EE5;)&#xFF0C;Hashtable&#x4E0D;&#x5141;&#x8BB8;null&#x503C;(key&#x548C;value&#x90FD;&#x4E0D;&#x53EF;&#x4EE5;)&#x3002;&#x56E0;&#x6B64;&#xFF0C;HashMap&#x4F7F;&#x7528;get()&#x65B9;&#x6CD5;&#x83B7;&#x53D6;&#x5230;null&#xFF0C;&#x53EF;&#x80FD;&#x662F;&#x67D0;&#x4E2A;&#x952E;&#x5BF9;&#x4E8E;value&#x4E3A;null&#xFF0C;&#x4E5F;&#x53EF;&#x80FD;&#x662F;&#x6CA1;&#x6709;&#x8BE5;&#x952E;&#xFF0C;&#x9700;&#x8981;&#x4F7F;&#x7528;containsKey()&#x6765;&#x5224;&#x65AD;&#x662F;&#x5426;&#x5305;&#x542B;&#x67D0;&#x4E2A;&#x952E;&#x503C;&#x3002;Hashtable&#x6CA1;&#x6709;&#x8BE5;&#x95EE;&#x9898;&#xFF0C;&#x4E24;&#x79CD;&#x65B9;&#x5F0F;&#x90FD;&#x53EF;&#x4EE5;&#x3002;</li>
+<li>HashMap&#x4E2D;hash&#x6570;&#x7EC4;&#x7684;&#x9ED8;&#x8BA4;&#x5927;&#x5C0F;&#x662F;16&#xFF0C;&#x5BA2;&#x5EA7;&#x7387;&#x662F;0.75&#xFF0C;&#x589E;&#x52A0;&#x65B9;&#x5F0F;&#x662F;&#x76F4;&#x63A5;&#x7FFB;&#x500D;&#xFF0C;&#x4E5F;&#x5C31;&#x662F;2&#x7684;&#x6307;&#x6570;, &#x5F53;HashMap&#x5BB9;&#x91CF;&#x8FBE;&#x5230;&#x4E86;16<em>0.75 = 12&#xFF0C;&#x5B83;&#x7684;&#x5BB9;&#x91CF;&#x4FBF;&#x4F1A;&#x62D3;&#x5C55;&#x5230;16</em>2=32&#x3002;Hashtable&#x4E2D;hash&#x6570;&#x7EC4;&#x9ED8;&#x8BA4;&#x5927;&#x5C0F;&#x662F;11&#xFF0C;&#x589E;&#x52A0;&#x7684;&#x65B9;&#x5F0F;&#x662F;old*2+1&#x3002;</li>
+<li>Hashtable&#x4F7F;&#x7528;Enumeration&#xFF0C;HashMap&#x4F7F;&#x7528;Iterator&#x3002;&#x4EE5;&#x4E0A;&#x53EA;&#x662F;&#x8868;&#x9762;&#x7684;&#x4E0D;&#x540C;&#xFF0C;&#x5B83;&#x4EEC;&#x7684;&#x5B9E;&#x73B0;&#x4E5F;&#x6709;&#x5F88;&#x5927;&#x7684;&#x4E0D;&#x540C;&#x3002;</li>
+<li>&#x4E24;&#x8005;&#x6700;&#x5927;&#x7684;&#x533A;&#x522B;&#x5728;&#x4E8E;HashMap&#x4E0D;&#x662F;&#x7EBF;&#x7A0B;&#x5B89;&#x5168;&#x7684;&#xFF0C;&#x800C;Hashtble&#x7684;&#x65B9;&#x6CD5;&#x662F;&#x7EBF;&#x7A0B;&#x5B89;&#x5168;&#x7684;&#xFF0C;&#x5B83;&#x7684;&#x65B9;&#x6CD5;&#x662F;&#x540C;&#x6B65;&#x8FC7;&#x4E86;&#x7684;&#xFF0C;&#x6240;&#x4EE5;&#x5728;&#x591A;&#x7EBF;&#x7A0B;&#x573A;&#x5408;&#x8981;&#x624B;&#x52A8;&#x540C;&#x6B65;HashMap&#x3002;&#x4F46;java&#x4E2D;&#x63D0;&#x4F9B;&#x4E86;&#x4E24;&#x79CD;&#x751F;&#x6210;&#x540C;&#x6B65;&#x7684;HashMap&#x7684;&#x65B9;&#x6CD5;&#x3002;&#x89C1;&#x4E0B;&#x6587;&#x3002;</li>
+</ol>
+<h1 id="4&#x3001;&#x6F5C;&#x5728;&#x7684;&#x7EBF;&#x7A0B;&#x5B89;&#x5168;&#x95EE;&#x9898;&#xFF1A;"><a href="#4&#x3001;&#x6F5C;&#x5728;&#x7684;&#x7EBF;&#x7A0B;&#x5B89;&#x5168;&#x95EE;&#x9898;&#xFF1A;" class="headerlink" title="4&#x3001;&#x6F5C;&#x5728;&#x7684;&#x7EBF;&#x7A0B;&#x5B89;&#x5168;&#x95EE;&#x9898;&#xFF1A;"></a>4&#x3001;&#x6F5C;&#x5728;&#x7684;&#x7EBF;&#x7A0B;&#x5B89;&#x5168;&#x95EE;&#x9898;&#xFF1A;</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Map m =Collections.synchronizedMap(<span class="keyword">new</span> HashMap(...));</div></pre></td></tr></table></figure>
+<p>&#x8BE5;&#x65B9;&#x6CD5;&#x8FD4;&#x56DE;&#x7684;&#x662F;&#x4E00;&#x4E2A;SynchronizedMap&#x7684;&#x5B9E;&#x4F8B;&#x3002;SynchronizedMap&#x7C7B;&#x662F;&#x5B9A;&#x4E49;&#x5728;Collections&#x4E2D;&#x7684;&#x4E00;&#x4E2A;&#x9759;&#x6001;&#x5185;&#x90E8;&#x7C7B;&#x3002;&#x5B83;&#x5B9E;&#x73B0;&#x4E86;Map&#x63A5;&#x53E3;&#xFF0C;&#x5E76;&#x5BF9;&#x5176;&#x4E2D;&#x7684;&#x6BCF;&#x4E00;&#x4E2A;&#x65B9;&#x6CD5;&#x5B9E;&#x73B0;&#xFF0C;&#x901A;&#x8FC7;synchronized&#x5173;&#x952E;&#x5B57;&#x8FDB;&#x884C;&#x4E86;&#x540C;&#x6B65;&#x63A7;&#x5236;&#x3002;&#x8FD9;&#x79CD;&#x65B9;&#x5F0F;&#x83B7;&#x53D6;&#x7684;map&#x4E2D;&#x6BCF;&#x4E2A;&#x65B9;&#x6CD5;&#x90FD;&#x662F;&#x540C;&#x6B65;&#x7684;&#xFF0C;&#x4F46;&#x5E76;&#x4E0D;&#x610F;&#x5473;&#x7740;&#x5C31;&#x4E00;&#x5B9A;&#x662F;&#x7EBF;&#x7A0B;&#x5B89;&#x5168;&#x7684;&#x3002;&#x5982;&#x4E0B;&#x9762;&#x4EE3;&#x7801;&#xFF1A;</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">Map&lt;String,String&gt;map=Collections.synchronizedMap(<span class="keyword">new</span> TreeMap&lt;String,String&gt;());</div><div class="line">map.put(<span class="string">&quot;key1&quot;</span>,<span class="string">&quot;value1&quot;</span>);</div><div class="line">map.put(<span class="string">&quot;key2&quot;</span>,<span class="string">&quot;value2&quot;</span>);</div><div class="line"><span class="keyword">if</span>(map.containsKey(<span class="string">&quot;key1&quot;</span>)){</div><div class="line">	map.remove(<span class="string">&quot;key1&quot;</span>);</div><div class="line">}</div><div class="line">Set&lt;Entry&lt;String,String&gt;&gt; entries = map.entrySet();</div><div class="line">Iterator&lt;Entry&lt;String,String&gt;&gt; iter = entries.iterator();</div><div class="line"><span class="keyword">while</span>(iter.hasNext()){</div><div class="line">	System.out.println(iter.next()); <span class="comment">//Willthrow ConcurrentModificationException</span></div><div class="line">	map.remove(<span class="string">&quot;key2&quot;</span>);</div><div class="line">}</div></pre></td></tr></table></figure>
+<p>&#x4E0A;&#x8FB9;&#x8FD9;&#x6BB5;&#x4EE3;&#x7801;&#x662F;&#x5728;map&#x5220;&#x9664;&#x4E00;&#x4E2A;&#x5143;&#x7D20;&#x4E4B;&#x524D;&#xFF0C;&#x5148;&#x5224;&#x65AD;&#x8FD9;&#x4E2A;&#x5143;&#x7D20;&#x662F;&#x5426;&#x5B58;&#x5728;&#x3002;&#x5982;&#x679C;&#x4E24;&#x4E2A;&#x6709;&#x7EBF;&#x7A0B;&#xFF0C;A&#x7EBF;&#x7A0B;&#x9996;&#x5148;&#x6267;&#x884C;containsKey&#x65B9;&#x6CD5;&#xFF0C;&#x8FD4;&#x56DE;true&#xFF0C;&#x51C6;&#x5907;&#x6267;&#x884C;remove&#x64CD;&#x4F5C;&#xFF0C;&#x8FD9;&#x4E2A;&#x65F6;&#x5019;&#xFF0C;&#x5982;&#x679C;&#x7EBF;&#x7A0B;B&#x4E5F;&#x6267;&#x884C;&#x4E86;containsKey&#x65B9;&#x6CD5;&#xFF0C;&#x540C;&#x6837;&#x4F1A;&#x8FD4;&#x56DE;true&#xFF0C;&#x7136;&#x540E;&#x51C6;&#x5907;&#x6267;&#x884C;remove&#x65B9;&#x6CD5;&#xFF0C;&#x7EBF;&#x7A0B;A,B&#x6709;&#x4E00;&#x4E2A;&#x5148;&#x6267;&#x884C;remove&#x53EF;&#x4EE5;&#x5220;&#x9664;&#x8BE5;&#x5143;&#x7D20;&#xFF0C;&#x5F53;&#x53E6;&#x4E00;&#x4E2A;&#x6267;&#x884C;&#x65F6;&#xFF0C;&#x4F1A;&#x53D1;&#x73B0;&#x8BE5;&#x5143;&#x7D20;&#x5DF2;&#x7ECF;&#x6CA1;&#x6709;&#x4E86;&#x3002;</p>
+<h1 id="5&#x3001;&#x7EBF;&#x7A0B;&#x5B89;&#x5168;&#x7684;HsahMap&#xFF1A;"><a href="#5&#x3001;&#x7EBF;&#x7A0B;&#x5B89;&#x5168;&#x7684;HsahMap&#xFF1A;" class="headerlink" title="5&#x3001;&#x7EBF;&#x7A0B;&#x5B89;&#x5168;&#x7684;HsahMap&#xFF1A;"></a>5&#x3001;&#x7EBF;&#x7A0B;&#x5B89;&#x5168;&#x7684;HsahMap&#xFF1A;</h1><p>Hashtable&#x867D;&#x7136;&#x662F;&#x7EBF;&#x7A0B;&#x5B89;&#x5168;&#x7684;&#xFF0C;&#x5B83;&#x91C7;&#x7528;&#x7684;&#x9501;&#x673A;&#x5236;&#x662F;&#x4E00;&#x6B21;&#x9501;&#x4F4F;&#x6574;&#x4E2A;hash&#x8868;&#xFF0C;&#x540C;&#x4E00;&#x65F6;&#x95F4;&#x70B9;&#x53EA;&#x80FD;&#x6709;&#x4E00;&#x4E2A;&#x7EBF;&#x7A0B;&#x64CD;&#x4F5C;&#xFF0C;&#x6240;&#x6709;&#x8BBF;&#x95EE;Hashtable&#x7684;&#x7EBF;&#x7A0B;&#x90FD;&#x8981;&#x7ADE;&#x4E89;&#x540C;&#x4E00;&#x628A;&#x9501;&#x3002;&#x5728;JDK5&#x4E2D;&#xFF0C;&#x65B0;&#x589E;&#x4E86;ConcurrentMap&#x63A5;&#x53E3;&#x548C;&#x5B83;&#x7684;&#x4E00;&#x4E2A;&#x5B9E;&#x73B0;&#x7C7B;ConcurrentHashMap&#x3002;&#x8FD9;&#x4E2A;map&#x53EF;&#x4EE5;&#x5B9E;&#x73B0;&#x4E0E;Hashtable&#x76F8;&#x540C;&#x7684;&#x7EBF;&#x7A0B;&#x5B89;&#x5168;&#xFF0C;&#x4F46;&#x6548;&#x7387;&#x8981;&#x6BD4;&#x5176;&#x9AD8;&#x5F88;&#x591A;&#x3002;ConcurrentHashMap&#x7684;&#x9501;&#x673A;&#x5236;&#x662F;&#x4E00;&#x6B21;&#x9501;&#x4F4F;&#x4E00;&#x4E2A;&#x6876;&#xFF0C;&#x5B83;&#x5C06;Hash&#x8868;&#x9ED8;&#x8BA4;&#x5206;&#x6210;16&#x4E2A;&#x6876;&#xFF0C;&#x5BF9;&#x4E8E;&#x5E38;&#x89C1;&#x64CD;&#x4F5C;&#x5982;get&#x3001;set&#x3001;remove&#x7B49;&#xFF0C;&#x53EA;&#x9700;&#x8981;&#x64CD;&#x4F5C;&#x5F53;&#x524D;&#x6876;&#x5373;&#x53EF;&#x3002;&#x8FD9;&#x6837;&#x539F;&#x6765;&#x53EA;&#x80FD;&#x6709;1&#x4E2A;&#x7EBF;&#x7A0B;&#x64CD;&#x4F5C;&#xFF0C;&#x53D8;&#x6210;&#x4E86;&#x6700;&#x591A;&#x53EF;&#x4EE5;16&#x4E2A;&#x7EBF;&#x7A0B;&#x540C;&#x65F6;&#x64CD;&#x4F5C;&#xFF0C;&#x6027;&#x80FD;&#x63D0;&#x9AD8;&#x662F;&#x663E;&#x800C;&#x6613;&#x89C1;&#x7684;&#x3002;</p>
+<h1 id="6&#x3001;&#x904D;&#x5386;&#x65B9;&#x5F0F;&#xFF1A;"><a href="#6&#x3001;&#x904D;&#x5386;&#x65B9;&#x5F0F;&#xFF1A;" class="headerlink" title="6&#x3001;&#x904D;&#x5386;&#x65B9;&#x5F0F;&#xFF1A;"></a>6&#x3001;&#x904D;&#x5386;&#x65B9;&#x5F0F;&#xFF1A;</h1><p>HashMap&#x7684;&#x904D;&#x5386;&#x6709;&#x4E24;&#x79CD;&#x5E38;&#x7528;&#x7684;&#x65B9;&#x6CD5;&#xFF0C;&#x90A3;&#x5C31;&#x662F;&#x4F7F;&#x7528;keyset&#x6216;&#x8005;entryset&#x6765;&#x8FDB;&#x884C;&#x904D;&#x5386;,&#x5982;&#x4E0B;:<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line">Map&lt;String, String&gt; map = <span class="keyword">new</span> HashMap&lt;String, String&gt;();</div><div class="line"><span class="comment">//&#x65B9;&#x5F0F;&#x4E00;&#xFF1A;</span></div><div class="line">Iterator&lt;Map.Entry&lt;String, String&gt;&gt; iterator = map.entrySet().iterator();</div><div class="line"><span class="keyword">while</span> (iterator.hasNext()) {</div><div class="line">	Map.Entry&lt;String, String&gt; entry = iterator.next();</div><div class="line">	entry.getKey();</div><div class="line">	entry.getValue();</div><div class="line">}</div><div class="line"><span class="comment">//&#x65B9;&#x5F0F;&#x4E8C;&#xFF1A;</span></div><div class="line"><span class="keyword">for</span> (Entry&lt;String, String&gt; entry : map.entrySet()) {</div><div class="line">	entry.getKey();</div><div class="line">	entry.getValue();</div><div class="line">}</div><div class="line"><span class="comment">//&#x65B9;&#x5F0F;&#x4E09;&#xFF1A;</span></div><div class="line">Iterator iterator = map.keySet().iterator();</div><div class="line"><span class="keyword">while</span> (iterator.hasNext()) {</div><div class="line">	Object key = iterator.next();</div><div class="line">	Object val = map.get(key);</div><div class="line">}</div><div class="line"><span class="comment">//&#x65B9;&#x5F0F;&#x56DB;&#xFF1A;</span></div><div class="line"><span class="keyword">for</span> (String key : map.keySet()) {</div><div class="line">	Object value = map.get(key);</div><div class="line">}</div></pre></td></tr></table></figure></p>
+<p>&#x4F7F;&#x7528;entrySet&#x65F6;&#xFF0C;&#x5C06;map&#x4E2D;key&#x548C;value&#x90FD;&#x653E;&#x5728;&#x4E86;entry&#x5BF9;&#x8C61;&#x4E2D;&#xFF0C;&#x6240;&#x4EE5;&#x53D6;&#x7684;&#x65F6;&#x5019;&#x76F4;&#x63A5;&#x53D6;&#x5373;&#x53EF;&#x3002;&#x4F7F;&#x7528;keySet&#x65F6;&#xFF0C;&#x5176;&#x5B9E;&#x662F;&#x904D;&#x5386;&#x4E86;2&#x6B21;&#xFF0C;&#x7B2C;&#x4E00;&#x6B21;&#x5F62;&#x6210;iterator&#xFF0C;&#x7B2C;&#x4E8C;&#x6B21;&#x5728;HashMap&#x4E2D;&#x53D6;&#x51FA;key&#x5BF9;&#x5E94;&#x7684;value&#x3002; </p>
+
+      
+    </div>
+
+    <div>
+      
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Java/" rel="tag">#Java</a>
+          
+            <a href="/tags/HashMap/" rel="tag">#HashMap</a>
+          
+            <a href="/tags/Hashtable/" rel="tag">#Hashtable</a>
+          
+            <a href="/tags/ConcurrentHashMap/" rel="tag">#ConcurrentHashMap</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/04/13/Java中要注意的几个问题/" rel="next" title="Java中要注意的几个问题">
+                <i class="fa fa-chevron-left"></i> Java中要注意的几个问题
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/04/13/windows7-64位安装Oracle10g-32位出错解决方法/" rel="prev" title="windows7 64位安装Oracle10g 32位出错解决方法">
+                windows7 64位安装Oracle10g 32位出错解决方法 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/04/13/HashMap、Hashtable、ConcurrentHashMap等深入分析/"
+           data-title="HashMap、Hashtable、ConcurrentHashMap等深入分析" data-url="http://lzblog.cn/2016/04/13/HashMap、Hashtable、ConcurrentHashMap等深入分析/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.png"
+               alt="lizhen" />
+          <p class="site-author-name" itemprop="name">lizhen</p>
+          <p class="site-description motion-element" itemprop="description">Java攻城狮</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">40</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">11</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">37</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://hexo.io/zh-cn/" target="_blank">
+                  
+                    <i class="fa fa-plane"></i>
+                  
+                  Hexo
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/lingbage" target="_blank">
+                  
+                    <i class="fa fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://leancloud.cn/" target="_blank">
+                  
+                    <i class="fa fa-cloud"></i>
+                  
+                  LCloud
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.bootcss.com/p/font-awesome/" target="_blank">
+                  
+                    <i class="fa fa-leaf"></i>
+                  
+                  FontA
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://portal.qiniu.com/" target="_blank">
+                  
+                    <i class="fa fa-cloud-upload"></i>
+                  
+                  七牛图床
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        <div class="links-of-blogroll motion-element">
+          
+            <div class="links-of-blogroll-title">友情链接</div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.lzblog.cn/" target="_blank">None</a>
+                </li>
+              
+            </ul>
+          
+        </div>
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1、HashMap的实现原理："><span class="nav-text">1、HashMap的实现原理：</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2、HashMap的存取实现："><span class="nav-text">2、HashMap的存取实现：</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3、HashMap和Hashtable主要区别："><span class="nav-text">3、HashMap和Hashtable主要区别：</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#4、潜在的线程安全问题："><span class="nav-text">4、潜在的线程安全问题：</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#5、线程安全的HsahMap："><span class="nav-text">5、线程安全的HsahMap：</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#6、遍历方式："><span class="nav-text">6、遍历方式：</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <script async src="/lib/jquery/busuanzi.pure.mini.js"></script>
+<div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">lizhen</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="powered-by">
+  主题  - 
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+<span id="busuanzi_container_site_pv">本站总访问量<span id="busuanzi_value_site_pv"></span>次</span>
+
+
+
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+
+  
+
+
+
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js"></script>
+
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js"></script>
+
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=0.5.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=0.5.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=0.5.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=0.5.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=0.5.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=0.5.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=0.5.0"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"lizhenblog"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+      <script src="/lib/ua-parser-js/dist/ua-parser.min.js"></script>
+      <script src="/js/src/hook-duoshuo.js"></script>
+    
+  
+
+
+
+
+
+  
+  
+  
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script>AV.initialize("DSUpqwXpCRk0yaVH0umWiadJ-gzGzoHsz", "b5jihkHKg0hUcy7gQ4rJz6dD");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+</body>
+</html>

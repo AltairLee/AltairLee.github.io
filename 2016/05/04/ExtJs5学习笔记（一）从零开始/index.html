@@ -1,0 +1,847 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
+
+
+
+
+  <link href="//fonts.googleapis.com/css?family=Lato:300,400,700,400italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=0.5.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="ExtJs5," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Dear Blog" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=0.5.0" />
+
+
+
+
+
+
+<meta name="description" content="&amp;#x4E4B;&amp;#x524D;&amp;#x4F7F;&amp;#x7528;&amp;#x8FC7;ExtJs2.x&amp;#xFF0C;&amp;#x4F46;&amp;#x6CA1;&amp;#x6709;&amp;#x7CFB;&amp;#x7EDF;&amp;#x7684;&amp;#x5B66;&amp;#x4E60;&amp;#x8FC7;&amp;#xFF0C;&amp;#x521A;&amp;#x597D;&amp;#x6709;&amp;#x65F6;&amp;#x95F4;&amp;#x60F3;&amp;#x7CFB;&amp;#x7EDF;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ExtJs5学习笔记（一）从零开始">
+<meta property="og:url" content="http://lzblog.cn/2016/05/04/ExtJs5学习笔记（一）从零开始/index.html">
+<meta property="og:site_name" content="Dear Blog">
+<meta property="og:description" content="&amp;#x4E4B;&amp;#x524D;&amp;#x4F7F;&amp;#x7528;&amp;#x8FC7;ExtJs2.x&amp;#xFF0C;&amp;#x4F46;&amp;#x6CA1;&amp;#x6709;&amp;#x7CFB;&amp;#x7EDF;&amp;#x7684;&amp;#x5B66;&amp;#x4E60;&amp;#x8FC7;&amp;#xFF0C;&amp;#x521A;&amp;#x597D;&amp;#x6709;&amp;#x65F6;&amp;#x95F4;&amp;#x60F3;&amp;#x7CFB;&amp;#x7EDF;">
+<meta property="og:image" content="http://7xsp5x.com2.z0.glb.clouddn.com/extjs5-1.png">
+<meta property="og:image" content="http://7xsp5x.com2.z0.glb.clouddn.com/extjs5-2.png">
+<meta property="og:image" content="http://7xsp5x.com2.z0.glb.clouddn.com/extjs5-3.png">
+<meta property="og:image" content="http://7xsp5x.com2.z0.glb.clouddn.com/extjs5-4.png">
+<meta property="og:image" content="http://7xsp5x.com2.z0.glb.clouddn.com/extjs5-5.png">
+<meta property="og:image" content="http://7xsp5x.com2.z0.glb.clouddn.com/extjs5-6.png">
+<meta property="og:updated_time" content="2016-11-21T14:42:32.038Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="ExtJs5学习笔记（一）从零开始">
+<meta name="twitter:description" content="&amp;#x4E4B;&amp;#x524D;&amp;#x4F7F;&amp;#x7528;&amp;#x8FC7;ExtJs2.x&amp;#xFF0C;&amp;#x4F46;&amp;#x6CA1;&amp;#x6709;&amp;#x7CFB;&amp;#x7EDF;&amp;#x7684;&amp;#x5B66;&amp;#x4E60;&amp;#x8FC7;&amp;#xFF0C;&amp;#x521A;&amp;#x597D;&amp;#x6709;&amp;#x65F6;&amp;#x95F4;&amp;#x60F3;&amp;#x7CFB;&amp;#x7EDF;">
+<meta name="twitter:image" content="http://7xsp5x.com2.z0.glb.clouddn.com/extjs5-1.png">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+  <title> ExtJs5学习笔记（一）从零开始 | Dear Blog </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?3b9384b786cf80306a6f68370a3a802f";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Dear Blog</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">Busy to live or busy to die ?!</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-th fa-fw"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-tags fa-fw"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-user fa-fw"></i> <br />
+            
+            关于我
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-commonweal">
+          <a href="/404.html" rel="section">
+            
+              <i class="menu-item-icon fa fa-heartbeat fa-fw"></i> <br />
+            
+            公益404
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-search">
+          <a href="/search" rel="section">
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                ExtJs5学习笔记（一）从零开始
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-05-04T09:32:13+08:00" content="2016-05-04">
+              2016-05-04
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/ExtJs5/" itemprop="url" rel="index">
+                    <span itemprop="name">ExtJs5</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/05/04/ExtJs5学习笔记（一）从零开始/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/05/04/ExtJs5学习笔记（一）从零开始/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/2016/05/04/ExtJs5学习笔记（一）从零开始/" class="leancloud_visitors" data-flag-title="ExtJs5学习笔记（一）从零开始">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">阅读次数 </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>&#x4E4B;&#x524D;&#x4F7F;&#x7528;&#x8FC7;ExtJs2.x&#xFF0C;&#x4F46;&#x6CA1;&#x6709;&#x7CFB;&#x7EDF;&#x7684;&#x5B66;&#x4E60;&#x8FC7;&#xFF0C;&#x521A;&#x597D;&#x6709;&#x65F6;&#x95F4;&#x60F3;&#x7CFB;&#x7EDF;&#x7684;&#x5B66;&#x4E60;&#x4E0B;ExtJs&#xFF0C;&#x60F3;&#x6765;&#x60F3;&#x53BB;&#x8FD8;&#x662F;&#x76F4;&#x63A5;&#x5B66;ExtJS 5&#x5427;&#x3002;</p>
+<p>Ext JS 5&#x7684;&#x7B2C;&#x4E00;&#x7248;&#x672C;&#x53D1;&#x884C;&#x4E8E;2014&#x5E74;04&#x6708;09&#x65E5;&#xFF0C;ExtJS&#x662F;&#x4E00;&#x4E2A;&#x57FA;&#x4E8E;JavaScript&#x7F16;&#x5199;&#x3001;&#x4E3B;&#x8981;&#x7528;&#x4E8E;&#x521B;&#x5EFA;&#x524D;&#x7AEF;&#x7528;&#x6237;&#x754C;&#x9762;&#x3001;&#x4E0E;&#x540E;&#x53F0;&#x6280;&#x672F;&#x65E0;&#x5173;&#x7684;&#x524D;&#x7AEF;AJAX&#x6846;&#x67B6;&#xFF0C;&#x53EF;&#x4EE5;&#x7528;&#x6765;&#x5F00;&#x53D1;&#x5BCC;&#x5BA2;&#x6237;&#x7AEF;&#x7684;AJAX&#x5E94;&#x7528;&#x3002;&#x56E0;&#x6B64;&#xFF0C;&#x53EF;&#x4EE5;&#x628A;ExtJS&#x7528;&#x5728;.Net&#x3001; Java&#x3001;Php&#x7B49;&#x5404;&#x79CD;&#x5F00;&#x53D1;&#x8BED;&#x8A00;&#x5F00;&#x53D1;&#x7684;&#x5E94;&#x7528;&#x4E2D;&#x3002;</p>
+<a id="more"></a>
+<h1 id="1&#x3001;What&#x2019;s-New-in-Ext-JS-5"><a href="#1&#x3001;What&#x2019;s-New-in-Ext-JS-5" class="headerlink" title="1&#x3001;What&#x2019;s New in Ext JS 5"></a>1&#x3001;What&#x2019;s New in Ext JS 5</h1><h2 id="1-1&#x3001;&#x4E0D;&#x518D;&#x652F;&#x6301;IE6&#x548C;IE7"><a href="#1-1&#x3001;&#x4E0D;&#x518D;&#x652F;&#x6301;IE6&#x548C;IE7" class="headerlink" title="1.1&#x3001;&#x4E0D;&#x518D;&#x652F;&#x6301;IE6&#x548C;IE7"></a>1.1&#x3001;&#x4E0D;&#x518D;&#x652F;&#x6301;IE6&#x548C;IE7</h2><p>Ext JS 5&#x652F;&#x6301;IE8+&#x548C;&#x6700;&#x65B0;&#x7684;&#x5E73;&#x677F;&#x7535;&#x8111;&#x5E73;&#x53F0;&#xFF0C;&#x5982;iOS6/7&#x3001;Chrome&#x4E0A;&#x7684;Android4.1+&#x548C;Win8&#x89E6;&#x5C4F;&#x8BBE;&#x5907;&#xFF08;&#x5982;Surface&#x548C;&#x89E6;&#x5C4F;&#x7B14;&#x8BB0;&#x672C;&#xFF09;&#x8FD0;&#x884C;&#x7684;IE10+&#x3002;</p>
+<h2 id="1-2&#x3001;&#x987A;&#x5E94;HTML5&#x5927;&#x6F6E;"><a href="#1-2&#x3001;&#x987A;&#x5E94;HTML5&#x5927;&#x6F6E;" class="headerlink" title="1.2&#x3001;&#x987A;&#x5E94;HTML5&#x5927;&#x6F6E;"></a>1.2&#x3001;&#x987A;&#x5E94;HTML5&#x5927;&#x6F6E;</h2><p>&#x6DFB;&#x52A0;&#x4E86;DOCTYPE&#x6587;&#x6863;&#x7C7B;&#x578B;&#x6807;&#x7B7E;&lt;!DOCTYPE html&gt;&#xFF0C;&#x4E14;&#x4E0D;&#x652F;&#x6301;&#x7701;&#x7565;&#x8BE5;&#x6807;&#x7B7E;&#x3002;</p>
+<h2 id="1-3&#x3001;MVC&#x548C;MVVM"><a href="#1-3&#x3001;MVC&#x548C;MVVM" class="headerlink" title="1.3&#x3001;MVC&#x548C;MVVM"></a>1.3&#x3001;MVC&#x548C;MVVM</h2><p>Ext JS 4&#x5F15;&#x5165;&#x4E86;&#x5BF9;MVC&#x67B6;&#x6784;&#x7684;&#x652F;&#x6301;&#xFF0C;&#x5728;Ext JS 5&#x4E2D;&#xFF0C;&#x53C8;&#x65B0;&#x589E;&#x5BF9;MVVM&#xFF08;&#x6A21;&#x578B; - &#x89C6;&#x56FE; - &#x89C6;&#x56FE; - &#x6A21;&#x578B;&#xFF09;&#x7684;&#x652F;&#x6301;&#xFF0C;MVVM&#x6A21;&#x5F0F;&#x5176;&#x4E2D;&#x4E00;&#x4E2A;&#x5927;&#x7684;&#x7279;&#x70B9;&#x662F;&#x6570;&#x636E;&#x7ED1;&#x5B9A;&#xFF0C;&#x5C06;&#x6A21;&#x578B;&#x5C42;&#x548C;&#x89C6;&#x56FE;&#x5C42;&#x94FE;&#x63A5;&#x8D77;&#x6765;&#xFF0C;&#x4FEE;&#x6539;&#x5176;&#x4E2D;&#x4E00;&#x4E2A;&#xFF0C;&#x53E6;&#x4E00;&#x4E2A;&#x4E5F;&#x4F1A;&#x968F;&#x4E4B;&#x53D8;&#x5316;&#x3002;</p>
+<h2 id="1-4&#x3001;&#x6574;&#x5408;&#x8FDB;Sencha-Cmd&#x5305;"><a href="#1-4&#x3001;&#x6574;&#x5408;&#x8FDB;Sencha-Cmd&#x5305;" class="headerlink" title="1.4&#x3001;&#x6574;&#x5408;&#x8FDB;Sencha Cmd&#x5305;"></a>1.4&#x3001;&#x6574;&#x5408;&#x8FDB;Sencha Cmd&#x5305;</h2><p>Ext JS 5&#x73B0;&#x5728;&#x5305;&#x542B;&#x5728;Sencha Cmd&#x5305;&#x4E2D;&#xFF0C;&#x540D;&#x4E3A;ext&#xFF0C;&#x5F53;&#x4F60;&#x4F7F;&#x7528;Sencha Cmd&#x751F;&#x6210;&#x3001;&#x6784;&#x5EFA;&#x3001;&#x66F4;&#x65B0;&#x4F60;&#x7684;&#x5E94;&#x7528;&#x7A0B;&#x5E8F;&#x65F6;&#xFF08;&#x6DFB;&#x52A0;-ext&#x53C2;&#x6570;&#xFF09;&#xFF0C;&#x5373;&#x53EF;&#x81EA;&#x52A8;&#x4E0B;&#x8F7D;&#x6700;&#x65B0;&#x7248;&#x7684;ExtJS&#x3002;</p>
+<h2 id="1-5&#x3001;&#x914D;&#x7F6E;&#x7CFB;&#x7EDF;&#x548C;&#x7EC4;&#x4EF6;"><a href="#1-5&#x3001;&#x914D;&#x7F6E;&#x7CFB;&#x7EDF;&#x548C;&#x7EC4;&#x4EF6;" class="headerlink" title="1.5&#x3001;&#x914D;&#x7F6E;&#x7CFB;&#x7EDF;&#x548C;&#x7EC4;&#x4EF6;"></a>1.5&#x3001;&#x914D;&#x7F6E;&#x7CFB;&#x7EDF;&#x548C;&#x7EC4;&#x4EF6;</h2><p>Ext JS 5&#x6269;&#x5C55;&#x4E86;&#x914D;&#x7F6E;&#x7CFB;&#x7EDF;&#xFF0C;&#x4F7F;&#x4E4B;&#x66F4;&#x52A0;&#x5411;&#x540E;&#x517C;&#x5BB9;&#x3002;</p>
+<h2 id="1-6&#x3001;&#x65B0;&#x7684;&#x4E3B;&#x9898;&#x548C;&#x56FE;&#x8868;"><a href="#1-6&#x3001;&#x65B0;&#x7684;&#x4E3B;&#x9898;&#x548C;&#x56FE;&#x8868;" class="headerlink" title="1.6&#x3001;&#x65B0;&#x7684;&#x4E3B;&#x9898;&#x548C;&#x56FE;&#x8868;"></a>1.6&#x3001;&#x65B0;&#x7684;&#x4E3B;&#x9898;&#x548C;&#x56FE;&#x8868;</h2><p>&#x5728;Ext JS 5&#x4E2D;&#xFF0C;&#x9ED8;&#x8BA4;&#x7684;&#x7ECF;&#x5178;&#x4E3B;&#x9898;&#x88AB;Neptune&#x4E3B;&#x9898;&#x66FF;&#x4EE3;&#xFF0C;&#x65B0;&#x751F;&#x6210;&#x7684;&#x5E94;&#x7528;&#x7A0B;&#x5E8F;&#x5C06;&#x9ED8;&#x8BA4;&#x4F7F;&#x7528;Neptune&#x4E3B;&#x9898;&#x3002;ExtJS5&#x4E2D;&#x8FD8;&#x5305;&#x542B;&#x4E00;&#x4E2A;&#x589E;&#x5F3A;&#x7248;&#x7684;&#x56FE;&#x8868;&#x5305;&#xFF0C;&#x5E26;&#x6765;&#x4E86;&#x5927;&#x91CF;&#x65B0;&#x529F;&#x80FD;&#xFF0C;&#x5E76;&#x4E14;&#x5728;&#x5E73;&#x677F;&#x7535;&#x8111;&#x4E0A;&#x62E5;&#x6709;&#x5F88;&#x597D;&#x7684;&#x6027;&#x80FD;&#x3002;</p>
+<h2 id="1-7&#x3001;More"><a href="#1-7&#x3001;More" class="headerlink" title="1.7&#x3001;More"></a>1.7&#x3001;More</h2><p>&#x66F4;&#x8BE6;&#x7EC6;&#x5185;&#x5BB9;&#x8BF7;&#x67E5;&#x9605;&#xFF1A;<a href="http://docs.sencha.com/extjs/5.0/whats_new/whats_new500.html" target="_blank" rel="external">http://docs.sencha.com/extjs/5.0/whats_new/whats_new500.html</a></p>
+<h1 id="2&#x3001;&#x5728;web&#x7CFB;&#x7EDF;&#x4E2D;&#x96C6;&#x6210;Ext-JS-5"><a href="#2&#x3001;&#x5728;web&#x7CFB;&#x7EDF;&#x4E2D;&#x96C6;&#x6210;Ext-JS-5" class="headerlink" title="2&#x3001;&#x5728;web&#x7CFB;&#x7EDF;&#x4E2D;&#x96C6;&#x6210;Ext JS 5"></a>2&#x3001;&#x5728;web&#x7CFB;&#x7EDF;&#x4E2D;&#x96C6;&#x6210;Ext JS 5</h1><h2 id="2-1&#x3001;API&#x4E0B;&#x8F7D;&#xFF1A;"><a href="#2-1&#x3001;API&#x4E0B;&#x8F7D;&#xFF1A;" class="headerlink" title="2.1&#x3001;API&#x4E0B;&#x8F7D;&#xFF1A;"></a>2.1&#x3001;API&#x4E0B;&#x8F7D;&#xFF1A;</h2><p>&#x6211;&#x4E0B;&#x8F7D;&#x7684;&#x662F;ext-5.1.0&#xFF0C;&#x5982;&#x4E0B;&#x56FE;&#xFF0C;&#x4E0B;&#x8F7D;&#x9014;&#x5F84;&#x6709;&#x5F88;&#x591A;&#xFF0C;&#x53EF;&#x4EE5;&#x53BB;&#x5B98;&#x7F51;&#x4E0B;&#x8F7D;&#x4E5F;&#x53EF;&#x4EE5;&#x5728;&#x7B2C;&#x4E09;&#x65B9;&#x7F51;&#x7AD9;&#x4E0B;&#x8F7D;&#x3002;<br><img src="http://7xsp5x.com2.z0.glb.clouddn.com/extjs5-1.png"></p>
+<h2 id="2-2&#x3001;&#x5229;&#x7528;Sencha-CMD"><a href="#2-2&#x3001;&#x5229;&#x7528;Sencha-CMD" class="headerlink" title="2.2&#x3001;&#x5229;&#x7528;Sencha CMD"></a>2.2&#x3001;&#x5229;&#x7528;Sencha CMD</h2><p>&#x5728;&#x7F51;&#x4E0A;&#x5B66;&#x4E60;&#x7684;&#x65F6;&#x5019;&#xFF0C;&#x6709;&#x4EBA;&#x5229;&#x7528;Sencha CMD&#x6765;&#x521B;&#x5EFA;Extjs5&#x7684;&#x9879;&#x76EE;&#xFF0C;&#x6211;&#x5E73;&#x65F6;&#x505A;JavaEE&#x5F00;&#x53D1;&#xFF0C;&#x4F7F;&#x7528;eclipse&#xFF0C;&#x5982;&#x679C;&#x8FD9;&#x79CD;&#x65B9;&#x5F0F;&#x5C06;&#x5927;&#x91CF;extjs5&#x7684;&#x8D44;&#x6E90;&#x5BFC;&#x5165;&#x5230;&#x6211;&#x7684;&#x9879;&#x76EE;&#x4E2D;&#xFF0C;&#x5176;&#x4E2D;&#x6709;&#x5F88;&#x591A;&#x5185;&#x5BB9;&#x662F;&#x6211;&#x4EEC;&#x7528;&#x4E0D;&#x5230;&#x7684;&#xFF0C;&#x8FD9;&#x4E9B;&#x5185;&#x5BB9;&#x4F1A;&#x5BFC;&#x81F4;&#x9879;&#x76EE;&#x8FC7;&#x4E8E;&#x5E9E;&#x5927;&#xFF0C;&#x624B;&#x5DE5;&#x53BB;&#x5220;&#x53C8;&#x5F88;&#x9EBB;&#x70E6;&#xFF0C;&#x6240;&#x4EE5;&#x6211;&#x6CA1;&#x6709;&#x4F7F;&#x7528;&#x8FD9;&#x79CD;&#x65B9;&#x5F0F;&#x3002;&#x4E0D;&#x8FC7;&#x8FD9;&#x79CD;&#x65B9;&#x5F0F;&#x6709;&#x4E2D;&#x597D;&#x5904;&#x5C31;&#x662F;&#x4F1A;&#x76F4;&#x63A5;&#x751F;&#x6210;&#x4E00;&#x4E2A;&#x6210;&#x5F62;&#x7684;&#x76EE;&#x5F55;&#x7ED3;&#x6784;&#xFF0C;&#x6BD4;&#x8F83;&#x65B9;&#x4FBF;&#x7684;&#x4F7F;&#x7528;MVC&#x6A21;&#x5F0F;&#x3002;</p>
+<p>&#x5982;&#x679C;&#x60F3;&#x4E86;&#x89E3;&#x7684;&#x53EF;&#x4EE5;&#x53C2;&#x8003;&#xFF1A;<a href="http://blog.csdn.net/jfok/article/details/35550713" target="_blank" rel="external">http://blog.csdn.net/jfok/article/details/35550713</a></p>
+<p>&#x4F7F;&#x7528;&#x8FD9;&#x79CD;&#x65B9;&#x5F0F;&#x9700;&#x8981;&#x6CE8;&#x610F;&#x6267;&#x884C;<code>sencha -sdk</code>&#x547D;&#x4EE4;&#x65F6;&#xFF0C;&#x8981;cd&#x5230;&#x4F60;&#x7684;ext-5.x&#x76EE;&#x5F55;&#x4E2D;&#xFF0C;&#x6BD4;&#x5982;&#x6211;&#x5728;myeclipse&#x4E2D;&#x5EFA;&#x7ACB;&#x4E86;&#x4E00;&#x4E2A;&#x540D;&#x4E3A;Extjs&#x7684;java web&#x9879;&#x76EE;&#xFF0C;&#x5DE5;&#x4F5C;&#x7A7A;&#x95F4;&#x4E3A;&#xFF1A;</p>
+<p><code>D:\Workspaces\MyEclipse 8.5\</code></p>
+<p>&#x9700;&#x8981;&#x6267;&#x884C;&#x7684;&#x547D;&#x4EE4;&#x5C31;&#x662F;&#xFF1A;</p>
+<p><code>sencha -sdk ext-5.1.0 generate app Extjs D:\Workspaces\MyEclipse 8.5\Extjs5\WebRoot</code></p>
+<p>&#x5982;&#x679C;&#x6267;&#x884C;&#x6B64;&#x547D;&#x4EE4;&#x65F6;&#x4E0D;&#x662F;&#x5728;ext-5.x&#x76EE;&#x5F55;&#x4E0B;&#xFF0C;&#x4F1A;&#x6709;&#x9519;&#x8BEF;&#x63D0;&#x793A;&#xFF1A;</p>
+<p><code>Unable to locate supported Framework...</code></p>
+<h1 id="3&#x3001;-&#x624B;&#x52A8;&#x5F15;&#x5165;&#x5FC5;&#x8981;&#x6587;&#x4EF6;"><a href="#3&#x3001;-&#x624B;&#x52A8;&#x5F15;&#x5165;&#x5FC5;&#x8981;&#x6587;&#x4EF6;" class="headerlink" title="3&#x3001; &#x624B;&#x52A8;&#x5F15;&#x5165;&#x5FC5;&#x8981;&#x6587;&#x4EF6;"></a>3&#x3001; &#x624B;&#x52A8;&#x5F15;&#x5165;&#x5FC5;&#x8981;&#x6587;&#x4EF6;</h1><h2 id="3-1&#x3001;&#x5BFB;&#x627E;&#x6709;&#x7528;&#x7684;&#x8D44;&#x6E90;"><a href="#3-1&#x3001;&#x5BFB;&#x627E;&#x6709;&#x7528;&#x7684;&#x8D44;&#x6E90;" class="headerlink" title="3.1&#x3001;&#x5BFB;&#x627E;&#x6709;&#x7528;&#x7684;&#x8D44;&#x6E90;"></a>3.1&#x3001;&#x5BFB;&#x627E;&#x6709;&#x7528;&#x7684;&#x8D44;&#x6E90;</h2><p>&#x89E3;&#x538B;&#x4E0B;&#x8F7D;&#x7684;&#x6E90;&#x6587;&#x4EF6;&#xFF0C;&#x5E76;&#x6253;&#x5F00;&#x5176;&#x4E2D;&#x7684;build&#x6587;&#x4EF6;&#x5939;&#xFF0C;&#x9996;&#x5148;&#x627E;&#x5230;ext-all.js&#x548C;ext-all-debug.js&#xFF0C;&#x8FD9;&#x4E24;&#x4E2A;js&#x662F;ext&#x6BD4;&#x8F83;&#x6838;&#x5FC3;&#x7684;js&#xFF0C;&#x5B83;&#x5305;&#x542B;&#x4E86;&#x6240;&#x6709;extjs&#x7684;&#x63A7;&#x4EF6;&#xFF0C;ext-all.js&#x662F;&#x7ECF;&#x8FC7;&#x5904;&#x7406;&#x7684;&#xFF0C;&#x4ECD;&#x7136;&#x6709;1.88M&#x3002;ext-all-debug.js&#x662F;&#x6CA1;&#x6709;&#x7ECF;&#x8FC7;&#x5904;&#x7406;&#x7684;&#xFF0C;&#x5176;&#x4E2D;&#x5305;&#x542B;&#x7A7A;&#x683C;&#x6362;&#x884C;&#x7B49;&#x3002;</p>
+<p>&#x7136;&#x540E;&#x627E;&#x5230;bootstrap.js&#xFF0C;&#x8FD9;&#x4E2A;&#x6587;&#x4EF6;&#x4F1A;&#x5728;&#x4E0D;&#x540C;&#x7684;&#x73AF;&#x5883;&#x4E2D;&#x81EA;&#x52A8;&#x5F15;&#x7528;&#x4E0D;&#x540C;&#x7684;js&#xFF0C;&#x5728;&#x5F00;&#x53D1;&#x73AF;&#x5883;&#x4E2D;&#x4F1A;&#x5F15;&#x7528;ext-all-debug.js&#xFF0C;&#x5728;&#x6B63;&#x5F0F;&#x73AF;&#x5883;&#x4E2D;&#x4F1A;&#x4F7F;&#x7528;ext-all.js&#x3002;</p>
+<p>&#x67E5;&#x770B;&#x6CE8;&#x91CA;&#xFF1A;</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">/**</div><div class="line"> * Load the library located at the same path with this file</div><div class="line"> *</div><div class="line"> * Will automatically load ext-all-dev.js if any of these conditions is true:</div><div class="line"> * - Current hostname is localhost</div><div class="line"> * - Current hostname is an IP v4 address</div><div class="line"> * - Current protocol is &quot;file:&quot;</div><div class="line"> *</div><div class="line"> * Will load ext-all.js (minified) otherwise</div><div class="line"> */</div></pre></td></tr></table></figure>
+<p>&#x6CE8;&#x91CA;&#x4E2D;&#x63D0;&#x793A;&#x4F7F;&#x7528;ext-all-dev.js&#xFF0C;&#x5B9E;&#x9645;&#x4EE3;&#x7801;&#x4E2D;&#x4F7F;&#x7528;&#x7684;ext-all-debug.js&#x3002;&#x4E14;&#x5728;5.1x&#x6E90;&#x6587;&#x4EF6;&#x4E2D;&#x4E5F;&#x6CA1;&#x6709;&#x627E;&#x5230;ext-all-dev.js&#x3002;</p>
+<p>&#x67E5;&#x770B;bootstrap.js&#x4E2D;&#x4EE3;&#x7801;:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">document.write(&apos;&lt;script type=&quot;text/javascript&quot; charset=&quot;UTF-8&quot; src=&quot;&apos; + </div><div class="line">        path + &apos;ext-all&apos; + (isDevelopment ? &apos;-debug&apos; : &apos;&apos;) + &apos;.js&quot;&gt;&lt;/script&gt;&apos;);</div></pre></td></tr></table></figure></p>
+<p>path&#x662F;bootstrap.js&#x6240;&#x5728;&#x76EE;&#x5F55;&#x3002;</p>
+<p>&#x7136;&#x540E;&#x662F;packages&#x6587;&#x4EF6;&#x5939;&#xFF0C;&#x8FD9;&#x4E2A;&#x6587;&#x4EF6;&#x5939;&#x4E2D;&#x5305;&#x542B;extjs&#x4E3B;&#x9898;&#x3001;&#x8BED;&#x8A00;&#x5305;&#x7B49;&#xFF0C;&#x5982;&#x4E0B;&#x56FE;&#x6240;&#x793A;&#xFF0C;&#x7EA2;&#x7EBF;&#x5708;&#x51FA;&#x7684;&#x662F;&#x51E0;&#x4E2A;&#x5FC5;&#x8981;&#x7684;&#x6587;&#x4EF6;&#x5939;&#x3002;</p>
+<p><img src="http://7xsp5x.com2.z0.glb.clouddn.com/extjs5-2.png"></p>
+<p>&#x5176;&#x4E2D;ext-aria&#x548C;ext-charts&#x6682;&#x65F6;&#x4E0D;&#x4F1A;&#x7528;&#x5230;&#xFF0C;&#x5148;&#x4FDD;&#x7559;&#x4E0B;&#x6765;&#x5907;&#x7528;&#x3002;</p>
+<p>ext-locale&#x662F;&#x672C;&#x5730;&#x5316;&#x8BED;&#x8A00;&#x5305;&#xFF0C;&#x6211;&#x4EEC;&#x53EA;&#x9700;&#x8981;&#x91CC;&#x9762;&#x7684;ext-locale-zh_CN.js&#xFF0C;&#x8FD9;&#x4E2A;&#x662F;&#x7B80;&#x4F53;&#x4E2D;&#x6587;&#x8BED;&#x8A00;&#x5305;&#x3002;</p>
+<p>&#x63A5;&#x4E0B;&#x6765;&#x7684;&#x56DB;&#x4E2A;&#x6587;&#x4EF6;&#x5939;&#x90FD;&#x662F;extjs&#x7684;&#x4E3B;&#x9898;&#x5305;&#xFF0C;&#x5206;&#x522B;&#x662F;&#x7ECF;&#x5178;&#x4E3B;&#x9898;&#x3001;&#x6E05;&#x65B0;&#x4E3B;&#x9898;&#x3001;&#x7070;&#x8272;&#x4E3B;&#x9898;&#x548C;&#x6D77;&#x738B;&#x661F;&#x4E3B;&#x9898;&#xFF0C;&#x5176;&#x4E2D;ext-theme-crisp&#xFF08;&#x6E05;&#x65B0;&#x4E3B;&#x9898;&#xFF09;&#x662F;extjs5&#x65B0;&#x589E;&#x7684;&#xFF1B;ext-theme-neptune&#xFF08;&#x6D77;&#x738B;&#x661F;&#x4E3B;&#x9898;&#xFF09;&#x662F;extjs4&#x4E2D;&#x65B0;&#x589E;&#x7684;&#x3002;&#x7ECF;&#x5178;&#x4E3B;&#x9898;&#x548C;&#x7070;&#x8272;&#x4E3B;&#x9898;&#x5927;&#x5BB6;&#x4F1A;&#x6BD4;&#x8F83;&#x719F;&#x6089;&#xFF0C;&#x4ECE;extjs&#x8BDE;&#x751F;&#x5C31;&#x5B58;&#x5728;&#x7684;&#x4E24;&#x4E2A;&#x4E3B;&#x9898;&#x3002;&#x8FD9;&#x91CC;&#x53EF;&#x4EE5;&#x6839;&#x636E;&#x81EA;&#x5DF1;&#x7684;&#x9700;&#x8981;&#x9009;&#x62E9;&#xFF0C;&#x521D;&#x5B66;&#x8FD8;&#x662F;&#x90FD;&#x5BFC;&#x5165;&#x8FDB;&#x884C;&#xFF0C;&#x770B;&#x4E00;&#x4E0B;&#x4E0D;&#x540C;&#x4E3B;&#x9898;&#x7684;&#x6548;&#x679C;&#x3002;</p>
+<h2 id="3-2&#x3001;&#x96C6;&#x6210;&#x81F3;java-web&#x9879;&#x76EE;&#x4E2D;"><a href="#3-2&#x3001;&#x96C6;&#x6210;&#x81F3;java-web&#x9879;&#x76EE;&#x4E2D;" class="headerlink" title="3.2&#x3001;&#x96C6;&#x6210;&#x81F3;java web&#x9879;&#x76EE;&#x4E2D;"></a>3.2&#x3001;&#x96C6;&#x6210;&#x81F3;java web&#x9879;&#x76EE;&#x4E2D;</h2><p>&#x5728;&#x5C06;Ext&#x5F15;&#x5165;&#x9879;&#x76EE;&#x4E4B;&#x524D;&#xFF0C;&#x9700;&#x8981;&#x5C06;&#x9879;&#x76EE;&#x8BBE;&#x7F6E;js&#x4E0D;&#x81EA;&#x52A8;&#x7F16;&#x8BD1;&#xFF0C;&#x5426;&#x5219;&#x7684;&#x8BDD;&#x4F1A;&#x7F16;&#x8BD1;&#x5F88;&#x957F;&#x5F88;&#x957F;&#x5F88;&#x957F;&#x65F6;&#x95F4;&#xFF0C;&#x5BFC;&#x81F4;&#x4F60;&#x7684;&#x5DE5;&#x5177;&#x5361;&#x6B7B;&#xFF0C;&#x5177;&#x4F53;&#x600E;&#x4E48;&#x8BBE;&#x7F6E;&#xFF0C;&#x8BF7;&#x81EA;&#x884C;google&#x3002;</p>
+<p>&#x6211;&#x4EEC;&#x5728;myeclipse&#x4E2D;&#x65B0;&#x5EFA;&#x4E00;&#x4E2A;web&#x9879;&#x76EE;&#xFF0C;&#x7136;&#x540E;&#x5C06;extjs5&#x5FC5;&#x987B;&#x7684;&#x6587;&#x4EF6;&#x62F7;&#x8D1D;&#x5230;&#x9879;&#x76EE;&#x91CC;&#xFF0C;&#x5F97;&#x5230;&#x5982;&#x4E0B;&#x56FE;&#x6240;&#x793A;&#x7684;&#x76EE;&#x5F55;&#x7ED3;&#x6784;&#xFF1A;</p>
+<p><img src="http://7xsp5x.com2.z0.glb.clouddn.com/extjs5-3.png"></p>
+<p>&#x7136;&#x540E;&#x5728;webRoot&#x6839;&#x76EE;&#x5F55;&#x4E0B;&#x65B0;&#x5EFA;&#x6587;&#x4EF6;index.html&#xFF0C;&#x5E76;&#x586B;&#x5165;&#x4EE5;&#x4E0B;&#x4EE3;&#x7801;&#xFF1A;<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">&lt;!DOCTYPE HTML&gt;</div><div class="line">&lt;html&gt;</div><div class="line">&lt;head&gt;</div><div class="line">    &lt;title&gt;Welcome&lt;/title&gt;</div><div class="line">    	&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=UTF-8&quot; /&gt;</div><div class="line">	&lt;script type=&quot;text/javascript&quot;  src=&quot;extjs/packages/ext-all.js&quot;&gt;&lt;/script&gt;</div><div class="line">	&lt;script type=&quot;text/javascript&quot;  src=&quot;extjs/packages/ext-locale/ext-locale-zh_CN.js&quot;&gt;&lt;/script&gt;</div><div class="line">	&lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;extjs/packages/ext-theme-neptune/build/resources/ext-theme-neptune-all.css&quot;&gt;</div><div class="line">	&lt;script type=&quot;text/javascript&quot; src=&quot;app.js&quot;&gt;&lt;/script&gt;</div><div class="line">&lt;/head&gt;</div><div class="line">&lt;body&gt;&lt;/body&gt; </div><div class="line">&lt;/html&gt;</div></pre></td></tr></table></figure></p>
+<p>&#x7136;&#x540E;&#x6211;&#x4EEC;&#x5728;webRoot&#x6839;&#x76EE;&#x5F55;&#x4E0B;&#x65B0;&#x5EFA;&#x6587;&#x4EF6;app.js&#xFF0C;&#x5E76;&#x586B;&#x5165;&#x4EE5;&#x4E0B;&#x4EE3;&#x7801;&#xFF1A;<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">Ext.onReady(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>{</div><div class="line">    Ext.MessageBox.alert(<span class="string">&quot;&#x786E;&#x5B9A;&quot;</span>, <span class="string">&quot;Hello World&quot;</span>);</div><div class="line">});</div></pre></td></tr></table></figure></p>
+<p>&#x90E8;&#x7F72;&#x5230;tomcat&#x4E2D;&#xFF0C;&#x8FD0;&#x884C;&#x5E76;&#x8BBF;&#x95EE;&#xFF1A;<a href="http://localhost:8082/Extjs5/index.html" target="_blank" rel="external">http://localhost:8082/Extjs5/index.html</a></p>
+<p><img src="http://7xsp5x.com2.z0.glb.clouddn.com/extjs5-4.png"></p>
+<p>&#x5982;&#x679C;&#x89C9;&#x5F97;&#x4E0A;&#x8FF0;&#x65B9;&#x6CD5;&#x5F15;&#x5165;&#x7684;&#x8FD8;&#x662F;&#x592A;&#x591A;&#xFF0C;&#x53EF;&#x4EE5;&#x76F4;&#x63A5;&#x627E;&#x5230;&#x81EA;&#x5DF1;&#x9700;&#x8981;&#x7684;&#x6587;&#x4EF6;&#x5F15;&#x5165;&#x3002;</p>
+<p><img src="http://7xsp5x.com2.z0.glb.clouddn.com/extjs5-5.png"></p>
+<p>&#x4F7F;&#x7528;&#x8FD9;&#x79CD;&#x65B9;&#x6CD5;&#xFF0C;&#x5E76;&#x5BF9;index.html&#x4E2D;&#x5F15;&#x5165;&#x6587;&#x4EF6;&#x505A;&#x5BF9;&#x5E94;&#x7684;&#x4FEE;&#x6539;&#x5373;&#x53EF;&#xFF1A;<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">&lt;!DOCTYPE HTML&gt;  </div><div class="line">&lt;html&gt;  </div><div class="line">&lt;head&gt;</div><div class="line">    &lt;title&gt;Welcome&lt;/title&gt;</div><div class="line">    	&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=UTF-8&quot; /&gt;</div><div class="line">	&lt;script type=&quot;text/javascript&quot; src=&quot;js/extjs/bootstrap.js&quot;&gt;&lt;/script&gt;</div><div class="line">    	&lt;script type=&quot;text/javascript&quot;  src=&quot;js/extjs/ext-locale-zh_CN.js&quot;&gt;&lt;/script&gt;</div><div class="line">    	&lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;resources/ext-theme-neptune-all.css&quot;&gt;</div><div class="line">	&lt;script type=&quot;text/javascript&quot; src=&quot;app.js&quot;&gt;&lt;/script&gt;</div><div class="line">&lt;/head&gt;  </div><div class="line">&lt;body&gt;&lt;/body&gt;  </div><div class="line">&lt;/html&gt;</div></pre></td></tr></table></figure></p>
+<p>&#x7531;&#x4E8E;&#x4EE5;&#x4E0A;html&#x4E2D;&#x5F15;&#x5165;&#x4E86;bootstrap.js&#xFF0C;&#x4E14;&#x6211;&#x5728;bootstrap.js&#x4E2D;&#x589E;&#x52A0;&#x4EE5;&#x4E0B;&#x4EE3;&#x7801;&#xFF1A;<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">document</span>.write(<span class="string">&apos;&lt;script type=&quot;text/javascript&quot; charset=&quot;UTF-8&quot; src=&quot;&apos;</span> + </div><div class="line">        path + <span class="string">&apos;ext-locale-zh_CN&apos;</span> + (isDevelopment ? <span class="string">&apos;-debug&apos;</span> : <span class="string">&apos;&apos;</span>) + <span class="string">&apos;.js&quot;&gt;&lt;/script&gt;&apos;</span>);</div></pre></td></tr></table></figure></p>
+<p>&#x6240;&#x4EE5;&#xFF0C;&#x5F53;&#x6211;&#x7684;&#x8BBF;&#x95EE;&#x5730;&#x5740;&#x662F;localhost&#x7684;&#x65F6;&#x5019;&#xFF0C;&#x7CFB;&#x7EDF;&#x4F1A;&#x8C03;&#x7528;<code>-debug</code>&#x7684;js&#xFF0C;&#x5982;&#x4E0B;:</p>
+<p><img src="http://7xsp5x.com2.z0.glb.clouddn.com/extjs5-6.png"></p>
+<p>&#x5230;&#x8FD9;&#x91CC;&#xFF0C;extjs5&#x5DF2;&#x7ECF;&#x53EF;&#x4EE5;&#x6B63;&#x5E38;&#x4F7F;&#x7528;&#x4E86;&#x3002;</p>
+<p><strong>&#x6CE8;&#x610F;&#xFF1A;</strong></p>
+<p>extjs&#x9700;&#x8981;&#x662F;&#x9875;&#x9762;&#x4E0A;&#x7B2C;&#x4E00;&#x4E2A;&#x5F15;&#x5165;&#x7684;js&#xFF0C;&#x5426;&#x5219;&#x7684;&#x8BDD;&#x4F1A;&#x6709;&#x5982;&#x4E0B;&#x9519;&#x8BEF;&#x63D0;&#x793A;&#xFF0C;&#x4F46;&#x662F;&#x8FD9;&#x4E2A;&#x9519;&#x8BEF;&#x4E0D;&#x5F71;&#x54CD;&#x9875;&#x9762;&#x7684;&#x663E;&#x793A;&#x3002;</p>
+<p><code>Uncaught ReferenceError: Ext is not defined</code></p>
+
+      
+    </div>
+
+    <div>
+      
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/ExtJs5/" rel="tag">#ExtJs5</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/04/29/Struts2学习笔记（一）/" rel="next" title="Struts2学习笔记（一）">
+                <i class="fa fa-chevron-left"></i> Struts2学习笔记（一）
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/05/12/ExtJs5学习笔记（二）Ext-API文档介绍/" rel="prev" title="ExtJs5学习笔记（二）Ext API文档介绍">
+                ExtJs5学习笔记（二）Ext API文档介绍 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/05/04/ExtJs5学习笔记（一）从零开始/"
+           data-title="ExtJs5学习笔记（一）从零开始" data-url="http://lzblog.cn/2016/05/04/ExtJs5学习笔记（一）从零开始/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.png"
+               alt="lizhen" />
+          <p class="site-author-name" itemprop="name">lizhen</p>
+          <p class="site-description motion-element" itemprop="description">Java攻城狮</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">40</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">11</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">37</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://hexo.io/zh-cn/" target="_blank">
+                  
+                    <i class="fa fa-plane"></i>
+                  
+                  Hexo
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/lingbage" target="_blank">
+                  
+                    <i class="fa fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://leancloud.cn/" target="_blank">
+                  
+                    <i class="fa fa-cloud"></i>
+                  
+                  LCloud
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.bootcss.com/p/font-awesome/" target="_blank">
+                  
+                    <i class="fa fa-leaf"></i>
+                  
+                  FontA
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://portal.qiniu.com/" target="_blank">
+                  
+                    <i class="fa fa-cloud-upload"></i>
+                  
+                  七牛图床
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        <div class="links-of-blogroll motion-element">
+          
+            <div class="links-of-blogroll-title">友情链接</div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.lzblog.cn/" target="_blank">None</a>
+                </li>
+              
+            </ul>
+          
+        </div>
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1、What’s-New-in-Ext-JS-5"><span class="nav-text">1、What’s New in Ext JS 5</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-1、不再支持IE6和IE7"><span class="nav-text">1.1、不再支持IE6和IE7</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-2、顺应HTML5大潮"><span class="nav-text">1.2、顺应HTML5大潮</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-3、MVC和MVVM"><span class="nav-text">1.3、MVC和MVVM</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-4、整合进Sencha-Cmd包"><span class="nav-text">1.4、整合进Sencha Cmd包</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-5、配置系统和组件"><span class="nav-text">1.5、配置系统和组件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-6、新的主题和图表"><span class="nav-text">1.6、新的主题和图表</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-7、More"><span class="nav-text">1.7、More</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2、在web系统中集成Ext-JS-5"><span class="nav-text">2、在web系统中集成Ext JS 5</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#2-1、API下载："><span class="nav-text">2.1、API下载：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-2、利用Sencha-CMD"><span class="nav-text">2.2、利用Sencha CMD</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3、-手动引入必要文件"><span class="nav-text">3、 手动引入必要文件</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#3-1、寻找有用的资源"><span class="nav-text">3.1、寻找有用的资源</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-2、集成至java-web项目中"><span class="nav-text">3.2、集成至java web项目中</span></a></li></ol></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <script async src="/lib/jquery/busuanzi.pure.mini.js"></script>
+<div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">lizhen</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="powered-by">
+  主题  - 
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+<span id="busuanzi_container_site_pv">本站总访问量<span id="busuanzi_value_site_pv"></span>次</span>
+
+
+
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+
+  
+
+
+
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js"></script>
+
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js"></script>
+
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=0.5.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=0.5.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=0.5.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=0.5.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=0.5.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=0.5.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=0.5.0"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"lizhenblog"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+      <script src="/lib/ua-parser-js/dist/ua-parser.min.js"></script>
+      <script src="/js/src/hook-duoshuo.js"></script>
+    
+  
+
+
+
+
+
+  
+  
+  
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script>AV.initialize("DSUpqwXpCRk0yaVH0umWiadJ-gzGzoHsz", "b5jihkHKg0hUcy7gQ4rJz6dD");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+</body>
+</html>

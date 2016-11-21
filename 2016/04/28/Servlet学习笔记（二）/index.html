@@ -1,0 +1,873 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
+
+
+
+
+  <link href="//fonts.googleapis.com/css?family=Lato:300,400,700,400italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=0.5.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Servlet," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Dear Blog" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=0.5.0" />
+
+
+
+
+
+
+<meta name="description" content="4&amp;#x3001;&amp;#x6570;&amp;#x636E;&amp;#x8BBF;&amp;#x95EE;4.1&amp;#x3001;&amp;#x5982;&amp;#x4F55;&amp;#x4F7F;&amp;#x7528;jdbc&amp;#x8BBF;&amp;#x95EE;&amp;#x6570;&amp;#x636E;&amp;#x5E93;?1)&amp;#x3001;JDBC&amp;#x8FDE;&amp;#x63A5;Oracle&amp;#x6570;&amp;#x636E;&amp;#x5E93;&amp;#xFF1A;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Servlet学习笔记（二）">
+<meta property="og:url" content="http://lzblog.cn/2016/04/28/Servlet学习笔记（二）/index.html">
+<meta property="og:site_name" content="Dear Blog">
+<meta property="og:description" content="4&amp;#x3001;&amp;#x6570;&amp;#x636E;&amp;#x8BBF;&amp;#x95EE;4.1&amp;#x3001;&amp;#x5982;&amp;#x4F55;&amp;#x4F7F;&amp;#x7528;jdbc&amp;#x8BBF;&amp;#x95EE;&amp;#x6570;&amp;#x636E;&amp;#x5E93;?1)&amp;#x3001;JDBC&amp;#x8FDE;&amp;#x63A5;Oracle&amp;#x6570;&amp;#x636E;&amp;#x5E93;&amp;#xFF1A;">
+<meta property="og:updated_time" content="2016-11-21T14:42:32.045Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Servlet学习笔记（二）">
+<meta name="twitter:description" content="4&amp;#x3001;&amp;#x6570;&amp;#x636E;&amp;#x8BBF;&amp;#x95EE;4.1&amp;#x3001;&amp;#x5982;&amp;#x4F55;&amp;#x4F7F;&amp;#x7528;jdbc&amp;#x8BBF;&amp;#x95EE;&amp;#x6570;&amp;#x636E;&amp;#x5E93;?1)&amp;#x3001;JDBC&amp;#x8FDE;&amp;#x63A5;Oracle&amp;#x6570;&amp;#x636E;&amp;#x5E93;&amp;#xFF1A;">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+  <title> Servlet学习笔记（二） | Dear Blog </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?3b9384b786cf80306a6f68370a3a802f";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Dear Blog</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">Busy to live or busy to die ?!</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-th fa-fw"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-tags fa-fw"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-user fa-fw"></i> <br />
+            
+            关于我
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-commonweal">
+          <a href="/404.html" rel="section">
+            
+              <i class="menu-item-icon fa fa-heartbeat fa-fw"></i> <br />
+            
+            公益404
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-search">
+          <a href="/search" rel="section">
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Servlet学习笔记（二）
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-04-28T15:46:55+08:00" content="2016-04-28">
+              2016-04-28
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Java/" itemprop="url" rel="index">
+                    <span itemprop="name">Java</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/04/28/Servlet学习笔记（二）/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/04/28/Servlet学习笔记（二）/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/2016/04/28/Servlet学习笔记（二）/" class="leancloud_visitors" data-flag-title="Servlet学习笔记（二）">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">阅读次数 </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="4&#x3001;&#x6570;&#x636E;&#x8BBF;&#x95EE;"><a href="#4&#x3001;&#x6570;&#x636E;&#x8BBF;&#x95EE;" class="headerlink" title="4&#x3001;&#x6570;&#x636E;&#x8BBF;&#x95EE;"></a>4&#x3001;&#x6570;&#x636E;&#x8BBF;&#x95EE;</h1><h2 id="4-1&#x3001;&#x5982;&#x4F55;&#x4F7F;&#x7528;jdbc&#x8BBF;&#x95EE;&#x6570;&#x636E;&#x5E93;"><a href="#4-1&#x3001;&#x5982;&#x4F55;&#x4F7F;&#x7528;jdbc&#x8BBF;&#x95EE;&#x6570;&#x636E;&#x5E93;" class="headerlink" title="4.1&#x3001;&#x5982;&#x4F55;&#x4F7F;&#x7528;jdbc&#x8BBF;&#x95EE;&#x6570;&#x636E;&#x5E93;?"></a>4.1&#x3001;&#x5982;&#x4F55;&#x4F7F;&#x7528;jdbc&#x8BBF;&#x95EE;&#x6570;&#x636E;&#x5E93;?</h2><p>1)&#x3001;JDBC&#x8FDE;&#x63A5;Oracle&#x6570;&#x636E;&#x5E93;&#xFF1A;<br><a id="more"></a><br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">test</span><span class="params">()</span> </span></div><div class="line"><span class="keyword">throws</span> SQLException, ClassNotFoundException</div><div class="line">	{</div><div class="line">		<span class="comment">// 1&#x3001;&#x6CE8;&#x518C;&#x9A71;&#x52A8;&#xFF08;&#x4E09;&#x79CD;&#x65B9;&#x5F0F;&#xFF09;</span></div><div class="line"><span class="comment">// DriverManager.registerDriver(new oracle.jdbc.driver.OracleDriver());</span></div><div class="line">		<span class="comment">// System.getProperty(&quot;jdbc.driver&quot;, &quot;oracle.jdbc.driver.OracleDriver&quot;);</span></div><div class="line"><span class="comment">// &#x63A8;&#x8350;&#x65B9;&#x5F0F; &#xFF0C;&#x7F16;&#x8BD1;&#x4E0D;&#x4F9D;&#x8D56;&#x4E8E;jar&#x5305;</span></div><div class="line">		Class.forName(<span class="string">&quot;oracle.jdbc.driver.OracleDriver&quot;</span>);		  </div><div class="line">		String url = <span class="string">&quot;jdbc:oracle:thin@localhost:1521:boson1&quot;</span>;</div><div class="line">		String user = <span class="string">&quot;scott&quot;</span>;</div><div class="line">		String password = <span class="string">&quot;tiger&quot;</span>;</div><div class="line">		String sql = <span class="string">&quot;select * from emp_lizhen&quot;</span>;</div><div class="line">		<span class="comment">// 2&#x3001;&#x5EFA;&#x7ACB;&#x8FDE;&#x63A5;</span></div><div class="line">		Connection conn = DriverManager.getConnection(url, user, password);</div><div class="line">		<span class="comment">// 3&#x3001;&#x521B;&#x5EFA;&#x8BED;&#x53E5;</span></div><div class="line">		PreparedStatement st = conn.prepareStatement(sql);</div><div class="line">		<span class="comment">// 4&#x3001;&#x6267;&#x884C;&#x8BED;&#x53E5;</span></div><div class="line">		ResultSet rs = st.executeQuery();</div><div class="line">		<span class="comment">// 5&#x3001;&#x5904;&#x7406;&#x7ED3;&#x679C;</span></div><div class="line">		<span class="keyword">while</span> (rs.next())</div><div class="line">		{</div><div class="line">			System.out.println(rs.getObject(<span class="string">&quot;empno&quot;</span>));</div><div class="line">		}</div><div class="line">		<span class="comment">// 6&#x3001;&#x91CA;&#x653E;&#x8D44;&#x6E90;</span></div><div class="line">		rs.close();</div><div class="line">		st.close();</div><div class="line">		conn.close();</div><div class="line">	}</div></pre></td></tr></table></figure></p>
+<p>2&#xFF09;&#x3001;JDBC&#x8FDE;&#x63A5;MySql&#x6570;&#x636E;&#x5E93;<br>&#x4F7F;&#x7528;mysql&#x4E0E;oracle&#x552F;&#x4E00;&#x4E0D;&#x540C;&#x5C31;&#x662F;&#x8FDE;&#x63A5;&#x662F;&#x4E0D;&#x540C;&#xFF0C;&#x4E0D;&#x540C;&#x7684;&#x9A71;&#x52A8;&#xFF0C;&#x4E0D;&#x540C;&#x7684;&#x83B7;&#x53D6;&#x8FDE;&#x63A5;&#x7684;&#x65B9;&#x5F0F;&#x3002;<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">Class.forName(<span class="string">&quot;com.mysql.jdbc.Driver&quot;</span>);</div><div class="line"><span class="comment">//&#x83B7;&#x53D6;&#x8FDE;&#x63A5;&#xFF0C;&#x5E76;&#x8BBE;&#x7F6E;&#x7F16;&#x7801;&#x65B9;&#x5F0F;</span></div><div class="line">conn = DriverManager.getConnection(</div><div class="line">		<span class="string">&quot;jdbc:mysql://localhost:3306/jsd1209db&quot;</span> +</div><div class="line">		<span class="string">&quot;?useUnicode=true&amp;characterEncoding=utf8&quot;</span></div><div class="line">		, <span class="string">&quot;root&quot;</span></div><div class="line">		, <span class="string">&quot;&quot;</span>);</div></pre></td></tr></table></figure></p>
+<p><strong>&#x6CE8;&#x610F;&#xFF1A;</strong></p>
+<p>&#x64CD;&#x4F5C;&#x6570;&#x636E;&#x5E93;&#x65F6;&#x5C3D;&#x91CF;&#x4F7F;&#x7528;preparedStatement&#xFF0C;&#x53EF;&#x4EE5;&#x6709;&#x6548;&#x7684;&#x65B9;&#x5F0F;sql&#x6CE8;&#x5165;&#x3002;</p>
+<h2 id="4-2&#x3001;MVC"><a href="#4-2&#x3001;MVC" class="headerlink" title="4.2&#x3001;MVC"></a>4.2&#x3001;MVC</h2><p>MVC(Model-View-Controller &#x6A21;&#x578B;-&#x89C6;&#x56FE;-&#x63A7;&#x5236;&#x5668;)&#x8F6F;&#x4EF6;&#x67B6;&#x6784;&#x601D;&#x60F3;&#x3002;</p>
+<ul>
+<li>Model&#xFF08;&#x6A21;&#x578B;&#x5C42;&#xFF09;&#x4E13;&#x6CE8;&#x4E8E;&#x4E1A;&#x52A1;&#x903B;&#x8F91;&#xFF08;&#x5373;&#x6570;&#x636E;&#x7684;&#x5B58;&#x50A8;&#x3001;&#x5904;&#x7406;&#x7B49;&#xFF09;</li>
+<li>View&#xFF08;&#x89C6;&#x56FE;&#x5C42;&#xFF09;&#x4E13;&#x6CE8;&#x4E8E;&#x6570;&#x636E;&#x5728;&#x5BA2;&#x6237;&#x7AEF;&#x7684;&#x663E;&#x793A;</li>
+<li>Control&#xFF08;&#x63A7;&#x5236;&#x5C42;&#xFF09;&#x7528;&#x4E8E;&#x8FDE;&#x63A5;Model&#x5C42;&#x548C;View&#x5C42;&#x3002;</li>
+</ul>
+<h2 id="4-3&#x3001;DAO"><a href="#4-3&#x3001;DAO" class="headerlink" title="4.3&#x3001;DAO"></a>4.3&#x3001;DAO</h2><p>DAO(Data Access Object&#xFF0C;&#x6570;&#x636E;&#x8BBF;&#x95EE;&#x5BF9;&#x8C61;)&#x3002;DAO&#x5C5E;&#x4E8E;MVC&#x8BBE;&#x8BA1;&#x6A21;&#x5F0F;&#x4E2D;&#x7684;Model&#x5C42;&#x7684;&#x6570;&#x636E;&#x5C42;&#x64CD;&#x4F5C;&#x3002;</p>
+<p>DAO&#x4E3B;&#x8981;&#x6709;&#x4E0B;&#x9762;&#x51E0;&#x90E8;&#x5206;&#x7EC4;&#x6210;&#xFF1A;</p>
+<ul>
+<li>DatabaseConnection&#xFF1A;&#x4E13;&#x95E8;&#x8D1F;&#x8D23;&#x6570;&#x636E;&#x5E93;&#x7684;&#x8FDE;&#x63A5;&#x548C;&#x5173;&#x95ED;&#x64CD;&#x4F5C;&#x3002;</li>
+<li>VO&#xFF1A;&#x5373;&#x5B9E;&#x4F53;&#x7C7B;&#xFF0C;&#x6BCF;&#x4E00;&#x4E2A;&#x5B9E;&#x4F53;&#x7C7B;&#x5BF9;&#x5E94;&#x4E00;&#x4E2A;&#x6570;&#x636E;&#x5E93;&#x4E2D;&#x7684;&#x8868;&#xFF0C;&#x5B9E;&#x4F53;&#x7C7B;&#x4E2D;&#x7684;&#x5C5E;&#x6027;&#x5BF9;&#x5E94;&#x8868;&#x4E2D;&#x7684;&#x5B57;&#x6BB5;&#x3002;</li>
+<li>DAO&#xFF1A;&#x4E3B;&#x8981;&#x4E3A;&#x5B9E;&#x4F53;&#x7C7B;&#x5B9A;&#x4E49;&#x5404;&#x79CD;&#x4E3B;&#x8981;&#x64CD;&#x4F5C;&#xFF0C;&#x5BF9;&#x6570;&#x636E;&#x5E93;&#x8FDB;&#x884C;&#x589E;&#x3001;&#x5220;&#x3001;&#x6539;&#x3001;&#x67E5;&#x7B49;&#x539F;&#x5B50;&#x6027;&#x64CD;&#x4F5C;&#x3002;</li>
+<li>Impl&#xFF1A;DAO&#x63A5;&#x53E3;&#x7684;&#x771F;&#x5B9E;&#x5B9E;&#x73B0;&#x7C7B;&#xFF0C;&#x5B8C;&#x6210;&#x5177;&#x4F53;&#x7684;&#x64CD;&#x4F5C;&#xFF0C;&#x4F46;&#x662F;&#x4E0D;&#x8D1F;&#x8D23;&#x6570;&#x636E;&#x5E93;&#x7684;&#x6253;&#x5F00;&#x548C;&#x5173;&#x95ED;&#x3002;</li>
+<li>Proxy&#xFF1A;&#x4EE3;&#x7406;&#x5B9E;&#x73B0;&#x7C7B;&#xFF0C;&#x4E3B;&#x8981;&#x5B8C;&#x6210;&#x6570;&#x636E;&#x5E93;&#x7684;&#x8FDE;&#x63A5;&#x548C;&#x5173;&#x95ED;&#xFF0C;&#x5E76;&#x4E14;&#x8C03;&#x7528;&#x771F;&#x5B9E;&#x5B9E;&#x73B0;&#x7C7B;&#x5BF9;&#x8C61;&#x7684;&#x64CD;&#x4F5C;&#x3002;</li>
+<li>Factory&#xFF1A;&#x5DE5;&#x5382;&#x7C7B;&#xFF0C;&#x901A;&#x8FC7;&#x5DE5;&#x5382;&#x7C7B;&#x53D6;&#x5F97;DAO&#x5B9E;&#x4F8B;&#x5316;&#x5BF9;&#x8C61;&#x3002;</li>
+</ul>
+<p>DAO&#x8BBE;&#x8BA1;&#x6A21;&#x5F0F;&#x4E2D;&#xFF0C;&#x6700;&#x91CD;&#x8981;&#x7684;&#x5C31;&#x662F;&#x8BBE;&#x8BA1;DAO&#x63A5;&#x53E3;&#xFF0C;&#x63A5;&#x53E3;&#x7684;&#x8BBE;&#x8BA1;&#x5FC5;&#x987B;&#x5BF9;&#x4E1A;&#x52A1;&#x8FDB;&#x884C;&#x4E86;&#x89E3;&#xFF0C;&#x719F;&#x6089;&#x6BCF;&#x4E00;&#x5F20;&#x8868;&#x5728;&#x6574;&#x4E2A;&#x7CFB;&#x7EDF;&#x4E2D;&#x5E94;&#x8BE5;&#x5177;&#x6709;&#x4EC0;&#x4E48;&#x529F;&#x80FD;&#x3002;</p>
+<h1 id="5&#x3001;&#x8FC7;&#x6EE4;&#x5668;&#x4E0E;&#x76D1;&#x542C;&#x5668;"><a href="#5&#x3001;&#x8FC7;&#x6EE4;&#x5668;&#x4E0E;&#x76D1;&#x542C;&#x5668;" class="headerlink" title="5&#x3001;&#x8FC7;&#x6EE4;&#x5668;&#x4E0E;&#x76D1;&#x542C;&#x5668;"></a>5&#x3001;&#x8FC7;&#x6EE4;&#x5668;&#x4E0E;&#x76D1;&#x542C;&#x5668;</h1><h2 id="5-1&#x3001;&#x4EC0;&#x4E48;&#x662F;&#x8FC7;&#x6EE4;&#x5668;"><a href="#5-1&#x3001;&#x4EC0;&#x4E48;&#x662F;&#x8FC7;&#x6EE4;&#x5668;" class="headerlink" title="5.1&#x3001;&#x4EC0;&#x4E48;&#x662F;&#x8FC7;&#x6EE4;&#x5668;?"></a>5.1&#x3001;&#x4EC0;&#x4E48;&#x662F;&#x8FC7;&#x6EE4;&#x5668;?</h2><p>servlet&#x89C4;&#x8303;&#x4E2D;&#x5B9A;&#x4E49;&#x7684;&#x4E00;&#x79CD;&#x7279;&#x6B8A;&#x7684;&#x7EC4;&#x4EF6;&#xFF0C;&#x7528;&#x6765;&#x62E6;&#x622A;&#x5BB9;&#x5668;&#x7684;&#x8C03;&#x7528;&#x8FC7;&#x7A0B;&#x3002;</p>
+<h2 id="5-2&#x3001;&#x5982;&#x4F55;&#x5199;&#x4E00;&#x4E2A;&#x8FC7;&#x6EE4;&#x5668;"><a href="#5-2&#x3001;&#x5982;&#x4F55;&#x5199;&#x4E00;&#x4E2A;&#x8FC7;&#x6EE4;&#x5668;" class="headerlink" title="5.2&#x3001;&#x5982;&#x4F55;&#x5199;&#x4E00;&#x4E2A;&#x8FC7;&#x6EE4;&#x5668;?"></a>5.2&#x3001;&#x5982;&#x4F55;&#x5199;&#x4E00;&#x4E2A;&#x8FC7;&#x6EE4;&#x5668;?</h2><ol>
+<li>&#x5199;&#x4E00;&#x4E2A;java&#x7C7B;&#xFF0C;&#x5B9E;&#x73B0;Filter&#x63A5;&#x53E3;</li>
+<li>&#x5728;doFilter&#x65B9;&#x6CD5;&#x91CC;&#x9762;&#xFF0C;&#x5B9E;&#x73B0;&#x62E6;&#x622A;&#x5904;&#x7406;&#x7684;&#x903B;&#x8F91;</li>
+<li>&#x914D;&#x7F6E;&#x8FC7;&#x6EE4;&#x5668;(web.xml)</li>
+</ol>
+<h2 id="5-3&#x3001;&#x8FC7;&#x6EE4;&#x5668;&#x7684;&#x4F18;&#x5148;&#x7EA7;&#x7531;&#x4EC0;&#x4E48;&#x6765;&#x51B3;&#x5B9A;"><a href="#5-3&#x3001;&#x8FC7;&#x6EE4;&#x5668;&#x7684;&#x4F18;&#x5148;&#x7EA7;&#x7531;&#x4EC0;&#x4E48;&#x6765;&#x51B3;&#x5B9A;" class="headerlink" title="5.3&#x3001;&#x8FC7;&#x6EE4;&#x5668;&#x7684;&#x4F18;&#x5148;&#x7EA7;&#x7531;&#x4EC0;&#x4E48;&#x6765;&#x51B3;&#x5B9A;?"></a>5.3&#x3001;&#x8FC7;&#x6EE4;&#x5668;&#x7684;&#x4F18;&#x5148;&#x7EA7;&#x7531;&#x4EC0;&#x4E48;&#x6765;&#x51B3;&#x5B9A;?</h2><p><filter-mapping>&#x914D;&#x7F6E;&#x7684;&#x5148;&#x540E;&#x987A;&#x5E8F;&#x51B3;&#x5B9A;&#x4E86;&#x8FC7;&#x6EE4;&#x5668;&#x6267;&#x884C;&#x7684;&#x5148;&#x540E;&#x987A;&#x5E8F;&#x3002;</filter-mapping></p>
+<h2 id="5-4&#x3001;&#x5982;&#x4F55;&#x7ED9;&#x8FC7;&#x6EE4;&#x5668;&#x914D;&#x7F6E;&#x521D;&#x59CB;&#x5316;&#x53C2;&#x6570;"><a href="#5-4&#x3001;&#x5982;&#x4F55;&#x7ED9;&#x8FC7;&#x6EE4;&#x5668;&#x914D;&#x7F6E;&#x521D;&#x59CB;&#x5316;&#x53C2;&#x6570;" class="headerlink" title="5.4&#x3001;&#x5982;&#x4F55;&#x7ED9;&#x8FC7;&#x6EE4;&#x5668;&#x914D;&#x7F6E;&#x521D;&#x59CB;&#x5316;&#x53C2;&#x6570;?"></a>5.4&#x3001;&#x5982;&#x4F55;&#x7ED9;&#x8FC7;&#x6EE4;&#x5668;&#x914D;&#x7F6E;&#x521D;&#x59CB;&#x5316;&#x53C2;&#x6570;?</h2><ol>
+<li>&#x5728;web.xml&#x6587;&#x4EF6;&#x5F53;&#x4E2D;&#xFF0C;&#x4F7F;&#x7528;<init-param>&#x914D;&#x7F6E;&#x76F8;&#x5E94;&#x7684;&#x53C2;&#x6570;&#x3002;</init-param></li>
+<li>&#x4F7F;&#x7528;<code>String FilterConfig.getInitParameter(String paraName);</code></li>
+</ol>
+<h2 id="5-5&#x3001;&#x8FC7;&#x6EE4;&#x5668;&#x7684;&#x4F18;&#x70B9;"><a href="#5-5&#x3001;&#x8FC7;&#x6EE4;&#x5668;&#x7684;&#x4F18;&#x70B9;" class="headerlink" title="5.5&#x3001;&#x8FC7;&#x6EE4;&#x5668;&#x7684;&#x4F18;&#x70B9;"></a>5.5&#x3001;&#x8FC7;&#x6EE4;&#x5668;&#x7684;&#x4F18;&#x70B9;</h2><ol>
+<li>&#x5C06;&#x591A;&#x4E2A;&#x7EC4;&#x4EF6;&#x76F8;&#x540C;&#x6216;&#x8005;&#x7C7B;&#x4F3C;&#x7684;&#x5904;&#x7406;&#x903B;&#x8F91;&#x96C6;&#x4E2D;&#x5199;&#x5728;&#x8FC7;&#x6EE4;&#x5668;&#x91CC;&#x9762;&#xFF0C;&#x65B9;&#x4FBF;&#x4EE3;&#x7801;&#x7684;&#x7EF4;&#x62A4;&#x3002;</li>
+<li>&#x5B9E;&#x73B0;&#x4EE3;&#x7801;&#x7684;&#x201C;&#x53EF;&#x63D2;&#x62D4;&#x6027;&#x201D;&#xFF1A;&#x589E;&#x52A0;&#x6216;&#x8005;&#x51CF;&#x5C11;&#x67D0;&#x4E2A;&#x6A21;&#x5757;&#xFF0C;&#x4E0D;&#x4F1A;&#x5F71;&#x54CD;&#x5230;&#x6574;&#x4E2A;&#x7A0B;&#x5E8F;&#x7684;&#x6B63;&#x5E38;&#x6267;&#x884C;&#x3002;</li>
+</ol>
+<h2 id="5-6&#x3001;&#x5199;&#x4E00;&#x4E2A;&#x8FC7;&#x6EE4;&#x5668;CommentFilter&#xFF0C;&#x68C0;&#x67E5;&#x8BC4;&#x8BBA;&#x7684;&#x5B57;&#x7B26;&#x4E2A;&#x6570;&#xFF08;&#x957F;&#x5EA6;&#x4E0D;&#x8D85;&#x8FC7;20&#x4E2A;&#xFF09;"><a href="#5-6&#x3001;&#x5199;&#x4E00;&#x4E2A;&#x8FC7;&#x6EE4;&#x5668;CommentFilter&#xFF0C;&#x68C0;&#x67E5;&#x8BC4;&#x8BBA;&#x7684;&#x5B57;&#x7B26;&#x4E2A;&#x6570;&#xFF08;&#x957F;&#x5EA6;&#x4E0D;&#x8D85;&#x8FC7;20&#x4E2A;&#xFF09;" class="headerlink" title="5.6&#x3001;&#x5199;&#x4E00;&#x4E2A;&#x8FC7;&#x6EE4;&#x5668;CommentFilter&#xFF0C;&#x68C0;&#x67E5;&#x8BC4;&#x8BBA;&#x7684;&#x5B57;&#x7B26;&#x4E2A;&#x6570;&#xFF08;&#x957F;&#x5EA6;&#x4E0D;&#x8D85;&#x8FC7;20&#x4E2A;&#xFF09;"></a>5.6&#x3001;&#x5199;&#x4E00;&#x4E2A;&#x8FC7;&#x6EE4;&#x5668;CommentFilter&#xFF0C;&#x68C0;&#x67E5;&#x8BC4;&#x8BBA;&#x7684;&#x5B57;&#x7B26;&#x4E2A;&#x6570;&#xFF08;&#x957F;&#x5EA6;&#x4E0D;&#x8D85;&#x8FC7;20&#x4E2A;&#xFF09;</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"></div></pre></td></tr></table></figure>
+<h2 id="5-7&#x3001;&#x4EC0;&#x4E48;&#x662F;&#x76D1;&#x542C;&#x5668;"><a href="#5-7&#x3001;&#x4EC0;&#x4E48;&#x662F;&#x76D1;&#x542C;&#x5668;" class="headerlink" title="5.7&#x3001;&#x4EC0;&#x4E48;&#x662F;&#x76D1;&#x542C;&#x5668;?"></a>5.7&#x3001;&#x4EC0;&#x4E48;&#x662F;&#x76D1;&#x542C;&#x5668;?</h2><p>servlet&#x89C4;&#x8303;&#x5F53;&#x4E2D;&#x5B9A;&#x4E49;&#x7684;&#x4E00;&#x79CD;&#x7279;&#x6B8A;&#x7684;&#x7EC4;&#x4EF6;&#xFF0C;&#x7528;&#x6765;&#x76D1;&#x542C;&#x5BB9;&#x5668;&#x4EA7;&#x751F;&#x7684;&#x4E24;&#x5927;&#x7C7B;&#x4E8B;&#x4EF6;&#x5E76;&#x8FDB;&#x884C;&#x5904;&#x7406;&#x4E8B;&#x4EF6;&#x5305;&#x62EC;&#xFF1A;</p>
+<ol>
+<li>&#x751F;&#x547D;&#x5468;&#x671F;&#x76F8;&#x5173;&#x4E8B;&#x4EF6;&#xFF1A;&#x5BB9;&#x5668;&#x521B;&#x5EFA;&#x6216;&#x8005;&#x9500;&#x6BC1;ServletContext(servlet&#x4E0A;&#x4E0B;&#x6587;), request&#xFF0C;session&#x5E02;&#x4EA7;&#x751F;&#x7684;&#x4E8B;&#x4EF6;&#x3002;</li>
+<li>&#x7ED1;&#x5B9A;&#x76F8;&#x5173;&#x4E8B;&#x4EF6;&#xFF1A;&#x5BF9;request&#xFF0C;session&#xFF0C;servlet&#x4E0A;&#x4E0B;&#x6587;&#x8C03;&#x7528;&#x4E86;setAttribute&#xFF0C;removeAttribute&#x65F6;&#x4EA7;&#x751F;&#x7684;&#x4E8B;&#x4EF6;&#x3002;</li>
+</ol>
+<h2 id="5-8&#x3001;&#x5982;&#x4F55;&#x5199;&#x4E00;&#x4E2A;&#x76D1;&#x542C;&#x5668;"><a href="#5-8&#x3001;&#x5982;&#x4F55;&#x5199;&#x4E00;&#x4E2A;&#x76D1;&#x542C;&#x5668;" class="headerlink" title="5.8&#x3001;&#x5982;&#x4F55;&#x5199;&#x4E00;&#x4E2A;&#x76D1;&#x542C;&#x5668;?"></a>5.8&#x3001;&#x5982;&#x4F55;&#x5199;&#x4E00;&#x4E2A;&#x76D1;&#x542C;&#x5668;?</h2><ol>
+<li>&#x5199;&#x4E00;&#x4E2A;java&#x7C7B;&#xFF0C;&#x5B9E;&#x73B0;&#x76F8;&#x5E94;&#x7684;&#x76D1;&#x542C;&#x5668;&#x63A5;&#x53E3;&#x3002;</li>
+<li>&#x5728;&#x76D1;&#x542C;&#x5668;&#x63A5;&#x53E3;&#x58F0;&#x660E;&#x7684;&#x65B9;&#x6CD5;&#x91CC;&#xFF0C;&#x5B9E;&#x73B0;&#x76F8;&#x5E94;&#x7684;&#x5904;&#x7406;&#x903B;&#x8F91;&#x3002;</li>
+<li>&#x914D;&#x7F6E;&#x76D1;&#x542C;&#x5668;(&#x5728;web.xml)</li>
+</ol>
+<h2 id="5-9&#x3001;servletContext-application"><a href="#5-9&#x3001;servletContext-application" class="headerlink" title="5.9&#x3001;servletContext(application)"></a>5.9&#x3001;servletContext(application)</h2><ol>
+<li>&#x4EC0;&#x4E48;&#x662F;ServletContext?<br>&#x5BB9;&#x5668;&#x5728;&#x542F;&#x52A8;&#x7684;&#x65F6;&#x5019;&#xFF0C;&#x4F1A;&#x4E3A;&#x6BCF;&#x4E00;&#x4E2A;web&#x5E94;&#x7528;&#x521B;&#x5EFA;&#x552F;&#x4E00;&#x7684;&#x4E00;&#x4E2A;&#x7B26;&#x5408;ServletContext&#x63A5;&#x53E3;&#x7684;&#x5BF9;&#x8C61;&#xFF0C;&#x8BE5;&#x5BF9;&#x8C61;&#x4E5F;&#x79F0;&#x4E4B;&#x4E3A;servlet&#x4E0A;&#x4E0B;&#x6587;&#x3002;&#x8BE5;&#x5BF9;&#x8C61;&#x4F1A;&#x4E00;&#x76F4;&#x5B58;&#x5728;&#xFF0C;&#x9664;&#x975E;&#x5BB9;&#x5668;&#x5173;&#x95ED;&#x6216;&#x8005;&#x5BF9;&#x5E94;&#x7684;&#x5E94;&#x7528;&#x88AB;&#x5378;&#x8F7D;&#x3002;</li>
+<li>&#x5982;&#x4F55;&#x83B7;&#x5F97;servlet&#x4E0A;&#x4E0B;&#x6587;?<br>&#xFF08;1&#xFF09;GenericServlet.getServletContext();<br>&#xFF08;2&#xFF09;HttpSession.getServletContext();<br>&#xFF08;3&#xFF09;ServletConfig.getServletContext();<br>&#xFF08;4&#xFF09;FilterConfig.getServletContext();</li>
+<li>&#x4F5C;&#x7528;:<br>&#xFF08;1&#xFF09;&#x7ED1;&#x8BA2;&#x6570;&#x636E;<br><code>setAttribute,getAttribute,removeAttribute</code><br>&#xFF08;2&#xFF09;&#x8BBF;&#x95EE;&#x5168;&#x5C40;&#x7684;&#x521D;&#x59CB;&#x5316;&#x53C2;&#x6570;:<br>&#x5728;web.xml&#x6587;&#x4EF6;&#x4E2D;&#xFF0C;&#x4F7F;&#x7528;<context-param>&#x914D;&#x7F6E;&#x5168;&#x5C40;&#x7684;&#x521D;&#x59CB;&#x5316;&#x53C2;&#x6570;&#xFF0C;&#x8BE5;&#x53C2;&#x6570;&#x53EF;&#x4EE5;&#x88AB;&#x6240;&#x6709;&#x7684;servlet,filter&#x8BBF;&#x95EE;&#x3002;<br><code>String getInitParameter(String name);</code><br>&#xFF08;3&#xFF09;&#x4F9D;&#x636E;&#x4E00;&#x4E2A;&#x903B;&#x8F91;&#x8DEF;&#x5F84;(path)&#x83B7;&#x5F97;&#x5B9E;&#x9645;&#x90E8;&#x7F72;&#x65F6;&#x7684;&#x7269;&#x7406;&#x8DEF;&#x5F84;&#x3002;<br><code>String getRealPath(String path);</code></context-param></li>
+</ol>
+<h1 id="6&#x3001;&#x6269;&#x5C55;"><a href="#6&#x3001;&#x6269;&#x5C55;" class="headerlink" title="6&#x3001;&#x6269;&#x5C55;"></a>6&#x3001;&#x6269;&#x5C55;</h1><h2 id="6-1&#x3001;smartupload&#x4E0A;&#x4F20;&#x6587;&#x4EF6;&#x7EC4;&#x4EF6;&#xFF1A;"><a href="#6-1&#x3001;smartupload&#x4E0A;&#x4F20;&#x6587;&#x4EF6;&#x7EC4;&#x4EF6;&#xFF1A;" class="headerlink" title="6.1&#x3001;smartupload&#x4E0A;&#x4F20;&#x6587;&#x4EF6;&#x7EC4;&#x4EF6;&#xFF1A;"></a>6.1&#x3001;smartupload&#x4E0A;&#x4F20;&#x6587;&#x4EF6;&#x7EC4;&#x4EF6;&#xFF1A;</h2><p>&#x4E00;&#x79CD;&#x8F83;&#x4E3A;&#x7B80;&#x5355;&#x7684;&#x6587;&#x4EF6;&#x4E0A;&#x4F20;&#x7EC4;&#x4EF6;&#x5305;&#xFF0C;smartupload.jar&#x53EF;&#x4EE5;&#x8F7B;&#x677E;&#x7A81;&#x7834;&#x4E0A;&#x4F20;&#x6587;&#x4EF6;&#x7684;&#x7C7B;&#x578B;&#x9650;&#x5236;&#xFF0C;&#x4E5F;&#x53EF;&#x4EE5;&#x8F7B;&#x677E;&#x53D6;&#x5F97;&#x4E0A;&#x4F20;&#x6587;&#x4EF6;&#x7684;&#x540D;&#x79F0;&#x3001;&#x540E;&#x7F00;&#x3001;&#x5927;&#x5C0F;&#x7B49;&#x3002;</p>
+<p>smartupload&#x7EC4;&#x4EF6;&#x63D0;&#x4F9B;&#x65B9;www.jspsmart.com&#x7F51;&#x7AD9;&#x5DF2;&#x5173;&#x95ED;&#xFF0C;&#x4F46;&#x7531;&#x4E8E;smartupload&#x8F83;&#x4E3A;&#x597D;&#x7528;&#xFF0C;&#x6240;&#x4EE5;&#xFF0C;&#x81F3;&#x4ECA;&#x8FD8;&#x6709;&#x5F00;&#x53D1;&#x8005;&#x7EE7;&#x7EED;&#x4F7F;&#x7528;&#x3002;&#x5728;&#x4E00;&#x822C;&#x7684;web&#x5F00;&#x53D1;&#x4E2D;&#xFF0C;&#x4F7F;&#x7528;smartupload&#x8F83;&#x4E3A;&#x660E;&#x667A;&#xFF0C;&#x5728;struts&#x4E2D;&#x624D;&#x4F1A;&#x7528;&#x8F83;&#x4E3A;&#x9EBB;&#x70E6;&#x7684;fileupload&#x3002;</p>
+<h2 id="6-2&#x3001;fileupload&#x4E0A;&#x4F20;&#x6587;&#x4EF6;&#x7EC4;&#x4EF6;&#xFF1A;"><a href="#6-2&#x3001;fileupload&#x4E0A;&#x4F20;&#x6587;&#x4EF6;&#x7EC4;&#x4EF6;&#xFF1A;" class="headerlink" title="6.2&#x3001;fileupload&#x4E0A;&#x4F20;&#x6587;&#x4EF6;&#x7EC4;&#x4EF6;&#xFF1A;"></a>6.2&#x3001;fileupload&#x4E0A;&#x4F20;&#x6587;&#x4EF6;&#x7EC4;&#x4EF6;&#xFF1A;</h2><ol>
+<li>&#x8BBE;&#x7F6E;&#x8868;&#x5355;&#x7684;enctype&#x5C5E;&#x6027;&#x5982;&#x4E0B;&#xFF1A;<br><code>&lt;form action=&quot;&quot; method=&quot;post&quot; enctype=&quot;multipart/form-data&quot;&gt;</code></li>
+<li>&#x5728;&#x670D;&#x52A1;&#x5668;&#x7AEF;&#xFF0C;&#x4E0D;&#x80FD;&#x591F;&#x4F7F;&#x7528;request.getParameter&#x65B9;&#x6CD5;&#x6765;&#x83B7;&#x5F97;&#x6570;&#x636E;&#x3002;&#x9700;&#x8981;&#x8C03;&#x7528;request.getInputStream&#x6765;&#x83B7;&#x5F97;InputStream,&#x901A;&#x8FC7;&#x5206;&#x6790;&#x8FD9;&#x4E2A;&#x6D41;&#x6765;&#x83B7;&#x5F97;&#x8868;&#x5355;&#x4E2D;&#x7684;&#x6570;&#x636E;&#x3002;&#x4E00;&#x822C;&#x90FD;&#x662F;&#x901A;&#x8FC7;&#x4E00;&#x4E9B;&#x5DE5;&#x5177;&#x6765;&#x5E2E;&#x6211;&#x4EEC;&#x6765;&#x5206;&#x6790;&#x8FD9;&#x4E2A;&#x6D41;&#x3002;&#x6BD4;&#x5982;&#xFF1A; commons-fileupload.jar&#x3002;&#x4F7F;&#x7528;&#x65F6;&#x9700;&#x8981;&#x5C06;&#x76F8;&#x5173;&#x7684;jar&#x6587;&#x4EF6;&#x62F7;&#x8D1D;&#x5230;WEB-INF\lib&#x4E0B;&#x3002;&#x63A5;&#x4E0B;&#x6765;&#xFF0C;&#x4F7F;&#x7528;&#x8FD9;&#x4E9B;&#x5DE5;&#x5177;&#x4E2D;&#x7684;&#x7C7B;&#x6765;&#x5206;&#x6790;&#x5C31;&#x53EF;&#x4EE5;&#x4E86;&#x3002;</li>
+</ol>
+<p>jsp&#x4EE3;&#x7801;&#xFF1A;<br><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">&lt;%@ page language=&quot;java&quot; import=&quot;java.util.*&quot; pageEncoding=&quot;UTF-8&quot;%&gt;</div><div class="line">&lt;html&gt;</div><div class="line">  &lt;head&gt;</div><div class="line">    &lt;title&gt;My JSP &apos;fileupload.jsp&apos; starting page&lt;/title&gt;</div><div class="line">  &lt;/head&gt;</div><div class="line">  &lt;body style=&quot;font-size:30px;&quot;&gt;</div><div class="line">   &lt;form action=&quot;fileprocess&quot; method=&quot;post&quot; enctype=&quot;multipart/form-data&quot;&gt;</div><div class="line">  		username:&lt;input name=&quot;username&quot;/&gt;&lt;br&gt;</div><div class="line">  		photo:&lt;input type=&quot;file&quot; name=&quot;file1&quot;/&gt;&lt;br&gt;</div><div class="line">  		&lt;input type=&quot;submit&quot; value=&quot;&#x786E;&#x5B9A;&quot;&gt;</div><div class="line">  	&lt;/form&gt;</div><div class="line">  &lt;/body&gt;</div><div class="line">&lt;/html&gt;</div></pre></td></tr></table></figure></p>
+<p>servlet&#x4EE3;&#x7801;&#xFF1A;<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">FileUpLodaServlet</span> <span class="keyword">extends</span> <span class="title">HttpServlet</span></span></div><div class="line">{</div><div class="line">	<span class="meta">@Override</span></div><div class="line">	<span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">service</span><span class="params">(HttpServletRequest request,</span></span></div><div class="line">		HttpServletResponse response) <span class="keyword">throws</span> ServletException, IOException</div><div class="line">	{</div><div class="line">		DiskFileItemFactory factory = <span class="keyword">new</span> DiskFileItemFactory();</div><div class="line">		ServletFileUpload sfu = <span class="keyword">new</span> ServletFileUpload(factory);</div><div class="line">		<span class="keyword">try</span></div><div class="line">		{</div><div class="line">			List&lt;FileItem&gt; items = sfu.parseRequest(request);</div><div class="line">			<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; items.size(); i++)</div><div class="line">			{</div><div class="line">				FileItem curr = items.get(i);</div><div class="line">				<span class="keyword">if</span> (curr.isFormField())</div><div class="line">				{</div><div class="line">					String value = curr.getString();</div><div class="line">					System.out.println(value);</div><div class="line">				} <span class="keyword">else</span></div><div class="line">				{</div><div class="line">					String path = getServletContext().getRealPath(<span class="string">&quot;upload&quot;</span>);</div><div class="line">					System.out.println(path);</div><div class="line">					String fileName = curr.getName();</div><div class="line">					File file = <span class="keyword">new</span> File(path + <span class="string">&quot;\\&quot;</span> + fileName);</div><div class="line">					curr.write(file);</div><div class="line">				}</div><div class="line">			}</div><div class="line">		} <span class="keyword">catch</span> (Exception e)</div><div class="line">		{</div><div class="line">			e.printStackTrace();</div><div class="line">		}</div><div class="line">	}</div><div class="line">}</div></pre></td></tr></table></figure></p>
+<h1 id="7&#x3001;&#x5178;&#x578B;&#x6848;&#x4F8B;"><a href="#7&#x3001;&#x5178;&#x578B;&#x6848;&#x4F8B;" class="headerlink" title="7&#x3001;&#x5178;&#x578B;&#x6848;&#x4F8B;"></a>7&#x3001;&#x5178;&#x578B;&#x6848;&#x4F8B;</h1><h2 id="7-1&#x3001;&#x9A8C;&#x8BC1;&#x7801;"><a href="#7-1&#x3001;&#x9A8C;&#x8BC1;&#x7801;" class="headerlink" title="7.1&#x3001;&#x9A8C;&#x8BC1;&#x7801;"></a>7.1&#x3001;&#x9A8C;&#x8BC1;&#x7801;</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">IdentifyServlet</span> <span class="keyword">extends</span> <span class="title">HttpServlet</span> </span>{</div><div class="line">	<span class="comment">/* &#x968F;&#x673A;&#x5B57;&#x7B26;&#x5B57;&#x5178;&#x3001;&#x4E0D;&#x5305;&#x62EC;&apos;0&apos;,&apos;O&apos;,&apos;1&apos;&apos;I&apos;,&apos;2&apos;&apos;Z&apos;&#x7B49;&#x96BE;&#x5206;&#x8FA8;&#x7684;&#x5B57;&#x7B26; */</span></div><div class="line">	<span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">char</span>[] CHARS = { <span class="string">&apos;3&apos;</span>, <span class="string">&apos;4&apos;</span>, <span class="string">&apos;5&apos;</span>, <span class="string">&apos;6&apos;</span>, <span class="string">&apos;7&apos;</span>, <span class="string">&apos;8&apos;</span>, <span class="string">&apos;9&apos;</span>,</div><div class="line">			<span class="string">&apos;A&apos;</span>, <span class="string">&apos;B&apos;</span>, <span class="string">&apos;C&apos;</span>, <span class="string">&apos;D&apos;</span>, <span class="string">&apos;E&apos;</span>, <span class="string">&apos;F&apos;</span>, <span class="string">&apos;G&apos;</span>, <span class="string">&apos;H&apos;</span>, <span class="string">&apos;J&apos;</span>, <span class="string">&apos;K&apos;</span>, <span class="string">&apos;L&apos;</span>, <span class="string">&apos;M&apos;</span>, <span class="string">&apos;N&apos;</span>,</div><div class="line">			<span class="string">&apos;P&apos;</span>, <span class="string">&apos;Q&apos;</span>, <span class="string">&apos;R&apos;</span>, <span class="string">&apos;S&apos;</span>, <span class="string">&apos;T&apos;</span>, <span class="string">&apos;U&apos;</span>, <span class="string">&apos;V&apos;</span>, <span class="string">&apos;W&apos;</span>, <span class="string">&apos;X&apos;</span>, <span class="string">&apos;Y&apos;</span>, };</div><div class="line">	<span class="keyword">public</span> <span class="keyword">static</span> Random random = <span class="keyword">new</span> Random();</div><div class="line"></div><div class="line">	<span class="comment">/* &#x968F;&#x673A;&#x83B7;&#x53D6;6&#x4F4D;&#x5B57;&#x7B26;&#x4E32; */</span></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> String <span class="title">getRandomString</span><span class="params">()</span> </span>{</div><div class="line">		StringBuffer buffer = <span class="keyword">new</span> StringBuffer();</div><div class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">6</span>; i++) {</div><div class="line">			buffer.append(CHARS[random.nextInt(CHARS.length)]);</div><div class="line">		}</div><div class="line">		<span class="keyword">return</span> buffer.toString();</div><div class="line">	}</div><div class="line"></div><div class="line">	<span class="comment">/* &#x968F;&#x673A;&#x83B7;&#x53D6;&#x989C;&#x8272; */</span></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Color <span class="title">getRandomColor</span><span class="params">()</span> </span>{</div><div class="line">		<span class="keyword">return</span> <span class="keyword">new</span> Color(random.nextInt(<span class="number">255</span>), random.nextInt(<span class="number">255</span>), random</div><div class="line">				.nextInt(<span class="number">255</span>));</div><div class="line">	}</div><div class="line"></div><div class="line">	<span class="comment">/* &#x83B7;&#x53D6;&#x67D0;&#x989C;&#x8272;&#x7684;&#x53CD;&#x8272; */</span></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Color <span class="title">getReverseColor</span><span class="params">(Color c)</span> </span>{</div><div class="line">		<span class="keyword">return</span> <span class="keyword">new</span> Color(<span class="number">255</span> - c.getRed(), <span class="number">255</span> - c.getGreen(), <span class="number">255</span> - c</div><div class="line">				.getBlue());</div><div class="line">	}</div><div class="line"></div><div class="line">	<span class="meta">@Override</span></div><div class="line">	<span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">doGet</span><span class="params">(HttpServletRequest request,</span></span></div><div class="line">			HttpServletResponse response) <span class="keyword">throws</span> ServletException, IOException {</div><div class="line">		response.setContentType(<span class="string">&quot;image/jpeg&quot;</span>);<span class="comment">// &#x8BBE;&#x7F6E;&#x8F93;&#x51FA;&#x7C7B;&#x578B;</span></div><div class="line">		String randomString = getRandomString();<span class="comment">// &#x83B7;&#x53D6;&#x5B57;&#x7B26;&#x4E32;</span></div><div class="line">		Color randomColor = getRandomColor();<span class="comment">// &#x83B7;&#x53D6;&#x989C;&#x8272;</span></div><div class="line">		Color reverseColor = getReverseColor(randomColor);<span class="comment">// &#x83B7;&#x53D6;&#x53CD;&#x8272;</span></div><div class="line">		<span class="comment">/* &#x653E;&#x5230;session&#x4E2D;,&#x4EE5;&#x4FBF;&#x5176;&#x4ED6;&#x7684;servlet&#x83B7;&#x53D6;&#x5B57;&#x7B26;&#x4E32;&#xFF0C;&#x8FDB;&#x884C;&#x9A8C;&#x8BC1; */</span></div><div class="line">		request.getSession(<span class="keyword">true</span>).setAttribute(<span class="string">&quot;randomString&quot;</span>, randomString);</div><div class="line">		<span class="keyword">int</span> width = <span class="number">100</span>;</div><div class="line">		<span class="keyword">int</span> height = <span class="number">30</span>;</div><div class="line">		<span class="comment">/* &#x521B;&#x5EFA;&#x4E00;&#x5F20;&#x5F69;&#x8272;&#x56FE;&#x7247; */</span></div><div class="line">		BufferedImage bi = <span class="keyword">new</span> BufferedImage(width, height,</div><div class="line">				BufferedImage.TYPE_INT_RGB);</div><div class="line">		<span class="comment">/* &#x83B7;&#x53D6;&#x7ED8;&#x56FE;&#x5BF9;&#x8C61; */</span></div><div class="line">		Graphics2D g = bi.createGraphics();</div><div class="line">		<span class="comment">/* &#x8BBE;&#x7F6E;&#x5404;&#x79CD;&#x5C5E;&#x6027; */</span></div><div class="line">		g.setFont(<span class="keyword">new</span> Font(Font.SANS_SERIF, Font.BOLD, <span class="number">16</span>));</div><div class="line">		g.setColor(randomColor);</div><div class="line">		g.fillRect(<span class="number">0</span>, <span class="number">0</span>, width, height);</div><div class="line">		g.setColor(reverseColor);</div><div class="line">		g.drawString(randomString, <span class="number">18</span>, <span class="number">20</span>);</div><div class="line">		<span class="comment">/* &#x8BBE;&#x7F6E;&#x4E0D;&#x5927;&#x4E8E;100&#x4E2A;&#x566A;&#x97F3;&#x70B9; */</span></div><div class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>, n = random.nextInt(<span class="number">100</span>); i &lt; n; i++) {</div><div class="line">			g.drawRect(random.nextInt(width), random.nextInt(height), <span class="number">1</span>, <span class="number">1</span>);</div><div class="line">		}</div><div class="line">		<span class="comment">/* &#x8F93;&#x51FA;&#x6D41; */</span></div><div class="line">		ServletOutputStream out = response.getOutputStream();</div><div class="line">		<span class="comment">/* &#x8F6C;&#x6362;&#x6210;JPEG&#x683C;&#x5F0F; */</span></div><div class="line">		JPEGImageEncoder encoder = JPEGCodec.createJPEGEncoder(out);</div><div class="line">		<span class="comment">/* &#x5BF9;&#x56FE;&#x7247;&#x8FDB;&#x884C;&#x7F16;&#x7801; */</span></div><div class="line">		encoder.encode(bi);</div><div class="line">		out.flush();</div><div class="line">		out.close();</div><div class="line">	}</div><div class="line">}</div></pre></td></tr></table></figure>
+<h1 id="8&#x3001;&#x603B;&#x7ED3;"><a href="#8&#x3001;&#x603B;&#x7ED3;" class="headerlink" title="8&#x3001;&#x603B;&#x7ED3;"></a>8&#x3001;&#x603B;&#x7ED3;</h1><h2 id="8-1&#x3001;&#x56DB;&#x79CD;&#x5C5E;&#x6027;&#x4F20;&#x9012;&#x65B9;&#x5F0F;&#xFF1A;"><a href="#8-1&#x3001;&#x56DB;&#x79CD;&#x5C5E;&#x6027;&#x4F20;&#x9012;&#x65B9;&#x5F0F;&#xFF1A;" class="headerlink" title="8.1&#x3001;&#x56DB;&#x79CD;&#x5C5E;&#x6027;&#x4F20;&#x9012;&#x65B9;&#x5F0F;&#xFF1A;"></a>8.1&#x3001;&#x56DB;&#x79CD;&#x5C5E;&#x6027;&#x4F20;&#x9012;&#x65B9;&#x5F0F;&#xFF1A;</h2><p>&#x5728;jsp&#x4E2D;&#xFF0C;&#x5C5E;&#x6027;&#x4F20;&#x9012;&#x65B9;&#x5F0F;&#x6709;&#x56DB;&#x79CD;&#xFF0C;page(&#x6307;&#x7684;&#x662F;pageContext), request, session, servletContext&#xFF08;&#x5373;application&#xFF09;&#x3002;&#x65B9;&#x6CD5;&#x4E3B;&#x8981;&#x6709;setAttribute&#x3001;getAttribute&#x3001;removeAttribute&#x3002;</p>
+<p>&#x4ECE;&#x4FDD;&#x5B58;&#x65F6;&#x95F4;&#x4E0A;&#x770B;&#xFF0C;page&#x4FDD;&#x5B58;&#x5728;&#x4E00;&#x4E2A;&#x9875;&#x9762;&#xFF0C;&#x8DF3;&#x8F6C;&#x65E0;&#x6548;(&#x4E0D;&#x5E38;&#x7528;)&#xFF1B;request&#x5728;&#x4E00;&#x6B21;&#x8BF7;&#x6C42;&#x8FDE;&#x63A5;&#x65F6;&#x6709;&#x6548;&#xFF0C;&#x65B0;&#x5EFA;&#x8FDE;&#x63A5;&#x540E;&#x5931;&#x6548;&#xFF1B;session&#x5728;&#x4E00;&#x6B21;&#x4F1A;&#x8BDD;&#x4E2D;&#x6709;&#x6548;&#xFF0C;&#x7528;&#x6237;&#x6CE8;&#x9500;&#x540E;&#x5931;&#x6548;&#xFF1B;&#x5982;&#x679C;&#x662F;servletContext&#x4E5F;&#x5C31;&#x662F;application&#xFF0C;&#x4F1A;&#x4FDD;&#x5B58;&#x5728;&#x670D;&#x52A1;&#x5668;&#x7AEF;,&#x5F53;&#x670D;&#x52A1;&#x5668;&#x5173;&#x95ED;&#x6216;&#x8005;&#x5BF9;&#x5E94;&#x7684;&#x5E94;&#x7528;&#x7A0B;&#x5E8F;&#x88AB;&#x6CE8;&#x9500;&#xFF0C;&#x624D;&#x4F1A;&#x5931;&#x6548;&#x3002;</p>
+<p>&#x5982;&#x679C;&#x8981;&#x7ED1;&#x5B9A;&#x7684;&#x6570;&#x636E;&#x4EE5;&#x4E0A;&#x56DB;&#x79CD;&#x65B9;&#x5F0F;&#x90FD;&#x6EE1;&#x8DB3;&#x9700;&#x8981;&#x7684;&#x8BDD;&#xFF0C;&#x5E94;&#x9009;&#x62E9;&#x4FDD;&#x5B58;&#x65F6;&#x95F4;&#x6700;&#x77ED;&#x7684;&#xFF0C;&#x4FDD;&#x5B58;&#x65F6;&#x95F4;&#x77ED;&#xFF0C;&#x5185;&#x5B58;&#x7684;&#x5360;&#x7528;&#x91CF;&#x5C31;&#x5C11;&#xFF0C;&#x76F8;&#x5E94;&#x7684;&#x6027;&#x80FD;&#x4E5F;&#x662F;&#x6700;&#x9AD8;&#x7684;&#x3002;</p>
+<h2 id="8-2&#x3001;&#x51E0;&#x4E2A;&#x5185;&#x7F6E;&#x5BF9;&#x8C61;"><a href="#8-2&#x3001;&#x51E0;&#x4E2A;&#x5185;&#x7F6E;&#x5BF9;&#x8C61;" class="headerlink" title="8.2&#x3001;&#x51E0;&#x4E2A;&#x5185;&#x7F6E;&#x5BF9;&#x8C61;:"></a>8.2&#x3001;&#x51E0;&#x4E2A;&#x5185;&#x7F6E;&#x5BF9;&#x8C61;:</h2><p>request&#x4F7F;&#x7528;&#x6700;&#x9891;&#x7E41;&#x7684;&#x5BF9;&#x8C61;&#xFF0C;&#x4E3B;&#x8981;&#x7528;&#x4E8E;&#x63A5;&#x6536;&#x5C5E;&#x6027;&#x503C;&#x3001;&#x8BBE;&#x7F6E;&#x5C5E;&#x6027;&#x3001;&#x8BBE;&#x7F6E;&#x7F16;&#x7801;&#x7B49;&#x3002;</p>
+<p>response&#x7528;&#x4E8E;&#x5BF9;&#x5BA2;&#x6237;&#x7AEF;&#x8BF7;&#x6C42;&#x8FDB;&#x884C;&#x76F8;&#x5E94;&#x3002;&#x53EF;&#x4EE5;&#x8BBE;&#x7F6E;&#x91CD;&#x5B9A;&#x5411;&#xFF1A;response.sendRedirect(String locationUrl)&#x3002;&#x6DFB;&#x52A0;cookie&#x5BF9;&#x8C61;&#xFF0C;response.addCookie(Cookie cookie)&#x3002;</p>
+<p>session&#x5728;&#x5B9E;&#x9645;&#x5F00;&#x53D1;&#x4E2D;&#xFF0C;&#x4E3B;&#x8981;&#x7684;&#x4F5C;&#x7528;&#x5C31;&#x662F;&#x7528;&#x4E8E;&#x7528;&#x6237;&#x7684;&#x767B;&#x5F55;&#x9A8C;&#x8BC1;&#x548C;&#x6CE8;&#x9500;&#x64CD;&#x4F5C;&#x3002;</p>
+<p>pageContext&#x4E3B;&#x8981;&#x7528;&#x6237;&#x83B7;&#x53D6;&#x5176;&#x4ED6;8&#x4E2A;&#x5185;&#x7F6E;&#x5BF9;&#x8C61;&#xFF08;getRequest&#x3001;getResponse&#x2026;&#xFF09;&#x5728;&#x4E00;&#x822C;servlet&#x5F00;&#x53D1;&#x4E2D;&#x5F88;&#x5C11;&#x7528;&#xFF0C;&#x4F46;&#x5728;&#x6807;&#x7B7E;&#x7F16;&#x7A0B;&#x4E2D;&#x975E;&#x5E38;&#x5E38;&#x89C1;&#x3002;</p>
+<p>application(servletContext)&#x53EF;&#x4EE5;&#x4F7F;&#x7528;this.getServletContext&#x4EE3;&#x66FF;&#xFF0C;&#x5B83;&#x7684;getRealPath()&#x53EF;&#x4EE5;&#x53D6;&#x5F97;&#x865A;&#x62DF;&#x76EE;&#x5F55;&#x5BF9;&#x5E94;&#x7684;&#x771F;&#x5B9E;&#x8DEF;&#x5F84;&#xFF0C;&#x5728;&#x6587;&#x4EF6;&#x64CD;&#x4F5C;&#x4E2D;&#x975E;&#x5E38;&#x6709;&#x7528;&#x3002;application&#x4E5F;&#x53EF;&#x4EE5;&#x83B7;&#x53D6;xml&#x6587;&#x4EF6;&#x4E2D;&#x7684;&#x914D;&#x7F6E;&#x53C2;&#x6570;application.getInitParameter(&#x201C;driver &#x201C;);application&#x83B7;&#x53D6;&#x7684;&#x662F;&#x5F53;&#x6574;&#x4E2A;web&#x5E94;&#x7528;&#x914D;&#x7F6E;&#x7684;&#x53C2;&#x6570;&#x3002;</p>
+<p>config&#x4E3B;&#x8981;&#x4F5C;&#x7528;&#x662F;&#x53D6;&#x5F97;&#x4E00;&#x4E9B;&#x5728;web.xml&#x6587;&#x4EF6;&#x4E2D;&#x914D;&#x7F6E;&#x7684;&#x521D;&#x59CB;&#x5316;&#x53C2;&#x6570;&#xFF0C;&#x4F7F;&#x7528;getInitParameter(String name)&#x65B9;&#x6CD5;&#x3002;&#x4F8B;&#x5982;&#xFF0C;&#x5C06;&#x6570;&#x636E;&#x5E93;&#x8FDE;&#x63A5;&#x9A71;&#x52A8;&#x7A0B;&#x5E8F;&#x540D;&#x4FDD;&#x5B58;&#x5728;xml&#x6587;&#x4EF6;&#x4E2D;&#xFF0C;&#x5C31;&#x53EF;&#x4EE5;&#x4F7F;&#x7528;String dbDriver = config.getInitParameter(    &#x201C;driver&#x201D;);config&#x83B7;&#x53D6;&#x7684;&#x662F;&#x5F53;&#x524D;servlet&#x914D;&#x7F6E;&#x7684;&#x53C2;&#x6570;&#x3002;</p>
+<h2 id="8-3&#x3001;&#x5BA2;&#x6237;&#x7AEF;&#x8DF3;&#x8F6C;&#x4E0E;&#x670D;&#x52A1;&#x5668;&#x8DF3;&#x8F6C;&#xFF1A;"><a href="#8-3&#x3001;&#x5BA2;&#x6237;&#x7AEF;&#x8DF3;&#x8F6C;&#x4E0E;&#x670D;&#x52A1;&#x5668;&#x8DF3;&#x8F6C;&#xFF1A;" class="headerlink" title="8.3&#x3001;&#x5BA2;&#x6237;&#x7AEF;&#x8DF3;&#x8F6C;&#x4E0E;&#x670D;&#x52A1;&#x5668;&#x8DF3;&#x8F6C;&#xFF1A;"></a>8.3&#x3001;&#x5BA2;&#x6237;&#x7AEF;&#x8DF3;&#x8F6C;&#x4E0E;&#x670D;&#x52A1;&#x5668;&#x8DF3;&#x8F6C;&#xFF1A;</h2><ol>
+<li>&#x670D;&#x52A1;&#x5668;&#x8DF3;&#x8F6C;&#x7684;&#x5730;&#x5740;&#xFF0C;&#x5FC5;&#x987B;&#x662F;&#x540C;&#x4E00;&#x4E2A;&#x5E94;&#x7528;&#x4E2D;&#x7684;&#x5176;&#x4ED6;&#x7EC4;&#x4EF6;&#xFF0C;&#x800C;&#x5BA2;&#x6237;&#x7AEF;&#x8DF3;&#x8F6C;&#x7684;&#x5730;&#x5740;&#x662F;&#x4EFB;&#x610F;&#x7684;&#x3002;</li>
+<li>&#x670D;&#x52A1;&#x5668;&#x8DF3;&#x8F6C;&#x6D4F;&#x89C8;&#x5668;&#x5730;&#x5740;&#x680F;&#x4E0D;&#x4F1A;&#x6709;&#x4EFB;&#x4F55;&#x53D8;&#x5316;&#xFF0C;&#x800C;&#x5BA2;&#x6237;&#x7AEF;&#x8DF3;&#x8F6C;&#x540E;&#xFF0C;&#x6D4F;&#x89C8;&#x5668;&#x5730;&#x5740;&#x680F;&#x5730;&#x5740;&#x4F1A;&#x53D8;&#x6210;&#x8DF3;&#x8F6C;&#x4E4B;&#x540E;&#x7684;&#x9875;&#x9762;&#x5730;&#x5740;&#x3002;</li>
+<li>&#x53EA;&#x6709;&#x670D;&#x52A1;&#x5668;&#x8DF3;&#x8F6C;&#x624D;&#x80FD;&#x5C06;request&#x5C5E;&#x6027;&#x4FDD;&#x5B58;&#x5230;&#x8DF3;&#x8F6C;&#x9875;&#x3002;&#x8FD9;&#x662F;&#x7531;http&#x534F;&#x8BAE;&#x51B3;&#x5B9A;&#x7684;&#xFF0C;&#x201C;&#x4E00;&#x6B21;&#x8BF7;&#x6C42;&#xFF0C;&#x4E00;&#x6B21;&#x8FDE;&#x63A5;&#x201D;&#xFF0C;&#x5BA2;&#x6237;&#x7AEF;&#x8DF3;&#x8F6C;&#x5305;&#x62EC;&#x662F;&#x4E24;&#x6B21;&#x8BF7;&#x6C42;&#xFF0C;&#x6240;&#x4EE5;&#x65E0;&#x6CD5;&#x5171;&#x4EAB;&#x5C5E;&#x6027;&#x3002;</li>
+<li>&#x670D;&#x52A1;&#x5668;&#x8DF3;&#x8F6C;&#xFF0C;&#x6267;&#x884C;&#x5230;&#x8DF3;&#x8F6C;&#x8BED;&#x53E5;&#x4F1A;&#x7ACB;&#x5373;&#x8DF3;&#x8F6C;&#xFF0C;&#x4E0D;&#x4F1A;&#x6267;&#x884C;&#x8DF3;&#x8F6C;&#x8BED;&#x53E5;&#x4E4B;&#x540E;&#x7684;&#x4EE3;&#x7801;&#xFF0C;&#x800C;&#x5BA2;&#x6237;&#x7AEF;&#x8DF3;&#x8F6C;&#x4F1A;&#x6267;&#x884C;&#x5B8C;&#x6574;&#x4E2A;&#x9875;&#x9762;&#xFF0C;&#x7136;&#x540E;&#x518D;&#x8FDB;&#x884C;&#x8DF3;&#x8F6C;&#x3002;</li>
+</ol>
+<p>&#x4F8B;&#x5982;&#xFF1A;<br><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">&lt;%@ page pageEncoding=&quot;UTF-8&quot; contentType=&quot;text/html;charset=utf-8&quot;%&gt;</div><div class="line">&lt;html&gt;</div><div class="line">  &lt;head&gt;</div><div class="line">  &lt;/head&gt;</div><div class="line">  &lt;body&gt;</div><div class="line">  &lt;%</div><div class="line">  	System.out.println(&quot;====response&#x8DF3;&#x8F6C;&#x4E4B;&#x524D;====&quot;);</div><div class="line">  	response.sendRedirect(&quot;hello.jsp&quot;);</div><div class="line">  	System.out.println(&quot;====response&#x8DF3;&#x8F6C;&#x4E4B;&#x540E;====&quot;);</div><div class="line">  %&gt;</div><div class="line">  &lt;/body&gt;</div><div class="line">&lt;/html&gt;</div></pre></td></tr></table></figure></p>
+<p>&#x8FD0;&#x884C;&#x4E4B;&#x540E;&#xFF0C;&#x63A7;&#x5236;&#x53F0;&#x4F1A;&#x8F93;&#x51FA;:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">====response&#x8DF3;&#x8F6C;&#x4E4B;&#x524D;====</div><div class="line">====response&#x8DF3;&#x8F6C;&#x4E4B;&#x540E;====</div></pre></td></tr></table></figure></p>
+<p>jsp&#x88AB;&#x90E8;&#x7F72;&#x4E3A;servlet&#x4E4B;&#x540E;&#x7684;&#x76F8;&#x5173;&#x4EE3;&#x7801;&#xFF1A;<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">out.write(<span class="string">&quot;\r\n&quot;</span>);</div><div class="line">out.write(<span class="string">&quot;&lt;html&gt;\r\n&quot;</span>);</div><div class="line">out.write(<span class="string">&quot;  &lt;head&gt;\r\n&quot;</span>);</div><div class="line">out.write(<span class="string">&quot;  &lt;/head&gt;\r\n&quot;</span>);</div><div class="line">out.write(<span class="string">&quot;  &lt;body&gt;\r\n&quot;</span>);</div><div class="line">out.write(<span class="string">&quot;  &quot;</span>);</div><div class="line">System.out.println(<span class="string">&quot;response&#x8DF3;&#x8F6C;&#x4E4B;&#x524D;&quot;</span>);</div><div class="line">response.sendRedirect(<span class="string">&quot;hello.jsp&quot;</span>);</div><div class="line">System.out.println(<span class="string">&quot;response&#x8DF3;&#x8F6C;&#x4E4B;&#x540E;&quot;</span>);</div><div class="line">out.write(<span class="string">&quot;\r\n&quot;</span>);</div><div class="line">out.write(<span class="string">&quot;  &lt;/body&gt;\r\n&quot;</span>);</div><div class="line">out.write(<span class="string">&quot;&lt;/html&gt;\r\n&quot;</span>);</div></pre></td></tr></table></figure></p>
+<p>&#x6240;&#x4EE5;&#x4E0D;&#x7BA1;response.sendRedirect&#x5728;&#x4EC0;&#x4E48;&#x4F4D;&#x7F6E;&#xFF0C;&#x8DF3;&#x8F6C;&#x524D;&#x540E;&#x7684;&#x8BED;&#x53E5;&#x90FD;&#x4F1A;&#x88AB;&#x6267;&#x884C;&#x3002;</p>
+<p>&#x7531;&#x4E8E;&#x8FD9;&#x4E24;&#x79CD;&#x8DF3;&#x8F6C;&#x7684;&#x5DEE;&#x5F02;&#xFF0C;&#x5728;&#x8FDB;&#x884C;&#x670D;&#x52A1;&#x5668;&#x8DF3;&#x8F6C;&#x4E4B;&#x524D;&#xFF0C;&#x5FC5;&#x987B;&#x5173;&#x95ED;&#x6570;&#x636E;&#x5E93;&#x8FDE;&#x63A5;&#xFF0C;&#x5426;&#x5219;&#x5C06;&#x518D;&#x4E5F;&#x65E0;&#x6CD5;&#x5173;&#x95ED;&#xFF0C;&#x5982;&#x679C;&#x672A;&#x5173;&#x95ED;&#x7684;&#x8FDE;&#x63A5;&#x8FBE;&#x5230;&#x4E00;&#x5B9A;&#x6570;&#x91CF;&#xFF0C;&#x4F1A;&#x51FA;&#x73B0;&#x201C;&#x6570;&#x636E;&#x5E93;&#x8FDE;&#x63A5;&#x5DF2;&#x8FBE;&#x5230;&#x6700;&#x5927;&#x7684;&#x5F02;&#x5E38;&#x201D;&#xFF0C;&#x6B64;&#x65F6;&#x5C31;&#x53EA;&#x80FD;&#x91CD;&#x542F;&#x670D;&#x52A1;&#x5668;&#x4E86;&#x3002;&#x5B9E;&#x9645;&#x5F00;&#x53D1;&#x8FC7;&#x7A0B;&#x4E2D;&#xFF0C;&#x670D;&#x52A1;&#x5668;&#x8DF3;&#x8F6C;&#x8981;&#x6BD4;&#x5BA2;&#x6237;&#x7AEF;&#x8DF3;&#x8F6C;&#x66F4;&#x4E3A;&#x5E38;&#x89C1;&#x3002;</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Servlet/" rel="tag">#Servlet</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/04/28/Servlet学习笔记（一）/" rel="next" title="Servlet学习笔记（一）">
+                <i class="fa fa-chevron-left"></i> Servlet学习笔记（一）
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/04/29/Struts2学习笔记（一）/" rel="prev" title="Struts2学习笔记（一）">
+                Struts2学习笔记（一） <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/04/28/Servlet学习笔记（二）/"
+           data-title="Servlet学习笔记（二）" data-url="http://lzblog.cn/2016/04/28/Servlet学习笔记（二）/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.png"
+               alt="lizhen" />
+          <p class="site-author-name" itemprop="name">lizhen</p>
+          <p class="site-description motion-element" itemprop="description">Java攻城狮</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">40</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">11</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">37</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://hexo.io/zh-cn/" target="_blank">
+                  
+                    <i class="fa fa-plane"></i>
+                  
+                  Hexo
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/lingbage" target="_blank">
+                  
+                    <i class="fa fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://leancloud.cn/" target="_blank">
+                  
+                    <i class="fa fa-cloud"></i>
+                  
+                  LCloud
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.bootcss.com/p/font-awesome/" target="_blank">
+                  
+                    <i class="fa fa-leaf"></i>
+                  
+                  FontA
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://portal.qiniu.com/" target="_blank">
+                  
+                    <i class="fa fa-cloud-upload"></i>
+                  
+                  七牛图床
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        <div class="links-of-blogroll motion-element">
+          
+            <div class="links-of-blogroll-title">友情链接</div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.lzblog.cn/" target="_blank">None</a>
+                </li>
+              
+            </ul>
+          
+        </div>
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#4、数据访问"><span class="nav-text">4、数据访问</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#4-1、如何使用jdbc访问数据库"><span class="nav-text">4.1、如何使用jdbc访问数据库?</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-2、MVC"><span class="nav-text">4.2、MVC</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-3、DAO"><span class="nav-text">4.3、DAO</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#5、过滤器与监听器"><span class="nav-text">5、过滤器与监听器</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#5-1、什么是过滤器"><span class="nav-text">5.1、什么是过滤器?</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-2、如何写一个过滤器"><span class="nav-text">5.2、如何写一个过滤器?</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-3、过滤器的优先级由什么来决定"><span class="nav-text">5.3、过滤器的优先级由什么来决定?</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-4、如何给过滤器配置初始化参数"><span class="nav-text">5.4、如何给过滤器配置初始化参数?</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-5、过滤器的优点"><span class="nav-text">5.5、过滤器的优点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-6、写一个过滤器CommentFilter，检查评论的字符个数（长度不超过20个）"><span class="nav-text">5.6、写一个过滤器CommentFilter，检查评论的字符个数（长度不超过20个）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-7、什么是监听器"><span class="nav-text">5.7、什么是监听器?</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-8、如何写一个监听器"><span class="nav-text">5.8、如何写一个监听器?</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-9、servletContext-application"><span class="nav-text">5.9、servletContext(application)</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#6、扩展"><span class="nav-text">6、扩展</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#6-1、smartupload上传文件组件："><span class="nav-text">6.1、smartupload上传文件组件：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-2、fileupload上传文件组件："><span class="nav-text">6.2、fileupload上传文件组件：</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#7、典型案例"><span class="nav-text">7、典型案例</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#7-1、验证码"><span class="nav-text">7.1、验证码</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#8、总结"><span class="nav-text">8、总结</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#8-1、四种属性传递方式："><span class="nav-text">8.1、四种属性传递方式：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#8-2、几个内置对象"><span class="nav-text">8.2、几个内置对象:</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#8-3、客户端跳转与服务器跳转："><span class="nav-text">8.3、客户端跳转与服务器跳转：</span></a></li></ol></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <script async src="/lib/jquery/busuanzi.pure.mini.js"></script>
+<div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">lizhen</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="powered-by">
+  主题  - 
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+<span id="busuanzi_container_site_pv">本站总访问量<span id="busuanzi_value_site_pv"></span>次</span>
+
+
+
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+
+  
+
+
+
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js"></script>
+
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js"></script>
+
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=0.5.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=0.5.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=0.5.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=0.5.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=0.5.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=0.5.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=0.5.0"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"lizhenblog"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+      <script src="/lib/ua-parser-js/dist/ua-parser.min.js"></script>
+      <script src="/js/src/hook-duoshuo.js"></script>
+    
+  
+
+
+
+
+
+  
+  
+  
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script>AV.initialize("DSUpqwXpCRk0yaVH0umWiadJ-gzGzoHsz", "b5jihkHKg0hUcy7gQ4rJz6dD");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+</body>
+</html>
