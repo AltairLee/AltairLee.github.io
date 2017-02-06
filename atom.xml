@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://lzblog.cn/"/>
-  <updated>2017-02-06T15:29:33.223Z</updated>
+  <updated>2017-02-06T15:30:29.897Z</updated>
   <id>http://lzblog.cn/</id>
   
   <author>
@@ -17,10 +17,10 @@
   
   <entry>
     <title>Ubuntu14.04下安装docker和docker-compose</title>
-    <link href="http://lzblog.cn/2017/02/06/Ubuntu14-04%E4%B8%8B%E5%AE%89%E8%A3%85docker%E5%92%8Cdocker-compose/"/>
-    <id>http://lzblog.cn/2017/02/06/Ubuntu14-04下安装docker和docker-compose/</id>
-    <published>2017-02-06T15:22:25.000Z</published>
-    <updated>2017-02-06T15:29:33.223Z</updated>
+    <link href="http://lzblog.cn/2017/02/01/Ubuntu14-04%E4%B8%8B%E5%AE%89%E8%A3%85docker%E5%92%8Cdocker-compose/"/>
+    <id>http://lzblog.cn/2017/02/01/Ubuntu14-04下安装docker和docker-compose/</id>
+    <published>2017-02-01T14:22:25.000Z</published>
+    <updated>2017-02-06T15:30:29.897Z</updated>
     
     <content type="html"><![CDATA[<h1 id="1-&#x4F7F;&#x7528;docker&#x5B98;&#x65B9;&#x5B58;&#x50A8;&#x5E93;&#x5B89;&#x88C5;&#x3002;"><a href="#1-&#x4F7F;&#x7528;docker&#x5B98;&#x65B9;&#x5B58;&#x50A8;&#x5E93;&#x5B89;&#x88C5;&#x3002;" class="headerlink" title="1.&#x4F7F;&#x7528;docker&#x5B98;&#x65B9;&#x5B58;&#x50A8;&#x5E93;&#x5B89;&#x88C5;&#x3002;"></a>1.&#x4F7F;&#x7528;docker&#x5B98;&#x65B9;&#x5B58;&#x50A8;&#x5E93;&#x5B89;&#x88C5;&#x3002;</h1><p>&#x5B89;&#x88C5;&#x4E4B;&#x524D;&#x9996;&#x5148;&#x4F7F;&#x7528;<code>uname -r</code>&#x68C0;&#x67E5;&#x7CFB;&#x7EDF;&#x5185;&#x6838;&#x7248;&#x672C;&#xFF0C;&#x9700;&#x8981;&#x662F;64wei&#x4E14;&#x5FC5;&#x987B;&#x5927;&#x4E8E;3.10&#x3002;&#x5982;&#x679C;&#x4E0D;&#x6EE1;&#x8DB3;&#xFF0C;&#x9700;&#x8981;&#x5347;&#x7EA7;&#x7CFB;&#x7EDF;&#x5185;&#x6838;&#x3002;</p>
 <h2 id="1-&#x5B98;&#x65B9;&#x63A8;&#x8350;&#x9996;&#x5148;&#x5B89;&#x88C5;curl&#x53CA;&#x76F8;&#x5173;&#x7A0B;&#x5E8F;"><a href="#1-&#x5B98;&#x65B9;&#x63A8;&#x8350;&#x9996;&#x5148;&#x5B89;&#x88C5;curl&#x53CA;&#x76F8;&#x5173;&#x7A0B;&#x5E8F;" class="headerlink" title="1.&#x5B98;&#x65B9;&#x63A8;&#x8350;&#x9996;&#x5148;&#x5B89;&#x88C5;curl&#x53CA;&#x76F8;&#x5173;&#x7A0B;&#x5E8F;"></a>1.&#x5B98;&#x65B9;&#x63A8;&#x8350;&#x9996;&#x5148;&#x5B89;&#x88C5;<code>curl</code>&#x53CA;&#x76F8;&#x5173;&#x7A0B;&#x5E8F;</h2><pre><code>$ sudo apt-get update
