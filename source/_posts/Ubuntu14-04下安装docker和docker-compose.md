@@ -44,8 +44,8 @@ categories: Docker
 
 安装完成后可以使用`sudo docker -v`来查看安装的版本。
 
-# 2.使用ubuntu系统自带源安装。
-使用阿里提供的自动安装命令：
+# 2.使用阿里提供的自动安装命令。
+方便快捷，简单粗暴
 	
 	$ curl -sSL http://acs-public-mirror.oss-cn-hangzhou.aliyuncs.com/docker-engine/internet | sh -
 
