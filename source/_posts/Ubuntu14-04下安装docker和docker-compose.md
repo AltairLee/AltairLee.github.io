@@ -45,11 +45,10 @@ categories: Docker
 安装完成后可以使用`sudo docker -v`来查看安装的版本。
 
 # 2.使用ubuntu系统自带源安装。
-这种方式安装的docker版本不一定的最新的，版本依赖于系统源中的docker版本，不过基本上也够用了。好处是可以自己修改源，速度较快。
+使用阿里提供的自动安装命令：
+	
+	$ curl -sSL http://acs-public-mirror.oss-cn-hangzhou.aliyuncs.com/docker-engine/internet | sh -
 
-    $ sudo apt-get update 
-    $ sudo apt-get install -y docker.io 
-    $ sudo ln -sf /usr/bin/docker.io /usr/local/bin/docker 
 
 
 
