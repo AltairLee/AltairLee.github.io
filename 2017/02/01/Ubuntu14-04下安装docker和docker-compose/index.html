@@ -65,7 +65,7 @@
 <meta property="og:url" content="http://lzblog.cn/2017/02/01/Ubuntu14-04下安装docker和docker-compose/index.html">
 <meta property="og:site_name" content="Dear Blog">
 <meta property="og:description" content="1.&amp;#x4F7F;&amp;#x7528;docker&amp;#x5B98;&amp;#x65B9;&amp;#x5B58;&amp;#x50A8;&amp;#x5E93;&amp;#x5B89;&amp;#x88C5;&amp;#x3002;&amp;#x5B89;&amp;#x88C5;&amp;#x4E4B;&amp;#x524D;&amp;#x9996;&amp;#x5148;&amp;#x4F7F;&amp;#x7528;uname -r&amp;#x68C0;&amp;#x67E5;&amp;#x7CFB;&amp;#x7EDF;&amp;#x5185;">
-<meta property="og:updated_time" content="2017-02-06T15:33:21.724Z">
+<meta property="og:updated_time" content="2017-02-09T15:46:15.342Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Ubuntu14.04下安装docker和docker-compose">
 <meta name="twitter:description" content="1.&amp;#x4F7F;&amp;#x7528;docker&amp;#x5B98;&amp;#x65B9;&amp;#x5B58;&amp;#x50A8;&amp;#x5E93;&amp;#x5B89;&amp;#x88C5;&amp;#x3002;&amp;#x5B89;&amp;#x88C5;&amp;#x4E4B;&amp;#x524D;&amp;#x9996;&amp;#x5148;&amp;#x4F7F;&amp;#x7528;uname -r&amp;#x68C0;&amp;#x67E5;&amp;#x7CFB;&amp;#x7EDF;&amp;#x5185;">
@@ -342,10 +342,8 @@ $ sudo add-apt-repository &quot;deb https://apt.dockerproject.org/repo/ ubuntu-$
 </code></pre><h2 id="6-&#x66F4;&#x65B0;&#x6E90;"><a href="#6-&#x66F4;&#x65B0;&#x6E90;" class="headerlink" title="6.&#x66F4;&#x65B0;&#x6E90;"></a>6.&#x66F4;&#x65B0;&#x6E90;</h2><pre><code>$ sudo apt-get update
 </code></pre><h2 id="7-&#x5B89;&#x88C5;docker"><a href="#7-&#x5B89;&#x88C5;docker" class="headerlink" title="7.&#x5B89;&#x88C5;docker"></a>7.&#x5B89;&#x88C5;docker</h2><pre><code>$ sudo apt-get -y install docker-engine
 </code></pre><h2 id="8-&#x5B89;&#x88C5;&#x7248;&#x672C;&#x6D4B;&#x8BD5;"><a href="#8-&#x5B89;&#x88C5;&#x7248;&#x672C;&#x6D4B;&#x8BD5;" class="headerlink" title="8.&#x5B89;&#x88C5;&#x7248;&#x672C;&#x6D4B;&#x8BD5;"></a>8.&#x5B89;&#x88C5;&#x7248;&#x672C;&#x6D4B;&#x8BD5;</h2><p>&#x5B89;&#x88C5;&#x5B8C;&#x6210;&#x540E;&#x53EF;&#x4EE5;&#x4F7F;&#x7528;<code>sudo docker -v</code>&#x6765;&#x67E5;&#x770B;&#x5B89;&#x88C5;&#x7684;&#x7248;&#x672C;&#x3002;</p>
-<h1 id="2-&#x4F7F;&#x7528;ubuntu&#x7CFB;&#x7EDF;&#x81EA;&#x5E26;&#x6E90;&#x5B89;&#x88C5;&#x3002;"><a href="#2-&#x4F7F;&#x7528;ubuntu&#x7CFB;&#x7EDF;&#x81EA;&#x5E26;&#x6E90;&#x5B89;&#x88C5;&#x3002;" class="headerlink" title="2.&#x4F7F;&#x7528;ubuntu&#x7CFB;&#x7EDF;&#x81EA;&#x5E26;&#x6E90;&#x5B89;&#x88C5;&#x3002;"></a>2.&#x4F7F;&#x7528;ubuntu&#x7CFB;&#x7EDF;&#x81EA;&#x5E26;&#x6E90;&#x5B89;&#x88C5;&#x3002;</h1><p>&#x8FD9;&#x79CD;&#x65B9;&#x5F0F;&#x5B89;&#x88C5;&#x7684;docker&#x7248;&#x672C;&#x4E0D;&#x4E00;&#x5B9A;&#x7684;&#x6700;&#x65B0;&#x7684;&#xFF0C;&#x7248;&#x672C;&#x4F9D;&#x8D56;&#x4E8E;&#x7CFB;&#x7EDF;&#x6E90;&#x4E2D;&#x7684;docker&#x7248;&#x672C;&#xFF0C;&#x4E0D;&#x8FC7;&#x57FA;&#x672C;&#x4E0A;&#x4E5F;&#x591F;&#x7528;&#x4E86;&#x3002;&#x597D;&#x5904;&#x662F;&#x53EF;&#x4EE5;&#x81EA;&#x5DF1;&#x4FEE;&#x6539;&#x6E90;&#xFF0C;&#x901F;&#x5EA6;&#x8F83;&#x5FEB;&#x3002;</p>
-<pre><code>$ sudo apt-get update 
-$ sudo apt-get install -y docker.io 
-$ sudo ln -sf /usr/bin/docker.io /usr/local/bin/docker 
+<h1 id="2-&#x4F7F;&#x7528;ubuntu&#x7CFB;&#x7EDF;&#x81EA;&#x5E26;&#x6E90;&#x5B89;&#x88C5;&#x3002;"><a href="#2-&#x4F7F;&#x7528;ubuntu&#x7CFB;&#x7EDF;&#x81EA;&#x5E26;&#x6E90;&#x5B89;&#x88C5;&#x3002;" class="headerlink" title="2.&#x4F7F;&#x7528;ubuntu&#x7CFB;&#x7EDF;&#x81EA;&#x5E26;&#x6E90;&#x5B89;&#x88C5;&#x3002;"></a>2.&#x4F7F;&#x7528;ubuntu&#x7CFB;&#x7EDF;&#x81EA;&#x5E26;&#x6E90;&#x5B89;&#x88C5;&#x3002;</h1><p>&#x4F7F;&#x7528;&#x963F;&#x91CC;&#x63D0;&#x4F9B;&#x7684;&#x81EA;&#x52A8;&#x5B89;&#x88C5;&#x547D;&#x4EE4;&#xFF1A;</p>
+<pre><code>$ curl -sSL http://acs-public-mirror.oss-cn-hangzhou.aliyuncs.com/docker-engine/internet | sh -
 </code></pre><h1 id="3-docker-compose&#x5B89;&#x88C5;"><a href="#3-docker-compose&#x5B89;&#x88C5;" class="headerlink" title="3.docker compose&#x5B89;&#x88C5;"></a>3.docker compose&#x5B89;&#x88C5;</h1><p>&#x5B89;&#x88C5;&#x5B8C;docker&#x4EE5;&#x540E;&#xFF0C;&#x53EF;&#x4EE5;&#x7EE7;&#x7EED;&#x5B89;&#x88C5;docker-compose&#x3002;&#x8FD9;&#x91CC;&#x7684;&#x5B89;&#x88C5;&#x65B9;&#x5F0F;&#x5C31;&#x4E0E;&#x4E0A;&#x4E00;&#x7BC7;&#x6587;&#x7AE0;<a href="http://www.lzblog.cn/2017/01/16/win10%E4%B8%8B%E5%88%A9%E7%94%A8DockerToolbox-1-12-2%E5%AE%89%E8%A3%85Docker%E5%92%8CDocker-compose/" title="&#x5728;win10&#x4E2D;&#x5B89;&#x88C5;docker..." target="_blank" rel="external">&#x5728;win10&#x4E2D;&#x5B89;&#x88C5;</a>&#x8FC7;&#x7A0B;&#x4E00;&#x6837;&#x4E86;</p>
 <h2 id="1-&#x65B9;&#x6CD5;&#x4E00;&#xFF1A;"><a href="#1-&#x65B9;&#x6CD5;&#x4E00;&#xFF1A;" class="headerlink" title="1.&#x65B9;&#x6CD5;&#x4E00;&#xFF1A;"></a>1.&#x65B9;&#x6CD5;&#x4E00;&#xFF1A;</h2><pre><code>$ curl -L &quot;https://github.com/docker/compose/releases/download/1.10.0/docker-compose-$(uname -s)-$(uname -m)&quot; -o /usr/local/bin/docker-compose
 $ chmod +x /usr/local/bin/docker-compose
@@ -376,8 +374,8 @@ $ sudo chmod +x /usr/local/bin/docker-compose
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/01/16/win10下利用DockerToolbox-1-12-2安装Docker和Docker-compose/" rel="next" title="win10下利用DockerToolbox-1.12.2安装docker和docker-compose">
-                <i class="fa fa-chevron-left"></i> win10下利用DockerToolbox-1.12.2安装docker和docker-compose
+              <a href="/2017/01/16/win10下利用DockerToolbox-1-12-2安装Docker和Docker-compose/" rel="next" title="Win10下利用DockerToolbox-1.12.2安装docker和docker-compose">
+                <i class="fa fa-chevron-left"></i> Win10下利用DockerToolbox-1.12.2安装docker和docker-compose
               </a>
             
           </div>
@@ -454,7 +452,7 @@ $ sudo chmod +x /usr/local/bin/docker-compose
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">42</span>
+              <span class="site-state-item-count">44</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -462,7 +460,7 @@ $ sudo chmod +x /usr/local/bin/docker-compose
           
             <div class="site-state-item site-state-categories">
               <a href="/categories">
-                <span class="site-state-item-count">12</span>
+                <span class="site-state-item-count">13</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -471,7 +469,7 @@ $ sudo chmod +x /usr/local/bin/docker-compose
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">38</span>
+                <span class="site-state-item-count">39</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
