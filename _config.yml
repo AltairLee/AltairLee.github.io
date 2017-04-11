@@ -87,7 +87,10 @@ deploy:
   branch: master
   
 # 评论插件多说
-duoshuo_shortname: lizhenblog
+# duoshuo_shortname: lizhenblog
+
+# youyan
+
 
 # 百度统计
 baidu_analytics: 3b9384b786cf80306a6f68370a3a802f

@@ -179,6 +179,8 @@ use_font_lato: true
 # MathJax Support
 mathjax:
 
+# youyan
+youyan_uid: 2130676
 
 # Swiftype Search API Key
 #swiftype_key:
