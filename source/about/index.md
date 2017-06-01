@@ -10,9 +10,7 @@ type: "about"
 <font size="4">**关于我**</font>
 ----------
 
-**我是一个什么样的人**：关于这一点，我自己也不清楚O(∩_∩)O~ 只知道，我会随着岁月的流逝，
-
-在生命里不同的阶段，都会遇到不一样的自己。
+**我是一个什么样的人**：关于这一点，我自己也不清楚O(∩_∩)O~ 只知道，我会随着岁月的流逝，在生命里不同的阶段，都会遇到不一样的自己。
 
 **目前的我**：爱生活，爱美剧，爱coding。
 
@@ -28,7 +26,7 @@ type: "about"
 
 <font size="4">**联系我**</font>
 
-Ⅰ. Leave me a message in this page.
+Ⅰ. Leave me a message in this page. 多说停用，插件正在升级...
 
 Ⅱ. Send to me.（Email:jinanlizhen@gmail.com）
 
