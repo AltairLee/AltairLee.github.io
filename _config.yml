@@ -83,7 +83,7 @@ theme: next # ice-hexo # pacman
 ## Docs: https://hexo.io/docs/deployment.html
 deploy:
   type: git
-  repo: git@github.com:AltairLee/AltairLee.github.io.git
+  repo: git@github.com:altairlee/altairlee.github.io.git
   branch: master
   
 # 评论插件多说
