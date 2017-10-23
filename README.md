@@ -3,5 +3,7 @@ blog
 
 # post blog
 hexo clean
+
 hexo g
+
 hexo d
