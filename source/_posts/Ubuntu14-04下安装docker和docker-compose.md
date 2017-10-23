@@ -51,9 +51,21 @@ categories: Docker
 
 
 
+# 3.使用Docker加速器
+针对Docker客户端版本大于1.10的用户
 
+您可以通过修改daemon配置文件/etc/docker/daemon.json来使用加速器：
 
-# 3.docker compose安装
+	sudo mkdir -p /etc/docker
+	sudo tee /etc/docker/daemon.json <<-'EOF'
+	{
+	  "registry-mirrors": ["https://5gynqgtw.mirror.aliyuncs.com"]
+	}
+	EOF
+	sudo systemctl daemon-reload
+	sudo systemctl restart docker
+
+# 4.docker compose安装
 
 安装完docker以后，可以继续安装docker-compose。这里的安装方式就与上一篇文章[在win10中安装](http://www.lzblog.cn/2017/01/16/win10%E4%B8%8B%E5%88%A9%E7%94%A8DockerToolbox-1-12-2%E5%AE%89%E8%A3%85Docker%E5%92%8CDocker-compose/ "在win10中安装docker...")过程一样了
 
