@@ -84,3 +84,11 @@ categories: Docker
 ## 3.测试安装
 
 安装完成后，可以使用`docker-compose --version`来检测是否安装成功。
+
+# 5.修改用户权限
+
+将当前用户（lizhen），添加到用户组docker中
+
+	sudo usermod -aG docker lizhen
+
+注销重新登录即可。
