@@ -10,8 +10,6 @@ categories: Go
 
 	wget https://storage.googleapis.com/golang/go1.9.linux-amd64.tar.gz
 
-**注意**：不要使用apt-get安装go，版本太低了
-
 如果wget下载失败，可以使用百度云盘手动下载新版的离线包:
 
 [https://pan.baidu.com/s/1pL0Ca4V](https://pan.baidu.com/s/1pL0Ca4V)
@@ -21,6 +19,8 @@ categories: Go
 然后执行命令
 
 	sudo tar -C /usr/local -xzf go1.9.linux-amd64.tar.gz
+
+**注意**：不要使用apt-get安装go，版本太低
 
 ## 1.2.配置环境变量
 在用户目录下创建go文件夹（也可以按照自己的喜好创建目录，环境变量中做相应的改变即可）
