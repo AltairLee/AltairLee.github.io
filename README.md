@@ -1,5 +1,5 @@
 # altairlee.github.io
-blog
+Personal Blog ： http://www.lzblog.cn/
 
 # post blog
 hexo clean
