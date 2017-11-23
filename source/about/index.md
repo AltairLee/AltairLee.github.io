@@ -28,7 +28,7 @@ type: "about"
 
 Ⅰ. Leave me a message in this page. 多说停用，插件正在升级...
 
-Ⅱ. Send to me.（Email:jinanlizhen@gmail.com）
+Ⅱ. Send to me.（Email:294474470@qq.com）
 
 Ⅲ. Contact me.（QQ：294474470）（常年在线，昼夜不息。验证：lzblog）
 
