@@ -1,0 +1,798 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
+
+
+
+
+  <link href="//fonts.googleapis.com/css?family=Lato:300,400,700,400italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=0.5.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Go," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Dear Blog" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=0.5.0" />
+
+
+
+
+
+
+<meta name="description" content="1.GOPATH&amp;#x9996;&amp;#x5148;&amp;#x4E86;&amp;#x89E3;&amp;#x4E00;&amp;#x4E0B;GOPATH&amp;#xFF0C;&amp;#x5B83;&amp;#x6307;&amp;#x5B9A;&amp;#x4E86;&amp;#x4E00;&amp;#x4E9B;&amp;#x76EE;&amp;#x5F55;&amp;#xFF1A;&amp;#x5305;&amp;#x542B;&amp;#x9664;GOROOT&amp;#x4E4B;&amp;#x5916;&amp;#x7684;&amp;#x5">
+<meta property="og:type" content="article">
+<meta property="og:title" content="GO项目的目录结构及多项目管理">
+<meta property="og:url" content="http://lzblog.cn/2017/04/01/GO项目的目录结构及多项目管理/index.html">
+<meta property="og:site_name" content="Dear Blog">
+<meta property="og:description" content="1.GOPATH&amp;#x9996;&amp;#x5148;&amp;#x4E86;&amp;#x89E3;&amp;#x4E00;&amp;#x4E0B;GOPATH&amp;#xFF0C;&amp;#x5B83;&amp;#x6307;&amp;#x5B9A;&amp;#x4E86;&amp;#x4E00;&amp;#x4E9B;&amp;#x76EE;&amp;#x5F55;&amp;#xFF1A;&amp;#x5305;&amp;#x542B;&amp;#x9664;GOROOT&amp;#x4E4B;&amp;#x5916;&amp;#x7684;&amp;#x5">
+<meta property="og:updated_time" content="2018-03-09T05:59:07.228Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="GO项目的目录结构及多项目管理">
+<meta name="twitter:description" content="1.GOPATH&amp;#x9996;&amp;#x5148;&amp;#x4E86;&amp;#x89E3;&amp;#x4E00;&amp;#x4E0B;GOPATH&amp;#xFF0C;&amp;#x5B83;&amp;#x6307;&amp;#x5B9A;&amp;#x4E86;&amp;#x4E00;&amp;#x4E9B;&amp;#x76EE;&amp;#x5F55;&amp;#xFF1A;&amp;#x5305;&amp;#x542B;&amp;#x9664;GOROOT&amp;#x4E4B;&amp;#x5916;&amp;#x7684;&amp;#x5">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+  <title> GO项目的目录结构及多项目管理 | Dear Blog </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?3b9384b786cf80306a6f68370a3a802f";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Dear Blog</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">Busy to live or busy to die ?!</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-th fa-fw"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-tags fa-fw"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-user fa-fw"></i> <br />
+            
+            关于我
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-commonweal">
+          <a href="/404.html" rel="section">
+            
+              <i class="menu-item-icon fa fa-heartbeat fa-fw"></i> <br />
+            
+            公益404
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-search">
+          <a href="/search" rel="section">
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                GO项目的目录结构及多项目管理
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2017-04-01T18:54:53+08:00" content="2017-04-01">
+              2017-04-01
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Go/" itemprop="url" rel="index">
+                    <span itemprop="name">Go</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+             <span id="/2017/04/01/GO项目的目录结构及多项目管理/" class="leancloud_visitors" data-flag-title="GO项目的目录结构及多项目管理">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">阅读次数 </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="1-GOPATH"><a href="#1-GOPATH" class="headerlink" title="1.GOPATH"></a>1.GOPATH</h1><p>&#x9996;&#x5148;&#x4E86;&#x89E3;&#x4E00;&#x4E0B;GOPATH&#xFF0C;&#x5B83;&#x6307;&#x5B9A;&#x4E86;&#x4E00;&#x4E9B;&#x76EE;&#x5F55;&#xFF1A;&#x5305;&#x542B;&#x9664;GOROOT&#x4E4B;&#x5916;&#x7684;&#x5305;&#x542B;Go&#x9879;&#x76EE;&#x6E90;&#x7801;&#x3001;&#x7B2C;&#x4E09;&#x65B9;&#x5305;&#x3001;&#x4E8C;&#x8FDB;&#x5236;&#x6587;&#x4EF6;&#x7B49;&#x76EE;&#x5F55;&#x3002;go&#x7684;&#x5F88;&#x591A;&#x547D;&#x4EE4;&#x884C;&#x5DE5;&#x5177;&#x90FD;&#x4F1A;&#x7528;&#x5230;&#x8FD9;&#x4E2A;&#x76EE;&#x5F55;&#xFF0C;&#x800C;&#x4E14;&#x8FD9;&#x4E9B;go&#x547D;&#x4EE4;&#x641C;&#x7D22;&#x76EE;&#x5F55;&#x7684;&#x539F;&#x5219;&#x662F;&#x4ECE;&#x524D;&#x5F80;&#x540E;&#xFF08;&#x5305;&#x62EC;&#x5BFC;&#x5165;&#x5305;&#xFF09;&#xFF0C;&#x6240;&#x4EE5;&#x8FD9;&#x4E2A;GOPATH&#x63A8;&#x8350;&#x53EA;&#x914D;&#x7F6E;&#x4E00;&#x4E2A;&#x76EE;&#x5F55;&#x3002;</p>
+<h1 id="2-Go&#x9879;&#x76EE;&#x76EE;&#x5F55;&#x7ED3;&#x6784;"><a href="#2-Go&#x9879;&#x76EE;&#x76EE;&#x5F55;&#x7ED3;&#x6784;" class="headerlink" title="2.Go&#x9879;&#x76EE;&#x76EE;&#x5F55;&#x7ED3;&#x6784;"></a>2.Go&#x9879;&#x76EE;&#x76EE;&#x5F55;&#x7ED3;&#x6784;</h1><p>Go&#x5BF9;&#x9879;&#x76EE;&#x7684;&#x76EE;&#x5F55;&#x7ED3;&#x6784;&#x6709;&#x7EDF;&#x4E00;&#x7684;&#x7EA6;&#x5B9A;&#xFF0C;&#x5728;&#x9879;&#x76EE;&#x6839;&#x76EE;&#x5F55;&#x4E0B;&#xFF0C;</p>
+<ul>
+<li>src&#x5B58;&#x50A8;&#x9879;&#x76EE;&#x7684;&#x6E90;&#x7801;</li>
+<li>bin&#x5B58;&#x50A8;go build&#x547D;&#x4EE4;&#x751F;&#x6210;&#x7684;&#x53EF;&#x6267;&#x884C;&#x6587;&#x4EF6;</li>
+<li>pkg&#x76EE;&#x5F55;&#x5B58;&#x50A8;go install&#x547D;&#x4EE4;&#x751F;&#x6210;&#x7684;&#x5305;&#x6587;&#x4EF6;&#x3002;</li>
+</ul>
+<a id="more"></a>
+<p>&#x5982;&#x4E0B;&#xFF1A;</p>
+<pre><code>blockchain
+    src 
+    bin (go build &#x751F;&#x6210;&#x7684;&#x53EF;&#x6267;&#x884C;&#x6587;&#x4EF6;)
+    pkg (go install &#x751F;&#x6210;&#x7684;&#x5305;&#x6587;&#x4EF6;&#xFF0C;&#x4E00;&#x822C;&#x4E3A;.a&#x540E;&#x7F00;)
+</code></pre><h1 id="3-Go&#x591A;&#x9879;&#x76EE;&#x7BA1;&#x7406;"><a href="#3-Go&#x591A;&#x9879;&#x76EE;&#x7BA1;&#x7406;" class="headerlink" title="3.Go&#x591A;&#x9879;&#x76EE;&#x7BA1;&#x7406;"></a>3.Go&#x591A;&#x9879;&#x76EE;&#x7BA1;&#x7406;</h1><p>&#x5176;&#x5B9E;&#x8F83;&#x4E3A;&#x9EBB;&#x70E6;&#x7684;&#x8FD8;&#x662F;go&#x7684;&#x591A;&#x9879;&#x76EE;&#x7BA1;&#x7406;&#xFF0C;&#x5E38;&#x7528;&#x7684;&#x6709;&#x4E24;&#x79CD;&#x65B9;&#x5F0F;&#xFF0C;&#x4F46;&#x662F;&#x4E5F;&#x662F;&#x5404;&#x6709;&#x5229;&#x5F0A;&#x3002;</p>
+<h2 id="3-1-&#x65B9;&#x5F0F;&#x4E00;&#xFF1A;"><a href="#3-1-&#x65B9;&#x5F0F;&#x4E00;&#xFF1A;" class="headerlink" title="3.1.&#x65B9;&#x5F0F;&#x4E00;&#xFF1A;"></a>3.1.&#x65B9;&#x5F0F;&#x4E00;&#xFF1A;</h2><p>&#x4E3A;&#x6BCF;&#x4E2A;project&#x90FD;&#x914D;&#x7F6E;&#x4E00;&#x4E2A;GOPATH&#xFF0C;&#x6BD4;&#x5982;&#x6211;&#x73B0;&#x6709;&#x5728;&#x4E24;&#x4E2A;Go&#x9879;&#x76EE;&#xFF0C;&#x5206;&#x522B;&#x662F;blockchain&#x548C;blockchain02&#xFF0C;&#x90A3;&#x4E48;&#x6211;&#x7684;GOPATH&#x5C31;&#x6210;&#x4E86;&#xFF1A;</p>
+<pre><code>/home/lizhen/go/src/blockchain:/home/lizhen/go/src/blockchain02
+</code></pre><p>&#x7F3A;&#x70B9;&#xFF1A;&#x4F7F;&#x7528;go get&#x547D;&#x4EE4;&#x4E0B;&#x8F7D;&#x7684;&#x7B2C;&#x4E09;&#x65B9;&#x5305;&#x4F1A;&#x5168;&#x90E8;&#x4FDD;&#x5B58;&#x5728;&#x7B2C;&#x4E00;&#x4E2A;gopath&#x76EE;&#x5F55;&#x4E0B;&#x3002;</p>
+<h2 id="3-2-&#x65B9;&#x5F0F;&#x4E8C;&#xFF08;&#x63A8;&#x8350;&#xFF09;&#xFF1A;"><a href="#3-2-&#x65B9;&#x5F0F;&#x4E8C;&#xFF08;&#x63A8;&#x8350;&#xFF09;&#xFF1A;" class="headerlink" title="3.2.&#x65B9;&#x5F0F;&#x4E8C;&#xFF08;&#x63A8;&#x8350;&#xFF09;&#xFF1A;"></a>3.2.&#x65B9;&#x5F0F;&#x4E8C;&#xFF08;&#x63A8;&#x8350;&#xFF09;&#xFF1A;</h2><p>&#x53EA;&#x914D;&#x7F6E;&#x4E00;&#x4E2A;gopath&#xFF0C;&#x6240;&#x6709;project&#x90FD;&#x653E;&#x5728;&#x8BE5;&#x76EE;&#x5F55;&#x4E0B;&#x7684;src&#x4E0B;&#x3002;&#x6BD4;&#x5982;&#x6211;&#x7684;GOPATH&#x4E3A;&#xFF1A;</p>
+<pre><code>/home/lizhen/go
+</code></pre><p>&#x8FD9;&#x79CD;&#x60C5;&#x51B5;&#x4E0B;&#xFF0C;&#x5404;&#x4E2A;&#x9879;&#x76EE;build&#x6216;&#x8005;install&#x751F;&#x6210;&#x7684;&#x5305;&#x6587;&#x4EF6;&#x90FD;&#x4F1A;&#x5B58;&#x5728;&#x8BE5;&#x76EE;&#x5F55;&#x4E0B;&#x7684;bin/pkg&#x6587;&#x4EF6;&#x5939;&#x4E0B;&#x3002;</p>
+<p>&#x8BE5;&#x76EE;&#x5F55;&#x4E0B;&#x6709;&#x4E24;&#x4E2A;&#x5DE5;&#x7A0B;blockchain&#x548C;blockchain02&#x3002;&#x76EE;&#x5F55;&#x5206;&#x522B;&#x662F;&#xFF1A;/home/lizhen/go/src/blockchain&#x548C;/home/lizhen/go/src/blockchain02&#x3002;</p>
+<p>&#x8FD9;&#x79CD;&#x65B9;&#x5F0F;&#xFF0C;&#x4E0B;&#x8F7D;&#x7684;&#x7B2C;&#x4E09;&#x65B9;&#x5305;&#x4F1A;&#x4E0B;&#x8F7D;&#x5230;gopath&#x7684;src&#x76EE;&#x5F55;&#x4E0B;&#xFF0C;&#x72EC;&#x7ACB;&#x4E8E;&#x9879;&#x76EE;&#x4E4B;&#x5916;&#xFF0C;&#x6211;&#x4EEC;&#x53EF;&#x4EE5;&#x4F7F;&#x7528;&#x7B2C;&#x4E09;&#x65B9;&#x5305;&#x7BA1;&#x7406;&#x5DE5;&#x5177;&#xFF08;&#x5982;&#xFF1A;govendor&#xFF09;&#x5C06;&#x9879;&#x76EE;&#x6240;&#x9700;&#x7684;&#x5305;&#x5728;&#x81EA;&#x5DF1;&#x9879;&#x76EE;&#x4E2D;&#x7BA1;&#x7406;&#x3002;</p>
+<h1 id="4-&#x5305;&#x5BFC;&#x5165;"><a href="#4-&#x5305;&#x5BFC;&#x5165;" class="headerlink" title="4.&#x5305;&#x5BFC;&#x5165;"></a>4.&#x5305;&#x5BFC;&#x5165;</h1><p>go&#x5BFC;&#x5165;&#x5305;&#x7684;&#x67E5;&#x627E;&#x987A;&#x5E8F;&#x662F;&#x6309;&#x7167;GOPATH&#x4E2D;&#x914D;&#x7F6E;&#x73AF;&#x5883;&#x53D8;&#x91CF;&#x7684;&#x987A;&#x5E8F;&#x67E5;&#x627E;&#x7684;&#xFF0C;&#x6240;&#x4EE5;&#xFF0C;&#x4E00;&#x822C;&#x60C5;&#x51B5;&#x4E0B;&#x6211;&#x4EEC;&#x90FD;&#x63A8;&#x8350;&#x5BFC;&#x5165;&#x5305;&#x7684;&#x65F6;&#x5019;&#xFF0C;&#x4F7F;&#x7528;&#x5168;&#x8DEF;&#x5F84;&#x5BFC;&#x5165; &#xFF0C;&#x4E5F;&#x5C31;&#x662F;&#x5305;&#x542B;&#x9879;&#x76EE;&#x540D;&#x7684;&#x65B9;&#x5F0F;&#xFF0C;&#x5426;&#x5219;&#x51FA;&#x73B0;&#x91CD;&#x540D;&#x5305;&#x7684;&#x8BDD;&#xFF0C;&#x53EF;&#x80FD;&#x4F1A;&#x51FA;&#x9519;&#x3002;&#x5982;blockchain&#x9879;&#x76EE;&#xFF1A;</p>
+<pre><code>import (
+    &quot;blockchain/src/hello&quot;
+)
+</code></pre><p>&#x4E0D;&#x63A8;&#x8350;&#x4F7F;&#x7528;&#x7C7B;&#x4F3C;<code>./hello</code>&#x7684;&#x65B9;&#x5F0F;&#x5BFC;&#x5165;&#x5305;&#x3002;</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Go/" rel="tag">#Go</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/03/13/第一个Go项目/" rel="next" title="第一个Go项目">
+                <i class="fa fa-chevron-left"></i> 第一个Go项目
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/04/03/Go程序交叉编译/" rel="prev" title="Go程序交叉编译">
+                Go程序交叉编译 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+            <div id="uyan_frame"></div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.png"
+               alt="lizhen" />
+          <p class="site-author-name" itemprop="name">lizhen</p>
+          <p class="site-description motion-element" itemprop="description">后端开发攻城狮</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">57</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">14</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">40</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://hexo.io/zh-cn/" target="_blank">
+                  
+                    <i class="fa fa-plane"></i>
+                  
+                  Hexo
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/lingbage" target="_blank">
+                  
+                    <i class="fa fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://leancloud.cn/" target="_blank">
+                  
+                    <i class="fa fa-cloud"></i>
+                  
+                  LCloud
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.bootcss.com/p/font-awesome/" target="_blank">
+                  
+                    <i class="fa fa-leaf"></i>
+                  
+                  FontA
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://portal.qiniu.com/" target="_blank">
+                  
+                    <i class="fa fa-cloud-upload"></i>
+                  
+                  七牛图床
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        <div class="links-of-blogroll motion-element">
+          
+            <div class="links-of-blogroll-title">友情链接</div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.lzblog.cn/" target="_blank">None</a>
+                </li>
+              
+            </ul>
+          
+        </div>
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-GOPATH"><span class="nav-text">1.GOPATH</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-Go项目目录结构"><span class="nav-text">2.Go项目目录结构</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-Go多项目管理"><span class="nav-text">3.Go多项目管理</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#3-1-方式一："><span class="nav-text">3.1.方式一：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-2-方式二（推荐）："><span class="nav-text">3.2.方式二（推荐）：</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#4-包导入"><span class="nav-text">4.包导入</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <script async src="/lib/jquery/busuanzi.pure.mini.js"></script>
+<div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">lizhen</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="powered-by">
+  主题  - 
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+<span id="busuanzi_container_site_pv">本站总访问量<span id="busuanzi_value_site_pv"></span>次</span>
+
+
+
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+
+  
+
+
+
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js"></script>
+
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js"></script>
+
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=0.5.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=0.5.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=0.5.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=0.5.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=0.5.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=0.5.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=0.5.0"></script>
+
+
+
+    
+
+    
+      
+    
+
+   
+        <!-- UY BEGIN -->
+        <script type="text/javascript" src="http://v2.uyan.cc/code/uyan.js?uid=2130676"></script>
+        <!-- UY END -->
+    
+  
+
+
+  
+
+
+
+  
+  
+  
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script>AV.initialize("DSUpqwXpCRk0yaVH0umWiadJ-gzGzoHsz", "b5jihkHKg0hUcy7gQ4rJz6dD");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+</body>
+</html>
